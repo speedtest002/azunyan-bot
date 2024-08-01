@@ -1,0 +1,30 @@
+{
+    "scrape_time": "",
+    "timestamp": 0,
+    "total_shows": 0,
+    "shows": [
+        {
+            "title": "",
+            "show_time": "",
+            "lastest_episode": "",
+            "latest_episode_links": [
+                {
+                    "source": "",
+                    "episode": 1,
+                    "link": ""
+                },
+                {
+                    "source": "",
+                    "episode": 2,
+                    "link": ""
+                },
+                {
+                    "source": "",
+                    "episode": 3,
+                    "link": ""
+                }
+            ],
+            "description": "",
+            "thumbnail": ""
+        }]
+}

@@ -1,0 +1,34 @@
+name: Discord Bot
+
+on:
+  push:
+    branches:
+      - main  # Thay 'main' bằng tên nhánh bạn muốn chạy GitHub Action khi có code được push lên
+  schedule:
+    - cron:  '0 */6 * * *'
+
+jobs:
+  build:
+
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v2
+    
+    - name: Set up Python
+      uses: actions/setup-python@v2
+      with:
+        python-version: '3.9'  # Thay '3.x' bằng phiên bản Python bạn muốn sử dụng (ví dụ: '3.9')
+
+    - name: Install dependencies
+      run: |
+        python -m pip install --upgrade pip
+        pip install -r requirements.txt
+  
+    - name: Run bot
+      run:
+        python bot.py  # Thay 'your_bot_file.py' bằng tên tệp Python chứa mã bot của bạn
+       # echo "This is a message from the workflow"
+      env:
+        DISCORD_TOKEN: ${{ secrets.DISCORD_TOKEN }}
