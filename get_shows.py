@@ -3,6 +3,7 @@ from bs4 import BeautifulSoup
 import json
 import time
 from datetime import datetime
+import pytz
 import logging
 logging.basicConfig(filename='/home/user/get_shows.log', level=logging.INFO, format='%(asctime)s - %(levelname)s - %(message)s')
 
@@ -95,13 +96,13 @@ def scrape_all_shows():
 
     # Thêm thời gian quét và số lượng show vào dữ liệu
     data = {
-        "scrape_time": str(datetime.now()),
-        "timestamp": round(datetime.now().timestamp()),
+        "scrape_time": str(datetime.now(pytz.timezone('Asia/Ho_Chi_Minh'))),
+        "timestamp": round(datetime.now(pytz.timezone('Asia/Ho_Chi_Minh'))).timestamp()),
         "total_shows": len(shows_sorted),
         "shows": shows_sorted
     }
 
-    with open("/home/user/shows.json", "w", encoding='utf-8') as f:
+    with open("shows.json", "w", encoding='utf-8') as f:
         json.dump(data, f, ensure_ascii=False, indent=4)
 
     return shows_sorted
