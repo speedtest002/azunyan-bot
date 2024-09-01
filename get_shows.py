@@ -5,7 +5,7 @@ import time
 from datetime import datetime
 import pytz
 import logging
-logging.basicConfig(filename='/home/user/get_shows.log', level=logging.INFO, format='%(asctime)s - %(levelname)s - %(message)s')
+logging.basicConfig(filename='get_shows.log', level=logging.INFO, format='%(asctime)s - %(levelname)s - %(message)s')
 
 def get_show_details(show_url):
     response = requests.get(show_url)
