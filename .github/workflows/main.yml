@@ -4,6 +4,7 @@ on:
   push:
     branches:
       - main  # Thay 'main' bằng tên nhánh bạn muốn chạy GitHub Action khi có code được push lên
+  workflow_dispatch:
   schedule:
     - cron: '0 0,12 * * *'  # Chạy script mỗi 24 giờ (vào nửa đêm)
 
