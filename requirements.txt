@@ -2,3 +2,5 @@ discord.py
 requests
 Pillow
 logging
+pytz
+beautifulsoup4
