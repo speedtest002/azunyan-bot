@@ -1,34 +1,43 @@
-name: Discord Bot
+name: Run Python Script and Upload File
 
 on:
   push:
     branches:
       - main  # Thay 'main' bằng tên nhánh bạn muốn chạy GitHub Action khi có code được push lên
   schedule:
-    - cron:  '0 */6 * * *'
+    - cron: '0 0,12 * * *'  # Chạy script mỗi 24 giờ (vào nửa đêm)
 
 jobs:
-  build:
-
+  run-script:
     runs-on: ubuntu-latest
-
+    
     steps:
     - name: Checkout code
-      uses: actions/checkout@v2
-    
+      uses: actions/checkout@v3
+
     - name: Set up Python
-      uses: actions/setup-python@v2
+      uses: actions/setup-python@v4
       with:
-        python-version: '3.9'  # Thay '3.x' bằng phiên bản Python bạn muốn sử dụng (ví dụ: '3.9')
+        python-version: '3.9'  # Thay '3.x' bằng phiên bản Python bạn muốn
 
     - name: Install dependencies
       run: |
-        python -m pip install --upgrade pip
-        pip install -r requirements.txt
-  
-    - name: Run bot
-      run:
-        python bot.py  # Thay 'your_bot_file.py' bằng tên tệp Python chứa mã bot của bạn
-       # echo "This is a message from the workflow"
+        pip install -r requirements.txt  # Nếu bạn có requirements.txt
+
+    - name: Run Python script
+      run: python get_shows.py  # Chạy script của bạn
+
+    - name: Upload via FTP/SFTP
+      run: |
+        apt-get install lftp  # Cài đặt lftp để truyền file qua FTP/SFTP
+        lftp -u ${{ secrets.FTP_USER }},${{ secrets.FTP_PASSWORD }} -e "put shows.json -o shows.json; bye" sftp://fi6.bot-hosting.net:2022
       env:
-        DISCORD_TOKEN: ${{ secrets.DISCORD_TOKEN }}
+        FTP_USER: ${{ secrets.FTP_USER }}
+        FTP_PASSWORD: ${{ secrets.FTP_PASSWORD }}
+        
+    - name: Upload log file
+      uses: actions/upload-artifact@v3
+      with:
+        name: script-log
+        path: script.log
+
