@@ -97,7 +97,7 @@ def scrape_all_shows():
     # Thêm thời gian quét và số lượng show vào dữ liệu
     data = {
         "scrape_time": str(datetime.now(pytz.timezone('Asia/Ho_Chi_Minh'))),
-        "timestamp": round(datetime.now(pytz.timezone('Asia/Ho_Chi_Minh'))).timestamp()),
+        "timestamp": round(datetime.now(pytz.timezone('Asia/Ho_Chi_Minh')).timestamp()),
         "total_shows": len(shows_sorted),
         "shows": shows_sorted
     }
