@@ -30,7 +30,7 @@ jobs:
 
     - name: Upload via FTP/SFTP
       run: |
-        apt-get install lftp  # Cài đặt lftp để truyền file qua FTP/SFTP
+        sudo apt-get install lftp  # Cài đặt lftp để truyền file qua FTP/SFTP
         lftp -u ${{ secrets.FTP_USER }},${{ secrets.FTP_PASSWORD }} -e "put shows.json -o shows.json; bye" sftp://fi6.bot-hosting.net:2022
       env:
         FTP_USER: ${{ secrets.FTP_USER }}
