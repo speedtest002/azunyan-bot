@@ -31,7 +31,7 @@ jobs:
     - name: Upload via SFTP
       run: |
         echo "put shows.json" > sftp_commands.txt
-        sshpass -p 'uyucnVw1fWpJlp8' sftp -oPort=2022 -b sftp_commands.txt 336004465872207872.543fff0b@fi6.bot-hosting.net
+        sshpass -p '1YILAlkCBHfTag9' sftp -oPort=2022 -b sftp_commands.txt 336004465872207872.543fff0b@fi6.bot-hosting.net
 
     - name: Upload log file
       uses: actions/upload-artifact@v3
