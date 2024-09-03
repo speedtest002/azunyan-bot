@@ -34,7 +34,7 @@ jobs:
     - name: Upload via SFTP
       run: |
         echo "
-        spawn sftp -oPort=2022 StrictHostKeyChecking=no -o 336004465872207872.543fff0b@fi6.bot-hosting.net
+        spawn sftp -oPort=2022 -o StrictHostKeyChecking=no 336004465872207872.543fff0b@fi6.bot-hosting.net
         expect \"password:\"
         send \"uyucnVw1fWpJlp8\r\"
         expect \"sftp>\"
