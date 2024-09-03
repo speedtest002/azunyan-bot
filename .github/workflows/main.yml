@@ -36,7 +36,7 @@ jobs:
         echo "
         spawn sftp -oPort=2022 -o StrictHostKeyChecking=no 336004465872207872.543fff0b@fi6.bot-hosting.net
         expect \"password:\"
-        send \"uyucnVw1fWpJlp8\r\"
+        send \"1YILAlkCBHfTag9\r\"
         expect \"sftp>\"
         send \"put shows.json\r\"
         expect \"sftp>\"
