@@ -28,14 +28,11 @@ jobs:
     - name: Run Python script
       run: python get_shows.py  # Chạy script của bạn
 
-    - name: Upload via FTP/SFTP
+    - name: Upload via SFTP
       run: |
-        sudo apt-get install lftp  # Cài đặt lftp để truyền file qua FTP/SFTP
-        lftp -v
-        lftp -u ${{ secrets.FTP_USER }},${{ secrets.FTP_PASSWORD }} -e "put shows.json -o shows.json; bye" sftp://fi6.bot-hosting.net:2022
-      env:
-        FTP_USER: ${{ secrets.FTP_USER }}
-        FTP_PASSWORD: ${{ secrets.FTP_PASSWORD }}
+        sshpass -p 'uyucnVw1fWpJlp8' sftp -oPort=2022 336004465872207872.543fff0b@fi6.bot-hosting.net << EOF
+        put shows.json
+        EOF
         
     - name: Upload log file
       uses: actions/upload-artifact@v3
