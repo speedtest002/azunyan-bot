@@ -36,16 +36,16 @@ jobs:
     - name: Cache apt packages
       uses: actions/cache@v3
       with:
-        path: /var/cache/apt
+        path: ~/.cache/apt
         key: ${{ runner.os }}-apt-${{ hashFiles('**/get_shows.py') }}
         restore-keys: |
           ${{ runner.os }}-apt-
 
     - name: Install expect
-      run: sudo apt-get update && sudo apt-get install -y expect
+      run: sudo apt-get install -y expect
 
     - name: Run Python script
-      run: python get_shows.py
+      run: python get_shows.py > script.log
 
     - name: Upload via SFTP
       run: |
