@@ -3,10 +3,10 @@ name: Run Python Script and Upload File
 on:
   push:
     branches:
-      - main  # Thay 'main' bằng tên nhánh bạn muốn chạy GitHub Action khi có code được push lên
+      - main
   workflow_dispatch:
   schedule:
-    - cron: '0 0,12 * * *'  # Chạy script mỗi 24 giờ (vào nửa đêm)
+    - cron: '0 5,17 * * *'  # Chạy script mỗi 12 giờ
 
 jobs:
   run-script:
@@ -19,17 +19,33 @@ jobs:
     - name: Set up Python
       uses: actions/setup-python@v4
       with:
-        python-version: '3.9'  # Thay '3.x' bằng phiên bản Python bạn muốn
+        python-version: '3.9'
+
+    - name: Cache pip dependencies
+      uses: actions/cache@v3
+      with:
+        path: ~/.cache/pip
+        key: ${{ runner.os }}-pip-${{ hashFiles('**/requirements.txt') }}
+        restore-keys: |
+          ${{ runner.os }}-pip-
 
     - name: Install dependencies
       run: |
-        pip install -r requirements.txt  # Nếu bạn có requirements.txt
+        pip install -r requirements.txt
 
-    - name: Run Python script
-      run: python get_shows.py  # Chạy script của bạn
+    - name: Cache apt packages
+      uses: actions/cache@v3
+      with:
+        path: /var/cache/apt
+        key: ${{ runner.os }}-apt-${{ hashFiles('**/get_shows.py') }}
+        restore-keys: |
+          ${{ runner.os }}-apt-
 
     - name: Install expect
-      run: sudo apt-get install -y expect
+      run: sudo apt-get update && sudo apt-get install -y expect
+
+    - name: Run Python script
+      run: python get_shows.py
 
     - name: Upload via SFTP
       run: |
@@ -43,7 +59,7 @@ jobs:
         send \"bye\r\"
         " > sftp_script.exp
         expect -f sftp_script.exp
-        
+
     - name: Upload log file
       uses: actions/upload-artifact@v3
       with:
