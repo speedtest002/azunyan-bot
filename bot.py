@@ -1,6 +1,6 @@
 import discord
 from discord.ext import commands
-from discord import app_commands, Interaction, Embed
+from discord import app_commands, Interaction, Embed, AppCommandContext, AppCommandContext, AppInstallationType
 from discord.ui import Button, View, Select
 import requests
 from PIL import Image
@@ -14,19 +14,15 @@ import json
 
 intents = discord.Intents.default()
 intents.message_content = True
-intents.typing = False
-intents.presences = False
 
 
-bot = commands.Bot(command_prefix="/", intents=intents)
 
-@bot.event
-async def on_ready():
-    print(f'Logged in as {bot.user}')
-    await bot.tree.sync()
+bot = commands.Bot(command_prefix=("azu", "Azu"), intents=intents)#, allowed_contexts = AppCommandContext(guild=True, dm_channel=True, private_channel=True), allowed_installs = AppInstallationType(guild=True, user=True))
 
-@bot.hybrid_command(name="ping")
-async def chat(ctx):
+
+
+@bot.hybrid_command(name="ping", with_app_command=True)
+async def ping(ctx):
     """
     Ping pong ding dong!
     """
@@ -46,11 +42,12 @@ async def chat(ctx, *, nội_dung: str):
 
 # = snake_commands.Param(name="ngân_hàng", choices=["VietinBank", "Vietcombank", "BIDV", "Agribank", "OCB", "MBBank", "Techcombank", "ACB", "VPBank", "TPBank", "Sacombank", "HDBank", "VietCapitalBank", "SCB", "VIB", "SHB", "Eximbank", "MSB", "CAKE", "Ubank", "Timo", "ViettelMoney", "VNPTMoney", "SaigonBank", "BacABank", "PVcomBank", "Oceanbank", "NCB", "ShinhanBank", "ABBANK", "VietABank", "NamABank", "PGBank", "VietBank", "BaoVietBank", "SeABank", "COOPBANK", "LienVietPostBank", "KienLongBank", "KBank", "KookminHN", "KEBHanaHCM", "KEBHanaHN", "MAFC"]),
 
-@bot.hybrid_command(name = "qr_ngân_hàng")
+@bot.hybrid_command(name = "qr_ngân_hàng", aliases = ['qr', 'bank'], with_app_command=True)
+#@app_commands.context_menu(name="QR Ngân Hàng")
 async def qr_ngân_hàng(
-    ctx,
-    ngân_hàng: str,
-    số_tài_khoản: str,
+    ctx: commands.Context,
+    số_tài_khoản: str = None,
+    ngân_hàng: str = None,
     số_tiền: str = None, 
     nội_dung: str = None, 
     chủ_tài_khoản: str = None
@@ -60,10 +57,10 @@ async def qr_ngân_hàng(
 
     Parameters
     ----------
-    ngân_hàng: str 
-        Tên ngân hàng
     số_tài_khoản: str,
         Số tài khoản người nhận
+    ngân_hàng: str 
+        Tên ngân hàng
     số_tiền: str = None, 
         Số tiền nhận
     nội_dung: str = None,
@@ -71,15 +68,38 @@ async def qr_ngân_hàng(
     chủ_tài_khoản: str = None
         Tên chủ tài khoản
     """
+    if số_tài_khoản is not None and ngân_hàng is None:
+        await ctx.send("Vui lòng nhập tên ngân hàng (ví dụ: vcb hoặc vietcombank).")
+        return
+    user_id = str(ctx.author.id)
+    if số_tài_khoản is None and ngân_hàng is None:
+        with open('user_qr.json', 'r', encoding='utf-8') as uf:
+            user_data = json.load(uf)
+        link_qr = user_data["user_qr"].get(user_id, [])
+        if link_qr == []:
+            await ctx.send("Bạn cần dùng lệnh này lần đầu với đúng cú pháp để lưu thông tin QR!")
+            return
+        await ctx.send(link_qr)
+        return
     url = f"https://img.vietqr.io/image/{ngân_hàng}-{số_tài_khoản}-print.png?"
-    if số_tiền:
+    if số_tiền is not None:
         url += f"amount={số_tiền}"
-    if nội_dung:
+    if nội_dung is not None:
         nội_dung = nội_dung.replace(" ", "%20")
         url += f"&addInfo={nội_dung}"
-    if chủ_tài_khoản:
+    if chủ_tài_khoản is not None:
         chủ_tài_khoản = chủ_tài_khoản.replace(" ", "%20")
         url += f"&accountName={chủ_tài_khoản}"
+    
+    with open('user_qr.json', 'r', encoding='utf-8') as uf:
+        data = json.load(uf)
+
+    # Thay đổi giá trị URL cho khóa user_id
+    data["user_qr"][user_id] = url
+
+    # Ghi đè nội dung mới vào file JSON
+    with open('user_qr.json', 'w', encoding='utf-8') as uf:
+        json.dump(data, uf, ensure_ascii=False, indent=4)
     await ctx.send(url)
 
 @bot.hybrid_command(name = "qr_ngân_hàng_test")
@@ -154,7 +174,7 @@ def calculate_times(current_time, time_to_wakeup=None):
             })
         return wakeup_times, "wakeup"
 #sleep
-@bot.hybrid_command(name = "sleep")
+@bot.hybrid_command(name = "sleep", aliases = ['ngu', 'slip'])
 async def sleep(ctx, giờ_thức_dậy: str = None):
     """
     Tính toán thời gian đi ngủ
@@ -396,7 +416,7 @@ async def create_paginated_view(ctx, current_page=1, message=None):
     else:
         await ctx.send("", view=view)
 
-@bot.hybrid_command(name = "lịch_chiếu_danhsách")
+@bot.hybrid_command(name = "lịch_chiếu_danh_sách", aliases = ['lichchieu_danhsach', 'lc_ds'])
 async def lịch_chiếu_danhsách(ctx):
     """
     Chọn các phim cần hiển thị lịch chiếu
@@ -457,9 +477,15 @@ async def create_paginated_embeds(ctx, current_page=1, message=None):
     selected_titles = get_user_selections(user_id)
     timestamp_shows, shows = read_shows('shows.json')
 
+    if not selected_titles:
+        await ctx.send("Bạn chưa chọn phim cần hiện, hãy sử dụng lệnh `/lịch_chiếu_danhsách` để chọn phim.")
+        return
+
     embeds = []
+    button_data = []
     for show in shows:
         if show.get('title') in selected_titles:
+            # Create the embed
             embed = discord.Embed(
                 title=show.get('title'),
                 description=show.get('description'),
@@ -467,12 +493,49 @@ async def create_paginated_embeds(ctx, current_page=1, message=None):
             )
             show_time_str = show.get('show_time')
             show_time_display = convert_to_timestamp(show_time_str) if show_time_str else "N/A"
-            embed.add_field(name="Tập mới nhất", value=f"{show.get('lastest_episode')}", inline=True)
-            embed.add_field(name="Tập kế tiếp", value=f"{show_time_display}", inline=True)
             embed.set_thumbnail(url=show.get('thumbnail'))
-            embed.set_footer(text = f"Cập nhật")
+            embed.set_footer(text="Cập nhật")
             embed.timestamp = datetime.fromtimestamp(timestamp_shows)
             embeds.append(embed)
+
+            # Determine button links and episode info
+            episode_links = show.get('latest_episode_links', [])
+            latest_episode = show.get('lastest_episode')
+
+            # Find the maximum episode number for each source
+            source_max_episodes = {}
+            for link in episode_links:
+                source = link['source']
+                episode = link['episode']
+                if source not in source_max_episodes or episode > source_max_episodes[source]['episode']:
+                    source_max_episodes[source] = link
+            
+            # Determine the value for the latest episode
+            if latest_episode is not None:
+                latest_episode_value = latest_episode
+            else:
+                # Use the maximum episode from the sources if lastest_episode is not available
+                max_episode = max((link['episode'] for link in source_max_episodes.values()), default='N/A')
+                latest_episode_value = max_episode
+
+            embed.add_field(name="Tập mới nhất", value=f"{latest_episode_value}", inline=True)
+            embed.add_field(name="Tập kế tiếp", value=f"{show_time_display}", inline=True)
+            # Determine button links
+            if latest_episode is not None:
+                # Add buttons for the latest episode link
+                buttons = [
+                    Button(label=link['source'], style=discord.ButtonStyle.link, url=link['link'])
+                    for link in episode_links if link['episode'] == latest_episode
+                ]
+            else:
+                # Add buttons for the max episode of each source
+                buttons = [
+                    Button(label=link['source'], style=discord.ButtonStyle.link, url=link['link'])
+                    for link in source_max_episodes.values()
+                ]
+            
+            button_data.append(buttons)
+
 
     
     items_per_page = 1
@@ -481,6 +544,7 @@ async def create_paginated_embeds(ctx, current_page=1, message=None):
     start_idx = (current_page - 1) * items_per_page
     end_idx = start_idx + items_per_page
     page_embeds = embeds[start_idx:end_idx]
+    current_buttons = button_data[start_idx:end_idx]
 
     next_page = discord.ui.Button(label="Trang tiếp", style=discord.ButtonStyle.green, emoji="<:Nokotan_Smug:1259094832400302100>", row = 1)
     prev_page = discord.ui.Button(label="Trang trước", style=discord.ButtonStyle.blurple, emoji="<:Nokotan_Smug:1259094832400302100>", row = 1)
@@ -508,29 +572,21 @@ async def create_paginated_embeds(ctx, current_page=1, message=None):
         prev_page.disabled = True
     if current_page == total_pages:
         next_page.disabled = True
-
+    
     view = discord.ui.View()
     view.add_item(prev_page)
     view.add_item(index_page)
     view.add_item(next_page)
-
-    if page_embeds:
-        current_title = page_embeds[0].title
-        for show in shows:
-            if show.get('title') == current_title:
-                latest_episode = int(show.get('lastest_episode'))
-                for link in show.get('latest_episode_links', []):
-                    if link['episode'] == latest_episode:
-                        button = Button(label=link['source'], style=discord.ButtonStyle.link, url=link['link'])
-                        view.add_item(button)
-                break
-
+    if current_buttons:
+        for button in current_buttons[0]:
+            view.add_item(button)
+    
     if message:
         await message.edit(content=None, embed=page_embeds[0], view=view)
     else:
         await ctx.send(embed=page_embeds[0], view=view)
 
-@bot.hybrid_command(name="lịch_chiếu")
+@bot.hybrid_command(name="lịch_chiếu", aliases = ['lc', 'lichchieu'])
 async def lịch_chiếu(ctx):
     """
     Hiển thị lịch chiếu, cần phải chọn các phim cần hiển thị bằng lệnh /lịch_chiếu_danhsách
@@ -539,4 +595,11 @@ async def lịch_chiếu(ctx):
 ####
 load_dotenv()
 token = os.getenv('TOKEN')
+
+
+@bot.event
+async def on_ready():
+    print(f'Logged in as {bot.user}')
+    await bot.tree.sync(guild=None)
+
 bot.run(token)
