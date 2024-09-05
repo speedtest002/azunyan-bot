@@ -3,6 +3,7 @@ from bs4 import BeautifulSoup
 import json
 import time
 from datetime import datetime
+import pytz
 
 def get_show_details(show_url):
     response = requests.get(show_url)
