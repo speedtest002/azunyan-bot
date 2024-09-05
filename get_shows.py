@@ -3,9 +3,6 @@ from bs4 import BeautifulSoup
 import json
 import time
 from datetime import datetime
-import pytz
-import logging
-logging.basicConfig(filename='get_shows.log', level=logging.INFO, format='%(asctime)s - %(levelname)s - %(message)s')
 
 def get_show_details(show_url):
     response = requests.get(show_url)
@@ -76,8 +73,8 @@ def scrape_all_shows():
                 episode_text = episode_tag.get_text(strip=True)
                 episode_number = ''.join(filter(str.isdigit, episode_text))
                 if episode_number.isdigit():
-                    episode_number = int(episode_number) - 1
-                    show_info["lastest_episode"] = str(episode_number)
+                    show_info["lastest_episode"] = int(episode_number) - 1
+                    #show_info["lastest_episode"] = str(episode_number)
 
             show_page_tag = block.select_one("a.coverImage")
             if show_page_tag:
@@ -102,12 +99,10 @@ def scrape_all_shows():
         "shows": shows_sorted
     }
 
-    with open("shows.json", "w", encoding='utf-8') as f:
+    with open("/home/huyprokute002/github/shows.json", "w", encoding='utf-8') as f:
         json.dump(data, f, ensure_ascii=False, indent=4)
 
     return shows_sorted
-logging.info('Script started')
-
 start_time = time.time()
 shows = scrape_all_shows()
 end_time = time.time()
@@ -120,4 +115,3 @@ else:
     print("Could not scrape any shows.")
 
 print(f"Execution time: {execution_time:.4f} seconds")
-logging.info('Script ended')
