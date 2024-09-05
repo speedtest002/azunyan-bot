@@ -100,7 +100,7 @@ def scrape_all_shows():
         "shows": shows_sorted
     }
 
-    with open("/home/huyprokute002/github/shows.json", "w", encoding='utf-8') as f:
+    with open("shows.json", "w", encoding='utf-8') as f:
         json.dump(data, f, ensure_ascii=False, indent=4)
 
     return shows_sorted
