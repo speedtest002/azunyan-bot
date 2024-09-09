@@ -6,7 +6,7 @@ on:
   #    - main
   workflow_dispatch:
   schedule:
-    - cron: '0 17,19 * * *'  # Chạy script mỗi 12 giờ
+    - cron: '0 17 * * *'  # Chạy script mỗi 12 giờ
 
 jobs:
   run-script:
