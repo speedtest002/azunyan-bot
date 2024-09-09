@@ -36,7 +36,7 @@ jobs:
         echo "
         spawn sftp -oPort=2022 -o StrictHostKeyChecking=no 336004465872207872.47485564@rycell.sillydevelopment.co.uk
         expect \"password:\"
-        send \"1YILAlkCBHfTag9\r\"
+        send \"+310101-\r\"
         expect \"sftp>\"
         send \"put shows.json\r\"
         expect \"sftp>\"
