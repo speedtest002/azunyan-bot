@@ -1,6 +1,10 @@
-discord.py
+discord.py==2.4.0
 requests
 Pillow
-logging
 pytz
 beautifulsoup4
+python-dotenv
+metadata_parser
+fastapi
+uvicorn
+asyncio
