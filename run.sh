@@ -1,6 +1,6 @@
 #!/bin/bash
 source .env
-find . -type f ! -name ".env" ! -name "run.sh" -delete
+find . -mindepth 1 ! -name ".env" ! -name "run.sh" -exec rm -rf {} +
 
 # Pull code from GitHub
 git clone https://$GH_ACCESS_TOKEN@github.com/$GH_USERNAME/$GH_REPO.git temp_dir
