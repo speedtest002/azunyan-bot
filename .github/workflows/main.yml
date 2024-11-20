@@ -1,45 +1,55 @@
-name: Run Python Script and Upload File
+name: Sillydev hosting
 
 on:
-  #push:
-  #  branches:
-  #    - main
-  workflow_dispatch:
-  schedule:
-    - cron: '0 17 * * *'  # Chạy script mỗi 12 giờ
+  push:
+    branches:
+      - main
+    workflow_dispatch:
 
 jobs:
-  run-script:
+  deploy:
     runs-on: ubuntu-latest
-    
+    environment: DISCORD_TOKEN
     steps:
     - name: Checkout code
       uses: actions/checkout@v3
 
-    - name: Set up Python
-      uses: actions/setup-python@v4
-      with:
-        python-version: '3.9'
-
-    - name: Install dependencies
-      run: |
-        pip install -r requirements.txt
-  
     - name: Install expect
       run: sudo apt-get install -y expect
 
-    - name: Run Python script
-      run: python get_shows.py > script.log
-
-    - name: Upload via SFTP
+    - name: Generate .env file
+      run: |
+        echo "DISCORD_TOKEN=${{ secrets.TOKEN }}" > .env
+        echo "PREFIX=${{ secrets.PREFIX }}" >> .env
+        echo "DISCORD_CHANNEL_ID=${{ secrets.DISCORD_CHANNEL_ID }}" >> .env
+        echo "HOST=${{ vars.HOST }}" >> .env
+        echo "PORT=${{ vars.PORT }}" >> .env
+        
+        echo "GH_ACCESS_TOKEN=${{ secrets.GH_ACCESS_TOKEN}}" >> .env
+        echo "GH_USERNAME=${{ vars.GH_USERNAME }}" >> .env
+        echo "GH_REPO=${{ vars.GH_REPO }}" >> .env
+    - name: Upload .env and run.sh via SFTP
       run: |
         echo "
-        spawn sftp -oPort=2022 -o StrictHostKeyChecking=no 336004465872207872.47485564@rycell.sillydevelopment.co.uk
+        spawn sftp -oPort=2022 -o StrictHostKeyChecking=no ${{ vars.AZUNYAN_SERVER }}@${{ vars.SERVER_ADDRESS }}
         expect \"password:\"
-        send \"+310101-\r\"
+        send \"${{ secrets.PASSWORD }}\r\"
         expect \"sftp>\"
-        send \"put shows.json\r\"
+        send \"put .env\r\"
+        expect \"sftp>\"
+        send \"put run.sh\r\"
         expect \"sftp>\"
         send \"bye\r\"
         " > sftp_script.exp
         expect -f sftp_script.exp
+
+    - name: Restart server
+      run: |
+        curl "https://panel.sillydev.co.uk/api/client/servers/$(echo "${{ vars.AZUNYAN_SERVER }}" | rev | cut -c1-8 | rev)/power" \
+          -H 'Accept: application/json' \
+          -H 'Content-Type: application/json' \
+          -H 'Authorization: Bearer ${{ secrets.STARTBOT_API }}' \
+          -X POST \
+          -d '{
+          "signal": "restart"
+        }'
