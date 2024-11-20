@@ -20,8 +20,8 @@ jobs:
     - name: Generate .env file
       run: |
         echo "DISCORD_TOKEN=${{ secrets.TOKEN }}" > .env
-        echo "PREFIX=${{ secrets.PREFIX }}" >> .env
-        echo "DISCORD_CHANNEL_ID=${{ secrets.DISCORD_CHANNEL_ID }}" >> .env
+        echo "PREFIX=${{ vars.PREFIX }}" >> .env
+        echo "DISCORD_CHANNEL_ID=${{ vars.DISCORD_CHANNEL_ID }}" >> .env
         echo "HOST=${{ vars.HOST }}" >> .env
         echo "PORT=${{ vars.PORT }}" >> .env
         
