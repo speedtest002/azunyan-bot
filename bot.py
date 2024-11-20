@@ -32,7 +32,7 @@ class CustomBot(commands.Bot):
         self.web_client = web_client
 
     async def setup_hook(self) -> None:
-        config = uvicorn.Config(app, host=os.getenv("HOST"), port=int(os.getenv("PORT")), log_level="info")
+        config = uvicorn.Config(app, host=str(os.getenv("HOST")), port=int(os.getenv("PORT")), log_level="info")
         server = uvicorn.Server(config)
         asyncio.create_task(server.serve())
         print("FastAPI server started!")
@@ -69,7 +69,7 @@ async def main():
                 case_insensitive=True,
         ) as bot:
             await load_extensions(bot)
-            await bot.start(os.getenv('TOKEN'))
+            await bot.start(str(os.getenv('DISCORD_TOKEN')))
 
         @app.post("/send_message")
         async def send_message(message: Optional[str] = Query(None)):
