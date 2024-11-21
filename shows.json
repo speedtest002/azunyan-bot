@@ -1,30 +1,1624 @@
 {
-    "scrape_time": "",
-    "timestamp": 0,
-    "total_shows": 0,
+    "scrape_time": "2024-10-23 13:11:36.510265+07:00",
+    "timestamp": 1729663897,
+    "total_shows": 38,
     "shows": [
         {
-            "title": "",
-            "show_time": "",
-            "lastest_episode": "",
+            "title": "365 Ngày Cho Đến Lễ Cưới",
+            "show_time": "2024-10-24 22:30:00",
+            "lastest_episode": 3,
             "latest_episode_links": [
                 {
-                    "source": "",
+                    "source": "Crunchyroll",
                     "episode": 1,
-                    "link": ""
+                    "link": "https://www.crunchyroll.com/series/G8DHV78E7/365-days-to-the-wedding"
                 },
                 {
-                    "source": "",
+                    "source": "Crunchyroll",
                     "episode": 2,
-                    "link": ""
+                    "link": "https://www.crunchyroll.com/series/G8DHV78E7/365-days-to-the-wedding"
                 },
                 {
-                    "source": "",
+                    "source": "Crunchyroll",
                     "episode": 3,
-                    "link": ""
+                    "link": "https://www.crunchyroll.com/series/G8DHV78E7/365-days-to-the-wedding"
                 }
             ],
-            "description": "",
-            "thumbnail": ""
-        }]
+            "description": "Takuya và Rika làm việc tại cùng một công ty du lịch ở Tokyo, cả hai đều là những người hướng nội và độc thân một cách vui vẻ. Tuy nhiên, công ty của họ sẽ mở chi nhánh mới ở Alaska vào năm sau, và những nhân viên chưa lập gia đình sẽ được điều chuyển sang đó. Để tránh bị chuyển đi, dù trước đây họ hầu như chưa từng nói chuyện với nhau, Takuya và Rika quyết định giả vờ đính hôn. Liệu hai đồng nghiệp trầm lặng này có thể trở thành một cặp đôi thuyết phục?",
+            "thumbnail": "https://a4vf.net/wp-content/uploads/2024/10/365-days.jpg"
+        },
+        {
+            "title": "Arifureta – Từ Tầm Thường Đến Bất Khả Chiến Bại (Mùa 3)",
+            "latest_episode_links": [
+                {
+                    "source": "FPT Play",
+                    "episode": 1,
+                    "link": "https://fptplay.vn/xem-video/arifureta-tu-tam-thuong-den-bat-kha-chien-bai-phan-3-670cf344765269165dc90322"
+                },
+                {
+                    "source": "Crunchyroll",
+                    "episode": 1,
+                    "link": "https://www.crunchyroll.com/watch/GN7UNXPWN/haulias-assemble"
+                }
+            ],
+            "description": "Hajime Nagumo cùng cả lớp bị triệu hồi đến một vùng đất kỳ ảo để trở thành những anh hùng. Tuy nhiên, khác với các bạn học được ban cho sức mạnh và khả năng phi thường, Hajime lại chẳng có gì cả. Bị đánh giá thấp và không được chuẩn bị kỹ lưỡng, cậu rơi xuống đáy của một mê cung đầy quái vật, nơi mà chỉ có sự tàn nhẫn và hy sinh mới giúp cậu tồn tại. Để vươn lên trong thế giới khắc nghiệt này, cậu không còn lựa chọn nào khác ngoài việc chấp nhận bóng tối.",
+            "thumbnail": "https://a.storyblok.com/f/178900/750x1060/038a02ab7f/arifureta-from-commonplace-to-worlds-strongest-season-3-key-visual.jpg/m/filters:quality(95)format(webp)"
+        },
+        {
+            "title": "Bleach: Huyết Chiến Ngàn Năm – Xung Khắc",
+            "show_time": "2024-10-26 22:30:00",
+            "lastest_episode": 29,
+            "latest_episode_links": [
+                {
+                    "source": "FPT Play",
+                    "episode": 27,
+                    "link": "https://fptplay.vn/xem-video/bleach-huyet-chien-ngan-nam-xung-khac-66fbd11c8da3c8f9b5707d72/tap-1"
+                },
+                {
+                    "source": "FPT Play",
+                    "episode": 28,
+                    "link": "https://fptplay.vn/xem-video/bleach-huyet-chien-ngan-nam-xung-khac-66fbd11c8da3c8f9b5707d72/tap-2"
+                },
+                {
+                    "source": "FPT Play",
+                    "episode": 29,
+                    "link": "https://fptplay.vn/xem-video/bleach-huyet-chien-ngan-nam-xung-khac-66fbd11c8da3c8f9b5707d72/tap-3"
+                },
+                {
+                    "source": "Ani-one Ultra",
+                    "episode": 27,
+                    "link": "https://www.youtube.com/playlist?list=PLOVZwvNm10lVIZvSHICYg7GXr7Xy3e90i"
+                },
+                {
+                    "source": "Ani-one Ultra",
+                    "episode": 28,
+                    "link": "https://www.youtube.com/playlist?list=PLOVZwvNm10lVIZvSHICYg7GXr7Xy3e90i"
+                },
+                {
+                    "source": "Ani-one Ultra",
+                    "episode": 29,
+                    "link": "https://www.youtube.com/playlist?list=PLOVZwvNm10lVIZvSHICYg7GXr7Xy3e90i"
+                }
+            ],
+            "description": "Phần thứ ba của loạt phim Bleach: Huyết Chiến Ngàn Năm tiếp tục câu chuyện về cuộc chiến khốc liệt giữa Soul Society và Quincy, với sự trở lại của Yhwach – kẻ thù nguy hiểm nhất của Soul Society. Bên cạnh đó, Ichigo và các đồng đội của anh phải đối mặt với những thử thách mới, khó khăn hơn khi họ cố gắng bảo vệ thế giới khỏi sự hủy diệt.",
+            "thumbnail": "https://a4vf.net/wp-content/uploads/2024/10/bleach-thousand-year-blood-war-the-conflict.jpg"
+        },
+        {
+            "title": "Blue Box",
+            "show_time": "2024-10-24 22:30:00",
+            "lastest_episode": 3,
+            "latest_episode_links": [
+                {
+                    "source": "Netflix",
+                    "episode": 1,
+                    "link": "https://www.netflix.com/watch/81664905"
+                },
+                {
+                    "source": "Netflix",
+                    "episode": 2,
+                    "link": "https://www.netflix.com/watch/81664906"
+                },
+                {
+                    "source": "Netflix",
+                    "episode": 3,
+                    "link": "https://www.netflix.com/watch/81664907"
+                }
+            ],
+            "description": "Dù có vài cuộc gặp đầy rung động, Taiki cho rằng cô nàng Chinatsu cậu thầm thích thậm chí còn chẳng biết tên cậu. Sau đó, một tin tức động trời buộc cậu phải có động thái táo bạo.",
+            "thumbnail": "https://a4vf.net/wp-content/uploads/2024/10/blue-box.jpg"
+        },
+        {
+            "title": "Blue Lock vs. U-20 Japan",
+            "show_time": "2024-10-26 21:30:00",
+            "lastest_episode": 27,
+            "latest_episode_links": [
+                {
+                    "source": "Crunchyroll",
+                    "episode": 25,
+                    "link": "https://www.crunchyroll.com/watch/GD9UE9W7K"
+                },
+                {
+                    "source": "Ani-one Ultra",
+                    "episode": 25,
+                    "link": "https://youtu.be/xHh1JbheG2I"
+                },
+                {
+                    "source": "Ani-one Ultra",
+                    "episode": 26,
+                    "link": "https://www.youtube.com/playlist?list=PLOVZwvNm10lUGvFpLxKhxjPjD62OLl7gj"
+                },
+                {
+                    "source": "Ani-one Ultra",
+                    "episode": 27,
+                    "link": "https://www.youtube.com/playlist?list=PLOVZwvNm10lUGvFpLxKhxjPjD62OLl7gj"
+                }
+            ],
+            "description": "Để đào tạo nên tiền đạo xuất sắc nhất thế giới, người sẽ dẫn dắt Nhật Bản đến chiến thắng tại World Cup, Liên đoàn Bóng đá Nhật Bản đã khởi động dự án “Blue Lock (Nhà ngục xanh)”.",
+            "thumbnail": "https://a4vf.net/wp-content/uploads/2024/10/blue-lock-vs-u-20-japan.jpg"
+        },
+        {
+            "title": "Buồn Vui Cuộc Đời Cần Thủ",
+            "show_time": "2024-10-24 20:00:00",
+            "lastest_episode": 3,
+            "latest_episode_links": [
+                {
+                    "source": "Bilibili",
+                    "episode": 1,
+                    "link": "https://www.bilibili.tv/vi/play/2115522"
+                },
+                {
+                    "source": "Bilibili",
+                    "episode": 2,
+                    "link": "https://www.bilibili.tv/vi/play/2115522"
+                },
+                {
+                    "source": "Bilibili",
+                    "episode": 3,
+                    "link": "https://www.bilibili.tv/vi/play/2115522"
+                }
+            ],
+            "description": "Câu chuyện theo chân Tsunehiro Sasaki, một sinh viên đại học đang chán nản với cuộc sống, bị gánh nặng bởi nợ nần và được chẩn đoán chỉ còn hai năm để sống. Khi đang chạy trốn khỏi những kẻ đòi nợ, Tsunehiro vô tình rơi xuống biển và được hai người bạn Hana và Takaaki cứu sống. Từ đó, cậu dần bị cuốn hút vào việc câu cá.",
+            "thumbnail": "https://a4vf.net/wp-content/uploads/2024/10/negative-positive-angler.jpg"
+        },
+        {
+            "title": "Chi: Về Sự Chuyển Động Của Địa Cầu",
+            "show_time": "2024-10-26 22:30:00",
+            "lastest_episode": 4,
+            "latest_episode_links": [
+                {
+                    "source": "Netflix",
+                    "episode": 1,
+                    "link": "https://www.netflix.com/watch/81765024"
+                },
+                {
+                    "source": "Netflix",
+                    "episode": 2,
+                    "link": "https://www.netflix.com/watch/81765025"
+                },
+                {
+                    "source": "Netflix",
+                    "episode": 3,
+                    "link": "https://www.netflix.com/watch/81765026"
+                },
+                {
+                    "source": "Netflix",
+                    "episode": 4,
+                    "link": "https://www.netflix.com/watch/81765027"
+                }
+            ],
+            "description": "Sau khi nghe thuyết giảng dị giáo về Trái Đất và Mặt Trời, một thần đồng tìm kiếm công trình nghiên cứu bí mật của thầy mình trong khi trốn tránh Tòa thẩm tra.",
+            "thumbnail": "https://a4vf.net/wp-content/uploads/2024/10/van-dong-dia-cau.jpg"
+        },
+        {
+            "title": "Chuyển Sinh Thành Quý Tộc Mùa 2",
+            "show_time": "2024-10-27 22:00:00",
+            "lastest_episode": 16,
+            "latest_episode_links": [
+                {
+                    "source": "Ani-one",
+                    "episode": 13,
+                    "link": "https://www.youtube.com/watch?v=zi4mE5sj858"
+                },
+                {
+                    "source": "Ani-one",
+                    "episode": 14,
+                    "link": "https://www.youtube.com/watch?v=AUfkS9dcKKc"
+                },
+                {
+                    "source": "Ani-one",
+                    "episode": 15,
+                    "link": "https://www.youtube.com/watch?v=l-bABG1SSQ4"
+                },
+                {
+                    "source": "Ani-one",
+                    "episode": 16,
+                    "link": "https://www.youtube.com/watch?v=pusuXIM6R2o"
+                },
+                {
+                    "source": "FPT Play",
+                    "episode": 13,
+                    "link": "https://fptplay.vn/xem-video/tai-sinh-thanh-quy-toc-toi-co-ky-nang-tham-dinh-ba-dao-phan-2-66f7a4880bee94f509ca8ff1"
+                }
+            ],
+            "description": "Series phim kể về cuộc sống sau khi tái sinh từ một người làm công ăn lương bình thường thành Ars Louvent, ‘con trai của một quý tộc’. Mặc dù không có tài về phép thuật hay kiếm thuật nhưng anh ấy có một kỹ năng mà không ai có: Thẩm định. Sử dụng khả năng này, Ars có thể xác định sức mạnh hiện tại của một người, tiềm năng của họ và tài năng của họ nằm ở đâu.",
+            "thumbnail": "https://a4vf.net/wp-content/uploads/2024/09/ars.jpg"
+        },
+        {
+            "title": "Cuộc Chinh Phục Hoàng Đế Rồng Của Lệnh Nữ Tái Sinh",
+            "show_time": "2024-10-23 20:30:00",
+            "lastest_episode": 2,
+            "latest_episode_links": [
+                {
+                    "source": "Crunchyroll",
+                    "episode": 1,
+                    "link": "https://www.crunchyroll.com/series/G0XHWM15X/the-do-over-damsel-conquers-the-dragon-emperor"
+                },
+                {
+                    "source": "Crunchyroll",
+                    "episode": 2,
+                    "link": "https://www.crunchyroll.com/series/G0XHWM15X/the-do-over-damsel-conquers-the-dragon-emperor"
+                }
+            ],
+            "description": "Jill Savelle, vị hôn thê của hoàng thái tử Gerald de Kleitos và được biết đến với danh hiệu “Nữ thần Chiến tranh”, đang bị chính đất nước mà cô từng thề bảo vệ truy đuổi. Bị vị hôn phu phản bội, Jill bị gán tội phản quốc và bị giam cầm. Trong những khoảnh khắc cuối cùng, cô tràn đầy hối tiếc. Tuy nhiên, ngay trước khi cái chết cận kề, cô bất ngờ tỉnh dậy và nhận ra mình đã quay trở lại sáu năm trước.",
+            "thumbnail": "https://a4vf.net/wp-content/uploads/2024/10/dragon-emperor.jpg"
+        },
+        {
+            "title": "DAN DA DAN",
+            "show_time": "2024-10-24 23:00:00",
+            "lastest_episode": 3,
+            "latest_episode_links": [
+                {
+                    "source": "MuseVN",
+                    "episode": 1,
+                    "link": "https://www.youtube.com/watch?v=cyxyZnqDwTk"
+                },
+                {
+                    "source": "MuseVN",
+                    "episode": 2,
+                    "link": "https://www.youtube.com/watch?v=C_xRZVd6d6s"
+                },
+                {
+                    "source": "MuseVN",
+                    "episode": 3,
+                    "link": "https://www.youtube.com/watch?v=n1Hj3JsHsRo"
+                },
+                {
+                    "source": "FPT Play",
+                    "episode": 1,
+                    "link": "https://fptplay.vn/xem-video/dan-da-dan-66fe43876ec5be718421fbbe"
+                },
+                {
+                    "source": "FPT Play",
+                    "episode": 2,
+                    "link": "https://fptplay.vn/xem-video/dan-da-dan-66fe43876ec5be718421fbbe/tap-2"
+                },
+                {
+                    "source": "FPT Play",
+                    "episode": 3,
+                    "link": "https://fptplay.vn/xem-video/dan-da-dan-66fe43876ec5be718421fbbe/tap-3"
+                },
+                {
+                    "source": "Netflix",
+                    "episode": 1,
+                    "link": "https://www.netflix.com/watch/81736886"
+                },
+                {
+                    "source": "Netflix",
+                    "episode": 2,
+                    "link": "https://www.netflix.com/watch/81736887"
+                },
+                {
+                    "source": "Netflix",
+                    "episode": 3,
+                    "link": "https://www.netflix.com/watch/81736888"
+                },
+                {
+                    "source": "Iqiyi",
+                    "episode": 1,
+                    "link": "https://www.iq.com/play/1aoafruv1as"
+                },
+                {
+                    "source": "Iqiyi",
+                    "episode": 2,
+                    "link": "https://www.iq.com/play/dan-da-dan-tap-2-1x9kxghj3fs?lang=vi_vn"
+                },
+                {
+                    "source": "Iqiyi",
+                    "episode": 3,
+                    "link": "https://www.iq.com/play/dan-da-dan-tap-3-1lwiulg2cnc?lang=vi_vn"
+                },
+                {
+                    "source": "Crunchyroll",
+                    "episode": 1,
+                    "link": "https://www.crunchyroll.com/watch/GN7UNXWMJ"
+                },
+                {
+                    "source": "Crunchyroll",
+                    "episode": 2,
+                    "link": "https://www.crunchyroll.com/watch/GK9UGV8E3/thats-a-space-alien-aint-it"
+                },
+                {
+                    "source": "Crunchyroll",
+                    "episode": 3,
+                    "link": "https://www.crunchyroll.com/watch/G50UMKE0M/its-a-granny-vs-granny-clash"
+                },
+                {
+                    "source": "VieON",
+                    "episode": 1,
+                    "link": "https://vieon.vn/dan-da-dan--eps-tap-1.html"
+                },
+                {
+                    "source": "VieON",
+                    "episode": 2,
+                    "link": "https://vieon.vn/dan-da-dan--eps-tap-2.html"
+                },
+                {
+                    "source": "VieON",
+                    "episode": 3,
+                    "link": "https://vieon.vn/dan-da-dan--eps-tap-3.html"
+                }
+            ],
+            "description": "Momo Ayase là con gái của một dòng họ sở hữu linh lực còn Takakura Ken (biệt danh Okarun), bạn cùng lớp của cô là một Otaku cuồng những điều huyền bí. Sau khi được Momo cứu khỏi lũ bắt nạt, hai người đã bắt đầu trò chuyện với nhau. Momo là người tin vào ma quỷ nhưng phủ định người vũ trụ còn Okarun thì ngược lại, cậu tin rằng có người vũ trụ còn ma quỷ thì không.Để chứng minh quan điểm của nhau, cả hai đã cùng tới một bệnh viện được cho là xuất hiện UFO và một đường hầm bỏ hoang bị đồn thổi là có ma ám. Thế rồi, cả hai đã cùng gặp những chuyện phi thường, không cách nào lý giải. Momo đã thức tỉnh linh lực ẩn giấu còn Okarun thì có được sức mạnh nguyền rủa để cùng nhau đương đầu với thử thách! Một mối tình định mệnh sẽ bắt đầu sao!?Một câu chuyện thanh xuân với những trận chiến kỳ ảo sẽ bắt đầu!",
+            "thumbnail": "https://a4vf.net/wp-content/uploads/2024/09/dan-dan-dan.jpg"
+        },
+        {
+            "title": "Demon Lord, Retry! R",
+            "show_time": "2024-10-26 21:00:00",
+            "lastest_episode": 4,
+            "latest_episode_links": [
+                {
+                    "source": "Crunchyroll",
+                    "episode": 1,
+                    "link": "https://www.crunchyroll.com/series/GXJHM37KD/demon-lord-retry"
+                },
+                {
+                    "source": "Crunchyroll",
+                    "episode": 2,
+                    "link": "https://www.crunchyroll.com/series/GXJHM37KD/demon-lord-retry"
+                },
+                {
+                    "source": "Crunchyroll",
+                    "episode": 3,
+                    "link": "https://www.crunchyroll.com/series/GXJHM37KD/demon-lord-retry"
+                },
+                {
+                    "source": "Crunchyroll",
+                    "episode": 4,
+                    "link": "https://www.crunchyroll.com/series/GXJHM37KD/demon-lord-retry"
+                }
+            ],
+            "description": "Akira Oono thấy mình bị cuốn vào thế giới của Infinity Game trong vai trò trùm cuối và là nhân vật yêu thích của anh, Ma Vương Hakuto Kunai. Sau khi gặp gỡ Aku, Luna, và những người bạn khác trên hành trình, Ma Vương bắt đầu cuộc phiêu lưu mới để tìm kiếm phép thuật có thể đưa anh trở về thế giới thực. Câu chuyện của Ma Vương tiếp tục trong chương mới này!",
+            "thumbnail": "https://a4vf.net/wp-content/uploads/2024/10/demon-lord-retry.jpg"
+        },
+        {
+            "title": "Em Là Nàng Hầu Gái",
+            "show_time": "2024-10-27 01:00:00",
+            "lastest_episode": 3,
+            "latest_episode_links": [
+                {
+                    "source": "Ani-one",
+                    "episode": 1,
+                    "link": "https://www.youtube.com/watch?v=WIdhgowoBFI"
+                },
+                {
+                    "source": "Ani-one",
+                    "episode": 2,
+                    "link": "https://www.youtube.com/watch?v=K-L-Z2y8K0E"
+                },
+                {
+                    "source": "Ani-one",
+                    "episode": 3,
+                    "link": "https://www.youtube.com/watch?v=S-i3YwEmG88"
+                },
+                {
+                    "source": "Crunchyroll",
+                    "episode": 1,
+                    "link": "https://www.crunchyroll.com/watch/GEVUWJGV7"
+                }
+            ],
+            "description": "Một ngày nọ, đột nhiên có một cô hầu gái đến gõ cửa nhà—.",
+            "thumbnail": "https://a4vf.net/wp-content/uploads/2024/10/youre-ms-servant.jpg"
+        },
+        {
+            "title": "Fairy Tail – Nhiệm vụ 100 năm",
+            "show_time": "2024-10-27 16:00:00",
+            "lastest_episode": 15,
+            "latest_episode_links": [
+                {
+                    "source": "MuseVN",
+                    "episode": 1,
+                    "link": "https://www.youtube.com/watch?v=cvRiZdzaP7A"
+                },
+                {
+                    "source": "MuseVN",
+                    "episode": 2,
+                    "link": "https://www.youtube.com/watch?v=Nvg-xtKWNC8"
+                },
+                {
+                    "source": "MuseVN",
+                    "episode": 3,
+                    "link": "https://www.youtube.com/watch?v=E-CkskLYfsc"
+                },
+                {
+                    "source": "MuseVN",
+                    "episode": 4,
+                    "link": "https://www.youtube.com/watch?v=a4-wAO49tbc"
+                },
+                {
+                    "source": "MuseVN",
+                    "episode": 5,
+                    "link": "https://www.youtube.com/watch?v=krAQQM6dNTw"
+                },
+                {
+                    "source": "MuseVN",
+                    "episode": 6,
+                    "link": "https://www.youtube.com/watch?v=zjSGI2WIPQM"
+                },
+                {
+                    "source": "MuseVN",
+                    "episode": 7,
+                    "link": "https://www.youtube.com/watch?v=DW42bLEiw8E"
+                },
+                {
+                    "source": "MuseVN",
+                    "episode": 8,
+                    "link": "https://www.youtube.com/watch?v=e0X8uh2EhGg"
+                },
+                {
+                    "source": "MuseVN",
+                    "episode": 9,
+                    "link": "https://www.youtube.com/watch?v=zjSGI2WIPQM"
+                },
+                {
+                    "source": "MuseVN",
+                    "episode": 10,
+                    "link": "https://www.youtube.com/watch?v=buKXp6nJoiM"
+                },
+                {
+                    "source": "MuseVN",
+                    "episode": 11,
+                    "link": "https://www.youtube.com/watch?v=HubYS6PJIlE"
+                },
+                {
+                    "source": "MuseVN",
+                    "episode": 12,
+                    "link": "https://www.youtube.com/watch?v=uCBnPTFgYNU"
+                },
+                {
+                    "source": "MuseVN",
+                    "episode": 13,
+                    "link": "https://www.youtube.com/watch?v=uvtyhHSWBtc"
+                },
+                {
+                    "source": "MuseVN",
+                    "episode": 14,
+                    "link": "https://www.youtube.com/watch?v=gSL-FTRURhw"
+                },
+                {
+                    "source": "MuseVN",
+                    "episode": 15,
+                    "link": "https://www.youtube.com/watch?v=HUuz6K_B8pU"
+                },
+                {
+                    "source": "FPT Play",
+                    "episode": 1,
+                    "link": "https://fptplay.vn/xem-video/fairy-tail-nhiem-vu-100-nam-668521c509dd9514485ceddf"
+                },
+                {
+                    "source": "FPT Play",
+                    "episode": 2,
+                    "link": "https://fptplay.vn/xem-video/fairy-tail-nhiem-vu-100-nam-668521c509dd9514485ceddf/tap-2"
+                },
+                {
+                    "source": "FPT Play",
+                    "episode": 3,
+                    "link": "https://fptplay.vn/xem-video/fairy-tail-nhiem-vu-100-nam-668521c509dd9514485ceddf/tap-3"
+                },
+                {
+                    "source": "FPT Play",
+                    "episode": 4,
+                    "link": "https://fptplay.vn/xem-video/fairy-tail-nhiem-vu-100-nam-668521c509dd9514485ceddf/tap-4"
+                },
+                {
+                    "source": "FPT Play",
+                    "episode": 5,
+                    "link": "https://fptplay.vn/xem-video/fairy-tail-nhiem-vu-100-nam-668521c509dd9514485ceddf/tap-5"
+                },
+                {
+                    "source": "FPT Play",
+                    "episode": 6,
+                    "link": "https://fptplay.vn/xem-video/fairy-tail-nhiem-vu-100-nam-668521c509dd9514485ceddf/tap-6"
+                },
+                {
+                    "source": "FPT Play",
+                    "episode": 7,
+                    "link": "https://fptplay.vn/xem-video/fairy-tail-nhiem-vu-100-nam-668521c509dd9514485ceddf/tap-7"
+                },
+                {
+                    "source": "FPT Play",
+                    "episode": 8,
+                    "link": "https://fptplay.vn/xem-video/fairy-tail-nhiem-vu-100-nam-668521c509dd9514485ceddf/tap-8"
+                },
+                {
+                    "source": "FPT Play",
+                    "episode": 9,
+                    "link": "https://fptplay.vn/xem-video/fairy-tail-nhiem-vu-100-nam-668521c509dd9514485ceddf/tap-9"
+                },
+                {
+                    "source": "FPT Play",
+                    "episode": 10,
+                    "link": "https://fptplay.vn/xem-video/fairy-tail-nhiem-vu-100-nam-668521c509dd9514485ceddf/tap-10"
+                },
+                {
+                    "source": "FPT Play",
+                    "episode": 11,
+                    "link": "https://fptplay.vn/xem-video/fairy-tail-nhiem-vu-100-nam-668521c509dd9514485ceddf/tap-11"
+                },
+                {
+                    "source": "FPT Play",
+                    "episode": 12,
+                    "link": "https://fptplay.vn/xem-video/fairy-tail-nhiem-vu-100-nam-668521c509dd9514485ceddf/tap-12"
+                },
+                {
+                    "source": "FPT Play",
+                    "episode": 13,
+                    "link": "https://fptplay.vn/xem-video/fairy-tail-nhiem-vu-100-nam-668521c509dd9514485ceddf/tap-13"
+                },
+                {
+                    "source": "FPT Play",
+                    "episode": 14,
+                    "link": "https://fptplay.vn/xem-video/fairy-tail-nhiem-vu-100-nam-668521c509dd9514485ceddf/tap-14"
+                },
+                {
+                    "source": "FPT Play",
+                    "episode": 15,
+                    "link": "https://fptplay.vn/xem-video/fairy-tail-nhiem-vu-100-nam-668521c509dd9514485ceddf/tap-15"
+                },
+                {
+                    "source": "Netflix",
+                    "episode": 1,
+                    "link": "https://www.netflix.com/watch/81910170"
+                },
+                {
+                    "source": "Netflix",
+                    "episode": 2,
+                    "link": "https://www.netflix.com/watch/81910171"
+                },
+                {
+                    "source": "Netflix",
+                    "episode": 3,
+                    "link": "https://www.netflix.com/watch/81910172"
+                },
+                {
+                    "source": "Netflix",
+                    "episode": 4,
+                    "link": "https://www.netflix.com/watch/81910173"
+                },
+                {
+                    "source": "Netflix",
+                    "episode": 5,
+                    "link": "https://www.netflix.com/watch/81910174"
+                },
+                {
+                    "source": "Netflix",
+                    "episode": 6,
+                    "link": "https://www.netflix.com/watch/81910175"
+                },
+                {
+                    "source": "Netflix",
+                    "episode": 7,
+                    "link": "https://www.netflix.com/watch/81910176"
+                },
+                {
+                    "source": "Netflix",
+                    "episode": 8,
+                    "link": "https://www.netflix.com/watch/81910177"
+                },
+                {
+                    "source": "Netflix",
+                    "episode": 9,
+                    "link": "https://www.netflix.com/watch/81910178"
+                },
+                {
+                    "source": "Netflix",
+                    "episode": 10,
+                    "link": "https://www.netflix.com/watch/81910179"
+                },
+                {
+                    "source": "Netflix",
+                    "episode": 11,
+                    "link": "https://www.netflix.com/watch/81910180"
+                },
+                {
+                    "source": "Netflix",
+                    "episode": 12,
+                    "link": "https://www.netflix.com/watch/81910181"
+                },
+                {
+                    "source": "Netflix",
+                    "episode": 13,
+                    "link": "https://www.netflix.com/watch/81910182"
+                },
+                {
+                    "source": "Netflix",
+                    "episode": 14,
+                    "link": "https://www.netflix.com/watch/81910183"
+                },
+                {
+                    "source": "Netflix",
+                    "episode": 15,
+                    "link": "https://www.netflix.com/watch/81910184"
+                },
+                {
+                    "source": "VieON",
+                    "episode": 1,
+                    "link": "https://vieon.vn/hoi-phap-su-nhiem-vu-100-nam--eps-tap-1.html"
+                },
+                {
+                    "source": "VieON",
+                    "episode": 2,
+                    "link": "https://vieon.vn/hoi-phap-su-nhiem-vu-100-nam--eps-tap-2.html"
+                },
+                {
+                    "source": "VieON",
+                    "episode": 3,
+                    "link": "https://vieon.vn/hoi-phap-su-nhiem-vu-100-nam--eps-tap-3.html"
+                },
+                {
+                    "source": "VieON",
+                    "episode": 4,
+                    "link": "https://vieon.vn/hoi-phap-su-nhiem-vu-100-nam--eps-tap-4.html"
+                },
+                {
+                    "source": "VieON",
+                    "episode": 5,
+                    "link": "https://vieon.vn/hoi-phap-su-nhiem-vu-100-nam--eps-tap-5.html"
+                },
+                {
+                    "source": "VieON",
+                    "episode": 6,
+                    "link": "https://vieon.vn/hoi-phap-su-nhiem-vu-100-nam--eps-tap-6.html"
+                },
+                {
+                    "source": "VieON",
+                    "episode": 7,
+                    "link": "https://vieon.vn/hoi-phap-su-nhiem-vu-100-nam--eps-tap-7.html"
+                },
+                {
+                    "source": "VieON",
+                    "episode": 8,
+                    "link": "https://vieon.vn/hoi-phap-su-nhiem-vu-100-nam--eps-tap-8.html"
+                },
+                {
+                    "source": "VieON",
+                    "episode": 9,
+                    "link": "https://vieon.vn/hoi-phap-su-nhiem-vu-100-nam--eps-tap-9.html"
+                },
+                {
+                    "source": "VieON",
+                    "episode": 10,
+                    "link": "https://vieon.vn/hoi-phap-su-nhiem-vu-100-nam--eps-tap-10.html"
+                },
+                {
+                    "source": "VieON",
+                    "episode": 11,
+                    "link": "https://vieon.vn/hoi-phap-su-nhiem-vu-100-nam--eps-tap-11.html"
+                },
+                {
+                    "source": "VieON",
+                    "episode": 12,
+                    "link": "https://vieon.vn/hoi-phap-su-nhiem-vu-100-nam--eps-tap-12.html"
+                },
+                {
+                    "source": "VieON",
+                    "episode": 13,
+                    "link": "https://vieon.vn/hoi-phap-su-nhiem-vu-100-nam--eps-tap-13.html"
+                },
+                {
+                    "source": "VieON",
+                    "episode": 14,
+                    "link": "https://vieon.vn/hoi-phap-su-nhiem-vu-100-nam--eps-tap-14.html"
+                },
+                {
+                    "source": "VieON",
+                    "episode": 15,
+                    "link": "https://vieon.vn/hoi-phap-su-nhiem-vu-100-nam--eps-tap-15.html"
+                }
+            ],
+            "description": "“Fairy Tail,” hội pháp sư nổi tiếng nhất và cũng gây nhiều rắc rối nhất ở vương quốc Fiore. Nhóm mạnh nhất gồm Natsu, Lucy, Happy, Gray, Erza, Wendy và Charle đang chuẩn bị lên đường. Họ hướng đến “Magia Dragon,” hội pháp sư cổ xưa nhất thế giới ở vùng đất xa xôi phương bắc Giltena. Sau khi vượt qua các trận chiến sinh tử với Zeref và Acnologia, họ được phép thử thách nhiệm vụ cấp S cao nhất – “Nhiệm vụ 100 năm.” “Nhiệm vụ 100 năm” là một nhiệm vụ huyền thoại chưa ai hoàn thành suốt hơn trăm năm kể từ khi “Magia Dragon” được thành lập. Natsu và nhóm “Fairy Tail” sẽ khám phá những thành phố kỳ lạ, đối đầu với các vị thần bí ẩn và những kẻ thù đáng sợ. Cuộc phiêu lưu mới đầy phấn khích của nhóm “Fairy Tail” bắt đầu!",
+            "thumbnail": "https://a4vf.net/wp-content/uploads/2024/06/fairy-tail-100-nen-quest.jpg"
+        },
+        {
+            "title": "Good Bye, Dragon Life",
+            "show_time": "2024-10-25 00:15:00",
+            "lastest_episode": 3,
+            "latest_episode_links": [
+                {
+                    "source": "Crunchyroll",
+                    "episode": 1,
+                    "link": "https://www.crunchyroll.com/series/G79H23Z0X/good-bye-dragon-life"
+                },
+                {
+                    "source": "Crunchyroll",
+                    "episode": 2,
+                    "link": "https://www.crunchyroll.com/series/G79H23Z0X/good-bye-dragon-life"
+                },
+                {
+                    "source": "Crunchyroll",
+                    "episode": 3,
+                    "link": "https://www.crunchyroll.com/series/G79H23Z0X/good-bye-dragon-life"
+                }
+            ],
+            "description": "Từ lâu, có một con người đã đánh bại con rồng cổ xưa và mạnh nhất trong tất cả các loài rồng. Con rồng này mạnh đến mức ngay cả các vị thần cũng phải khiếp sợ, nhưng nó đã chấp nhận cái kết của mình trong cô đơn. Tuy nhiên, đột nhiên, con rồng tỉnh dậy trong một cuộc đời mới với thân phận của một chàng trai tên là Dolan, sống ở một ngôi làng xa xôi.",
+            "thumbnail": "https://a4vf.net/wp-content/uploads/2024/10/good-bye-dragon-life.jpg"
+        },
+        {
+            "title": "Gun Gale Online Mùa 2",
+            "show_time": "2024-10-25 23:30:00",
+            "lastest_episode": 3,
+            "latest_episode_links": [
+                {
+                    "source": "MuseVN",
+                    "episode": 1,
+                    "link": "https://www.youtube.com/watch?v=vj7FqKXuUn0"
+                },
+                {
+                    "source": "MuseVN",
+                    "episode": 2,
+                    "link": "https://www.youtube.com/watch?v=J09O2_OIVSU"
+                },
+                {
+                    "source": "MuseVN",
+                    "episode": 3,
+                    "link": "https://www.youtube.com/watch?v=DtqevznH6iE"
+                },
+                {
+                    "source": "FPT Play",
+                    "episode": 1,
+                    "link": "https://fptplay.vn/xem-video/sword-art-online-ngoai-truyen-gun-gale-online-phan-2-66ffc83b55210fd9f4e58162"
+                },
+                {
+                    "source": "FPT Play",
+                    "episode": 2,
+                    "link": "https://fptplay.vn/xem-video/sword-art-online-ngoai-truyen-gun-gale-online-phan-2-66ffc83b55210fd9f4e58162/tap-2"
+                },
+                {
+                    "source": "FPT Play",
+                    "episode": 3,
+                    "link": "https://fptplay.vn/xem-video/sword-art-online-ngoai-truyen-gun-gale-online-phan-2-66ffc83b55210fd9f4e58162/tap-3"
+                }
+            ],
+            "description": "Đây là tác phẩm phái sinh từ Sword Art Online, tựa sách đã bán được hơn 30 triệu bản toàn cầu.Một SAO khác biệt được viết bởi Keiichi Sigsawa và được minh họa bởi Kuroboshi.Bối cảnh của câu truyện là một VRMMO (Trò chơi trực tuyến thực tế ảo nhiều người chơi) nơi súng đạn và khói lửa mịt mù, Gun Gale Online.Kohiruimaki Karen là một cô gái mặc cảm với chiều cao ngoại cỡ của mình nên đã tìm tới game VR để tìm kiếm một hình hài nhỏ bé và rồi tham gia cuộc chiến sinh tử Squad Jam cùng khẩu P90 yêu quý.Mùa thứ nhất của TV Anime lên sóng vào tháng 4 năm 2018 đã tạo nên cơn sốt với hình ảnh những thiếu nữ cực chiến cùng những màn hành động mãn nhãn và được đông đảo khán giả cả trong lẫn ngoài Nhật Bản bàn tán.Mùa thứ hai dự kiến sẽ lên sóng trong tháng 10 năm 2024. Tổ đội vô địch LPFM của LLENN, Pitohui, M, Fukaziroh sẽ tham gia một giải đấu sinh tử chiến mới được tổ chức bất ngờ. Mặc dù là ứng cử viên vô địch nặng ký nhưng đây sẽ là một giải đấu vô cùng khó khăn khi “Khu vực thi đấu là nơi đã chìm xuống biển theo dòng thời gian”, “Trung tâm của MAP là khu vực [Unknown]”, “Xung đột giữa các đội vô danh”…Chưa kể toàn bộ các người chơi tham gia còn được thông báo có một luật chơi đặc biệt…",
+            "thumbnail": "https://a4vf.net/wp-content/uploads/2024/09/gun-gale.jpg"
+        },
+        {
+            "title": "Haigakura",
+            "show_time": "2024-10-28 21:00:00",
+            "lastest_episode": 3,
+            "latest_episode_links": [
+                {
+                    "source": "MuseVN",
+                    "episode": 1,
+                    "link": "https://www.youtube.com/watch?v=seFFZHhLQXQ"
+                },
+                {
+                    "source": "MuseVN",
+                    "episode": 2,
+                    "link": "https://www.youtube.com/watch?v=iAA-qgcjmJ0"
+                },
+                {
+                    "source": "MuseVN",
+                    "episode": 3,
+                    "link": "https://www.youtube.com/watch?v=DioyeS56tiM"
+                }
+            ],
+            "description": "Tiên Giới, nơi các vị thần và con người sinh sống đang trên bờ vực sụp đổ. Nguyên nhân là bởi Tứ Hung, bốn vị thần hung ác bị phóng ấn làm trụ cột nâng đỡ thế giới đã biến mất. Nhất Diệp, một Ca Kỹ với mục đích giải cứu người nuôi dưỡng mình là Bạch Hào, người đang đưa mình ra làm trụ cột thay thế. Bên dưới Nhất Diệp còn có phục thần theo hầu là Điền Hồng. Họ cùng nhau truy tìm Tứ Hung. Bản thân là Ca Kỹ, Nhất Diệp nhảy múa rất thượng thừa chỉ có điều giọng hát lại dở tệ nên luôn bị chế nhạo là bất tài vô dụng. Vào một ngày, Nhất Diệp cùng La Hán, một người bạn cũng là một luyện sư, họ tình cờ phát hiện ra thần thú Ngưu Quỷ bị chủ nhân là Vu Dĩ đối xử tệ bạc…",
+            "thumbnail": "https://a4vf.net/wp-content/uploads/2024/10/haigakura.jpg"
+        },
+        {
+            "title": "Hành trình cô độc nơi dị giới",
+            "show_time": "2024-10-24 22:00:00",
+            "lastest_episode": 4,
+            "latest_episode_links": [
+                {
+                    "source": "MuseVN",
+                    "episode": 1,
+                    "link": "https://www.youtube.com/watch?v=r0CayzYRWzw"
+                },
+                {
+                    "source": "MuseVN",
+                    "episode": 2,
+                    "link": "https://www.youtube.com/watch?v=aR_BEHztnXc"
+                },
+                {
+                    "source": "MuseVN",
+                    "episode": 3,
+                    "link": "https://www.youtube.com/watch?v=iRA8zzWYjno"
+                },
+                {
+                    "source": "MuseVN",
+                    "episode": 4,
+                    "link": "https://www.youtube.com/watch?v=QBXApHrMp1o"
+                },
+                {
+                    "source": "VieON",
+                    "episode": 1,
+                    "link": "https://vieon.vn/hanh-trinh-co-doc-noi-di-gioi--eps-tap-1.html"
+                },
+                {
+                    "source": "VieON",
+                    "episode": 2,
+                    "link": "https://vieon.vn/hanh-trinh-co-doc-noi-di-gioi--eps-tap-2.html"
+                }
+            ],
+            "description": "Haraka là người đã trải qua những năm tháng học cấp ba mà không có bạn bè. Một ngày nọ, cậu cùng các bạn cùng lớp đột nhiên bị triệu hồi đến thế giới khác ngay trong giờ học.",
+            "thumbnail": "https://a4vf.net/wp-content/uploads/2024/09/145320l.jpg"
+        },
+        {
+            "title": "Hôn thê Yakuza",
+            "show_time": "2024-10-24 21:30:00",
+            "lastest_episode": 3,
+            "latest_episode_links": [
+                {
+                    "source": "Crunchyroll",
+                    "episode": 1,
+                    "link": "https://www.crunchyroll.com/series/G8DHV78E7/365-days-to-the-wedding"
+                },
+                {
+                    "source": "Crunchyroll",
+                    "episode": 2,
+                    "link": "https://www.crunchyroll.com/series/G8DHV78E7/365-days-to-the-wedding"
+                },
+                {
+                    "source": "Crunchyroll",
+                    "episode": 3,
+                    "link": "https://www.crunchyroll.com/series/G8DHV78E7/365-days-to-the-wedding"
+                }
+            ],
+            "description": "Somei Renji là ông nội của Somei Yoshino và là thủ lĩnh của “Tập đoàn Somei”, nhóm yakuza lớn nhất vùng Kansai. Khi ông sắp xếp cho cô kết hôn với Miyama Kirishima, Yoshino phải chuyển đến sống tại dinh thự của “Gia tộc Miyama”, nhóm yakuza lớn nhất vùng Kanto. Kirishima đón tiếp Yoshino một cách ấm áp, là một chàng trai dễ mến, hòa đồng và tốt bụng đến mức không ai ngờ rằng anh xuất thân từ một gia đình yakuza. Điều này khiến Yoshino cảm thấy an tâm, dù ban đầu cô đã rất bất an ở nơi xa lạ này.",
+            "thumbnail": "https://a4vf.net/wp-content/uploads/2024/10/yakuza-fiance.jpg"
+        },
+        {
+            "title": "Khi “Trai” Đẹp Hẹn Hò",
+            "show_time": "2024-10-26 00:30:00",
+            "lastest_episode": 3,
+            "latest_episode_links": [
+                {
+                    "source": "Ani-one",
+                    "episode": 1,
+                    "link": "https://www.youtube.com/watch?v=_rJ_VQOXys8"
+                },
+                {
+                    "source": "Ani-one",
+                    "episode": 2,
+                    "link": "https://www.youtube.com/watch?v=xEmnYXMSGmI"
+                },
+                {
+                    "source": "Ani-one",
+                    "episode": 3,
+                    "link": "https://www.youtube.com/watch?v=CKqqruWAN-I"
+                },
+                {
+                    "source": "Netflix",
+                    "episode": 1,
+                    "link": "https://www.netflix.com/watch/81942654"
+                }
+            ],
+            "description": "Tokiwa, một sinh viên đại học, được Suo – cô bạn cùng nhóm nghiên cứu – mời tham gia buổi hẹn hò nhóm. Cậu cùng hai người bạn Asagi và Hagi, cả ba đều lần đầu tham gia buổi hẹn, háo hức chờ đợi tại quán nhậu. Biết được các cô gái đã đến trước, họ vội vàng di chuyển đến chỗ ngồi để tránh việc các cô phải đợi. Tuy nhiên, khi đến nơi, trước mặt họ lại là ba chàng trai đẹp đến chói mắt. Một buổi hẹn hò giao lưu có phần khác biệt, với sáu chàng trai và không có cô gái nào, chính thức bắt đầu!?",
+            "thumbnail": "https://a4vf.net/wp-content/uploads/2024/10/how-i-attended-an-all-guys-mixer.jpg"
+        },
+        {
+            "title": "Lam Hỏa Diệt Quỷ – Chương Hồi kết của bông tuyết",
+            "latest_episode_links": [
+                {
+                    "source": "Crunchyroll",
+                    "episode": 1,
+                    "link": "https://www.crunchyroll.com/watch/G8WU73WK4"
+                }
+            ],
+            "description": "Câu chuyện xoay quanh Okumura Rin vốn là một thiếu niên bình thường sống tại nhà thờ nơi cha xứ Shiro Fujimoto làm việc. Một ngày nọ, cậu đã tình cờ phát hiện ra mình và người em sinh đôi tên Okumura Yukio, là con trai của quỷ Satan và một phụ nữ loài người. Trong hai người, Rin là người duy nhất thừa hưởng ngọn lửa xanh lam mà Satan để lại. Vì bảo vệ cậu để không bị Satan và thuộc hạ của hắn bắt cậu về làm quỷ vương kế nhiệm, Shiro đã phải hi sinh. Sau đó theo ước muốn của mình, Rin đã ghi danh đăng kí vào học viện Thập Tự với mục đích trở thành pháp sư trừ ma để tiêu diệt Satan dưới sự dẫn dắt của em mình.",
+            "thumbnail": "https://a4vf.net/wp-content/uploads/2024/09/lam-hoa.jpg"
+        },
+        {
+            "title": "MF Ghost Mùa 2",
+            "show_time": "2024-10-27 23:00:00",
+            "lastest_episode": 3,
+            "latest_episode_links": [
+                {
+                    "source": "Ani-one Ultra",
+                    "episode": 1,
+                    "link": "https://www.youtube.com/watch?v=7MIAUJuhWKo"
+                },
+                {
+                    "source": "Ani-one Ultra",
+                    "episode": 2,
+                    "link": "https://www.youtube.com/playlist?list=PLOVZwvNm10lW3s2U1C5G4eZOYO7l1nI9C"
+                },
+                {
+                    "source": "Ani-one Ultra",
+                    "episode": 3,
+                    "link": "https://www.youtube.com/playlist?list=PLOVZwvNm10lW3s2U1C5G4eZOYO7l1nI9C"
+                }
+            ],
+            "description": "Kẻ thách thức đến từ châu Âu, Katagiri Kanata. Kẻ địch từ Stuttgart, Michael Beckenbauer. Thiên tài thức tỉnh, Sawatari Kouki. Với sự trỗi dậy của sức mạnh trẻ tuổi, cuộc đua thứ hai của MFG tại Ashinoko GT đã bước sang một giai đoạn mới. Trận đua bắt đầu dưới cơn mưa tầm tã, tạo nên một bối cảnh đầy biến động. Cuộc chiến xoay quanh những bẫy trơn trượt phủ đầy tro núi lửa. Kanata, lái chiếc 86, tiếp cận các đối thủ điều khiển những siêu xe mạnh mẽ bằng kỹ thuật lái phi thường, khuấy động không khí cuồng nhiệt của những người hâm mộ MFG.",
+            "thumbnail": "https://a4vf.net/wp-content/uploads/2024/10/mf-ghost-mua-2.jpg"
+        },
+        {
+            "title": "Ma Vương 2099",
+            "show_time": "2024-10-26 22:00:00",
+            "lastest_episode": 2,
+            "latest_episode_links": [
+                {
+                    "source": "FPT Play",
+                    "episode": 1,
+                    "link": "https://fptplay.vn/xem-video/ma-vuong-2099-67065ba77662bc73fdf100b0"
+                },
+                {
+                    "source": "FPT Play",
+                    "episode": 2,
+                    "link": "https://fptplay.vn/xem-video/ma-vuong-2099-67065ba77662bc73fdf100b0/tap-2"
+                },
+                {
+                    "source": "Crunchyroll",
+                    "episode": 1,
+                    "link": "https://www.crunchyroll.com/watch/G31UVK0X9/cyberpunk-city-shinjuku"
+                },
+                {
+                    "source": "Crunchyroll",
+                    "episode": 2,
+                    "link": "https://www.crunchyroll.com/watch/GPWU8N1KD/the-demon-lord-and-his-vassals"
+                }
+            ],
+            "description": "Năm 2099 theo lịch Thống Nhất—500 năm sau khi Ma vương huyền thoại Veltol Velvet Velsvalt, kẻ từng thống trị Vương quốc Bất tử ngã xuống—Đã đến lúc Ma vương hồi sinh.",
+            "thumbnail": "https://a4vf.net/wp-content/uploads/2024/10/maou-2099.jpg"
+        },
+        {
+            "title": "Nina Của Đất Nước Ngàn Sao",
+            "show_time": "2024-10-28 21:00:00",
+            "lastest_episode": 3,
+            "latest_episode_links": [
+                {
+                    "source": "Crunchyroll",
+                    "episode": 1,
+                    "link": "https://www.crunchyroll.com/watch/GZ7UDQX17/the-origin-of-sin"
+                },
+                {
+                    "source": "Crunchyroll",
+                    "episode": 2,
+                    "link": "https://www.crunchyroll.com/series/GKEH2G0QK/nina-the-starry-bride"
+                },
+                {
+                    "source": "Crunchyroll",
+                    "episode": 3,
+                    "link": "https://www.crunchyroll.com/series/GKEH2G0QK/nina-the-starry-bride"
+                }
+            ],
+            "description": "Nina có một khởi đầu khó khăn trong cuộc sống, phải ăn trộm để sinh tồn và cuối cùng bị chính anh trai mình bán làm nô lệ. Nhưng trái với mong đợi, kẻ bắt giữ cô – Hoàng tử Azure – lại quyết định cho cô sống cuộc đời của một công chúa… cụ thể là công chúa-tư tế Alisha vừa mới qua đời.",
+            "thumbnail": "https://a4vf.net/wp-content/uploads/2024/10/nina-the-starry-bride.jpg"
+        },
+        {
+            "title": "Puniru Là Một Bé Slime Dễ Thương",
+            "show_time": "2024-10-27 22:45:00",
+            "lastest_episode": 3,
+            "latest_episode_links": [
+                {
+                    "source": "Ani-one",
+                    "episode": 1,
+                    "link": "https://www.youtube.com/watch?v=mrEDD6A8a-s"
+                },
+                {
+                    "source": "Ani-one",
+                    "episode": 2,
+                    "link": "https://www.youtube.com/watch?v=7Q5U1vOCnmg"
+                },
+                {
+                    "source": "Ani-one",
+                    "episode": 3,
+                    "link": "https://www.youtube.com/watch?v=BNGm2ToRYcM"
+                }
+            ],
+            "description": "Đây là câu chuyện về hành trình của slime Puniru và cậu bé trung học Kotaro cho đến khi họ không còn là “bạn bè” nữa…",
+            "thumbnail": "https://a4vf.net/wp-content/uploads/2024/10/puniru-wa-kawaii-slime.jpg"
+        },
+        {
+            "title": "Ranma1/2 (2024)",
+            "show_time": "2024-10-27 23:00:00",
+            "lastest_episode": 3,
+            "latest_episode_links": [
+                {
+                    "source": "Netflix",
+                    "episode": 1,
+                    "link": "https://www.netflix.com/watch/81320039"
+                },
+                {
+                    "source": "Netflix",
+                    "episode": 2,
+                    "link": "https://www.netflix.com/watch/81320040"
+                },
+                {
+                    "source": "Netflix",
+                    "episode": 3,
+                    "link": "https://www.netflix.com/watch/81320041"
+                }
+            ],
+            "description": "Soun Tendou điều hành võ đường Tendou cùng với ba cô con gái của mình: Akane, Nabiki, và Kasumi. Một ngày nọ, cuộc sống của ba chị em bị đảo lộn khi cha của họ thông báo rằng ông đã hứa gả một trong số họ cho con trai của một võ sĩ khác, với hy vọng tiếp nối gia nghiệp của gia đình. Bên cạnh những phản ứng trái chiều của các cô gái, điều mà gia đình Tendou không ngờ tới khi vị hôn phu đến chính là Ranma Saotome và cha của cậu, Genma.",
+            "thumbnail": "https://a4vf.net/wp-content/uploads/2024/10/ranma.jpg"
+        },
+        {
+            "title": "Re:Zero – Bắt đầu lại từ con số 0 tại thế giới khác – Phần 3",
+            "show_time": "2024-10-23 21:30:00",
+            "lastest_episode": 3,
+            "latest_episode_links": [
+                {
+                    "source": "MuseVN",
+                    "episode": 1,
+                    "link": "https://www.youtube.com/watch?v=v3MpwUZfhL4"
+                },
+                {
+                    "source": "MuseVN",
+                    "episode": 2,
+                    "link": "https://www.youtube.com/watch?v=csHZHYTuo70"
+                },
+                {
+                    "source": "MuseVN",
+                    "episode": 3,
+                    "link": "https://www.youtube.com/watch?v=PO__3c0eqmM"
+                },
+                {
+                    "source": "FPT Play",
+                    "episode": 1,
+                    "link": "https://fptplay.vn/xem-video/rezero-bat-dau-lai-o-the-gioi-khac-phan-3-66fcf00155ef684c970caf98/tap-1"
+                },
+                {
+                    "source": "FPT Play",
+                    "episode": 2,
+                    "link": "https://fptplay.vn/xem-video/rezero-bat-dau-lai-o-the-gioi-khac-phan-3-66fcf00155ef684c970caf98/tap-2"
+                },
+                {
+                    "source": "FPT Play",
+                    "episode": 3,
+                    "link": "https://fptplay.vn/xem-video/rezero-bat-dau-lai-o-the-gioi-khac-phan-3-66fcf00155ef684c970caf98/tap-3"
+                },
+                {
+                    "source": "Crunchyroll",
+                    "episode": 1,
+                    "link": "https://www.crunchyroll.com/watch/GQJUMNE75"
+                }
+            ],
+            "description": "Đã một năm trôi qua kể từ khi giải phóng “Thánh Địa,” nơi Subaru và các đồng đội đã đẩy lùi những đợt tấn công ác liệt của Elsa cùng đồng bọn và hoàn thành hợp đồng với Beatrice trong cuộc chiến với Đại Thố.",
+            "thumbnail": "https://a4vf.net/wp-content/uploads/2024/09/rezero.jpg"
+        },
+        {
+            "title": "Shangri-La Frontier Mùa 2",
+            "show_time": "2024-10-27 15:30:00",
+            "lastest_episode": 27,
+            "latest_episode_links": [
+                {
+                    "source": "MuseVN",
+                    "episode": 26,
+                    "link": "https://www.youtube.com/watch?v=N1idd8Xn2ls"
+                },
+                {
+                    "source": "MuseVN",
+                    "episode": 27,
+                    "link": "https://www.youtube.com/watch?v=8oYnqIryDYM"
+                }
+            ],
+            "description": "Mùa hai của bộ phim Shanri-La Frontier",
+            "thumbnail": "https://a4vf.net/wp-content/uploads/2024/10/shangri-la-frontier-2nd-season.jpg"
+        },
+        {
+            "title": "Thám Tử Loạn Trí Mùa 2",
+            "show_time": "2024-10-28 21:30:00",
+            "lastest_episode": 16,
+            "latest_episode_links": [
+                {
+                    "source": "Ani-one Ultra",
+                    "episode": 14,
+                    "link": "https://www.youtube.com/watch?v=NQjtox35yk0"
+                },
+                {
+                    "source": "Ani-one Ultra",
+                    "episode": 15,
+                    "link": "https://www.youtube.com/playlist?list=PLOVZwvNm10lUEhoedPOQm9LGN60u4c1QK"
+                },
+                {
+                    "source": "Ani-one Ultra",
+                    "episode": 16,
+                    "link": "https://www.youtube.com/playlist?list=PLOVZwvNm10lUEhoedPOQm9LGN60u4c1QK"
+                }
+            ],
+            "description": "Kamonohashi Ron, từng được gọi là thiên tài tại trường đào tạo thám tử hàng đầu thế giới, BLUE, nhưng đã bị tước bỏ tư cách thám tử vì một “khiếm khuyết” chết người. Sau những năm tháng bất hạnh, số phận của anh thay đổi lớn khi gặp gỡ Isshiki Totomaru, thành viên của đội điều tra số 1 Cục Cảnh sát Thủ Đô — thường được gọi là “Toto”.",
+            "thumbnail": "https://a4vf.net/wp-content/uploads/2024/10/kamonohashi-ron-no-kindan-suiri-2nd-season.jpg"
+        },
+        {
+            "title": "Tower of God Season 2",
+            "show_time": "2024-10-27 21:00:00",
+            "lastest_episode": 16,
+            "latest_episode_links": [
+                {
+                    "source": "Crunchyroll",
+                    "episode": 1,
+                    "link": "https://www.crunchyroll.com/watch/G2XU07K9E"
+                },
+                {
+                    "source": "Crunchyroll",
+                    "episode": 2,
+                    "link": "https://www.crunchyroll.com/watch/GZ7UVGZGJ/the-strongest-regular"
+                },
+                {
+                    "source": "Crunchyroll",
+                    "episode": 5,
+                    "link": "https://www.crunchyroll.com/series/G6J0G49DR/tower-of-god"
+                },
+                {
+                    "source": "Crunchyroll",
+                    "episode": 3,
+                    "link": "https://www.crunchyroll.com/watch/GD9UVM5MP/the-trustworthy-room"
+                },
+                {
+                    "source": "Crunchyroll",
+                    "episode": 4,
+                    "link": "https://www.crunchyroll.com/series/G6J0G49DR/tower-of-god"
+                },
+                {
+                    "source": "Crunchyroll",
+                    "episode": 6,
+                    "link": "https://www.crunchyroll.com/series/G6J0G49DR/tower-of-god"
+                },
+                {
+                    "source": "Crunchyroll",
+                    "episode": 7,
+                    "link": "https://www.crunchyroll.com/series/G6J0G49DR/tower-of-god"
+                },
+                {
+                    "source": "Crunchyroll",
+                    "episode": 8,
+                    "link": "https://www.crunchyroll.com/series/G6J0G49DR/tower-of-god"
+                },
+                {
+                    "source": "Crunchyroll",
+                    "episode": 9,
+                    "link": "https://www.crunchyroll.com/series/G6J0G49DR/tower-of-god"
+                },
+                {
+                    "source": "Crunchyroll",
+                    "episode": 10,
+                    "link": "https://www.crunchyroll.com/series/G6J0G49DR/tower-of-god"
+                },
+                {
+                    "source": "Crunchyroll",
+                    "episode": 11,
+                    "link": "https://www.crunchyroll.com/series/G6J0G49DR/tower-of-god"
+                },
+                {
+                    "source": "Crunchyroll",
+                    "episode": 12,
+                    "link": "https://www.crunchyroll.com/series/G6J0G49DR/tower-of-god"
+                },
+                {
+                    "source": "Crunchyroll",
+                    "episode": 13,
+                    "link": "https://www.crunchyroll.com/series/G6J0G49DR/tower-of-god"
+                },
+                {
+                    "source": "Crunchyroll",
+                    "episode": 14,
+                    "link": "https://www.crunchyroll.com/series/G6J0G49DR/tower-of-god"
+                },
+                {
+                    "source": "Crunchyroll",
+                    "episode": 15,
+                    "link": "https://www.crunchyroll.com/series/G6J0G49DR/tower-of-god"
+                },
+                {
+                    "source": "Crunchyroll",
+                    "episode": 16,
+                    "link": "https://www.crunchyroll.com/series/G6J0G49DR/tower-of-god"
+                }
+            ],
+            "description": "Ja Wangnan dường như không thể vượt qua tầng 20. Dù thất bại hết lần này đến lần khác, anh không chịu bỏ cuộc. Trên hành trình của mình, anh gặp một nhân vật bí ẩn và mạnh mẽ tên là Viole. Wangnan mời Viole tham gia nhóm Regulars của mình. Cuộc hành trình của họ tiếp tục với những thử thách mới ở mỗi lượt.",
+            "thumbnail": "https://a4vf.net/wp-content/uploads/2024/06/bx153406-du2rlkgmuf2u.jpg"
+        },
+        {
+            "title": "Trò chơi nghìn tỷ",
+            "show_time": "2024-10-25 00:05:00",
+            "lastest_episode": 4,
+            "latest_episode_links": [
+                {
+                    "source": "Ani-one",
+                    "episode": 1,
+                    "link": "https://www.youtube.com/watch?v=-mHXH9ANRac"
+                },
+                {
+                    "source": "Ani-one",
+                    "episode": 2,
+                    "link": "https://www.youtube.com/watch?v=CX8HlU-cGZg"
+                },
+                {
+                    "source": "Ani-one",
+                    "episode": 3,
+                    "link": "https://www.youtube.com/watch?v=dIZtYQoZVCs"
+                },
+                {
+                    "source": "Ani-one",
+                    "episode": 4,
+                    "link": "https://www.youtube.com/watch?v=7ilEXeTlHlg"
+                }
+            ],
+            "description": "Haru, một kẻ lém lỉnh với đầu óc sắc sảo, và Gaku, một otaku máy tính nhút nhát, ngại giao tiếp với người khác. Hai người với tính cách hoàn toàn trái ngược nhau đã dần trở nên thân thiết từ một sự kiện xảy ra trong thời trung học.",
+            "thumbnail": "https://a4vf.net/wp-content/uploads/2024/10/trillion-game.jpg"
+        },
+        {
+            "title": "Trị Liệu Sư Bị Đuổi Khỏi Tổ Đội Lại Là Người Mạnh Nhất",
+            "show_time": "2024-10-27 01:00:00",
+            "lastest_episode": 3,
+            "latest_episode_links": [
+                {
+                    "source": "Ani-one",
+                    "episode": 1,
+                    "link": "https://www.youtube.com/watch?v=77ZN0gIvit4"
+                },
+                {
+                    "source": "Ani-one",
+                    "episode": 2,
+                    "link": "https://www.youtube.com/watch?v=QTrP5_88kN8"
+                },
+                {
+                    "source": "Ani-one",
+                    "episode": 3,
+                    "link": "https://www.youtube.com/watch?v=QTrP5_88kN8"
+                }
+            ],
+            "description": "“Anh trai, có muốn lập đội với em không?”",
+            "thumbnail": "https://a4vf.net/wp-content/uploads/2024/10/the-healer-who-was-banished-from-his-party-is-in-fact-the-strongest.jpg"
+        },
+        {
+            "title": "Trở Thành Giáo Viên Tại Trường Học Quái Vật",
+            "show_time": "2024-10-29 21:00:00",
+            "lastest_episode": 3,
+            "latest_episode_links": [
+                {
+                    "source": "Ani-one",
+                    "episode": 1,
+                    "link": "https://www.youtube.com/watch?v=gS1mc1BxE60"
+                },
+                {
+                    "source": "Ani-one",
+                    "episode": 2,
+                    "link": "https://www.youtube.com/watch?v=oqKmIU2-AIc"
+                },
+                {
+                    "source": "Ani-one",
+                    "episode": 3,
+                    "link": "https://www.youtube.com/watch?v=dCkVWM1bKHY"
+                }
+            ],
+            "thumbnail": "https://a4vf.net/wp-content/uploads/2024/10/youkai-gakkou-no-sensei-hajimemashita.jpg"
+        },
+        {
+            "title": "Tôi Sẽ Trở Thành Nữ Phản Diện Lưu Danh Sử Sách",
+            "show_time": "2024-10-23 22:00:00",
+            "lastest_episode": 3,
+            "latest_episode_links": [
+                {
+                    "source": "Crunchyroll",
+                    "episode": 1,
+                    "link": "https://www.crunchyroll.com/series/GQWH0M17X/ill-become-a-villainess-who-goes-down-in-history"
+                },
+                {
+                    "source": "Crunchyroll",
+                    "episode": 2,
+                    "link": "https://www.crunchyroll.com/series/GQWH0M17X/ill-become-a-villainess-who-goes-down-in-history"
+                },
+                {
+                    "source": "Crunchyroll",
+                    "episode": 3,
+                    "link": "https://www.crunchyroll.com/series/GQWH0M17X/ill-become-a-villainess-who-goes-down-in-history"
+                }
+            ],
+            "description": "Alicia là con gái cả của gia tộc quý tộc Williams – một dòng họ nổi bật với ma thuật bóng tối. Mái tóc đen như than và đôi mắt vàng rực rỡ của cô tạo nên một sự hiện diện đầy quyền lực, nhưng điểm đặc biệt nhất của cô chính là chiếc lưỡi sắc bén và bản tính xấu xa. Đúng vậy, Alicia chính là một nữ phản diện, nhưng cũng chỉ là nhân vật hư cấu trong một trò chơi otome!",
+            "thumbnail": "https://a4vf.net/wp-content/uploads/2024/10/ill-become-a-villainess-who-goes-down-in-history.jpg"
+        },
+        {
+            "title": "Tôi là [Thoại thuật sư] hỗ trợ cực ác dẫn dắt gia tộc mạnh nhất thế giới",
+            "show_time": "2024-10-28 22:00:00",
+            "lastest_episode": 4,
+            "latest_episode_links": [
+                {
+                    "source": "MuseVN",
+                    "episode": 1,
+                    "link": "https://www.youtube.com/watch?v=QnmEd_wJIYQ"
+                },
+                {
+                    "source": "MuseVN",
+                    "episode": 2,
+                    "link": "https://www.youtube.com/watch?v=A7GW7Ngzdsw"
+                },
+                {
+                    "source": "MuseVN",
+                    "episode": 3,
+                    "link": "https://www.youtube.com/watch?v=WAwIxHugZ-o"
+                },
+                {
+                    "source": "MuseVN",
+                    "episode": 4,
+                    "link": "https://www.youtube.com/watch?v=Wr6ATvXbI_g"
+                },
+                {
+                    "source": "Crunchyroll",
+                    "episode": 1,
+                    "link": "https://www.crunchyroll.com/watch/GG1UXWD1N"
+                }
+            ],
+            "description": "Noel là một thiếu niên có ông từng là anh hùng được ca tụng là Ác Quỷ Bất Tử. Vì ngưỡng mộ ông nội, cậu muốn trở thành thám hiểm giả mạnh nhất nhưng lại nhận được chức nghiệp hỗ trợ “Thoại thuật sư” yếu nhất. Dù nỗ lực rất nhiều để tiếp bước ông nội, nhưng Noel lại không thể được như ông vì khác biệt năng lực cơ bản quá lớn. Tuy nhiên, cậu đã tìm ra cách phát triển năng lực và trở thành người mạnh nhất. Cậu chiêu mộ đồng đội, thành lập gia tộc mạnh nhất. Noel vận dụng đủ loại sách lược để đánh lừa đối thủ và giúp đồng đội chiếm lợi. Thoại thuật sư cực ác sẽ không từ thủ đoạn dể trở thành người đứng đầu.",
+            "thumbnail": "https://a4vf.net/wp-content/uploads/2024/09/thoai-thuat-su.jpg"
+        },
+        {
+            "title": "Vong Linh Đau Khổ Muốn Giải Nghệ",
+            "show_time": "2024-10-27 22:30:00",
+            "lastest_episode": 4,
+            "latest_episode_links": [
+                {
+                    "source": "MuseVN",
+                    "episode": 1,
+                    "link": "https://www.youtube.com/watch?v=LzqvUVEXUK4"
+                },
+                {
+                    "source": "MuseVN",
+                    "episode": 2,
+                    "link": "https://www.youtube.com/watch?v=7yAxjnkpdXQ"
+                },
+                {
+                    "source": "MuseVN",
+                    "episode": 3,
+                    "link": "https://www.youtube.com/watch?v=p8w9bmBOIHo"
+                },
+                {
+                    "source": "MuseVN",
+                    "episode": 4,
+                    "link": "https://www.youtube.com/watch?v=r9WvX5aduGA"
+                },
+                {
+                    "source": "Crunchyroll",
+                    "episode": 1,
+                    "link": "https://www.crunchyroll.com/watch/G7PU3PWDW"
+                }
+            ],
+            "description": "Cùng làm thợ săn kho báu nào!Mục tiêu chỉ có một: Trở thành anh hùng mạnh nhất thế giới!",
+            "thumbnail": "https://a4vf.net/wp-content/uploads/2024/09/vong-linh.jpg"
+        },
+        {
+            "title": "Vợ Tôi Là Học Sinh Tiểu Học",
+            "show_time": "2024-10-27 20:30:00",
+            "lastest_episode": 4,
+            "latest_episode_links": [
+                {
+                    "source": "Ani-one",
+                    "episode": 1,
+                    "link": "https://www.youtube.com/watch?v=qAOaPQS_Je4"
+                },
+                {
+                    "source": "Ani-one",
+                    "episode": 2,
+                    "link": "https://www.youtube.com/watch?v=J-08zFK3mD0"
+                },
+                {
+                    "source": "Ani-one",
+                    "episode": 3,
+                    "link": "https://www.youtube.com/watch?v=tnb8lzbuwcM"
+                },
+                {
+                    "source": "Ani-one",
+                    "episode": 4,
+                    "link": "https://www.youtube.com/watch?v=jMJXAvAP42M"
+                }
+            ],
+            "description": "10 năm trước, Niijima  Keisuke, một người chồng yêu vợ, đã mất đi người vợ yêu quý của mình và chìm trong nỗi đau buồn.",
+            "thumbnail": "https://a4vf.net/wp-content/uploads/2024/10/tsumasho.jpg"
+        },
+        {
+            "title": "Yêu Hồ Youko: Chương Thiên Ma Hỗn Độn",
+            "show_time": "2024-10-23 22:00:00",
+            "lastest_episode": 25,
+            "latest_episode_links": [
+                {
+                    "source": "Ani-one",
+                    "episode": 1,
+                    "link": "https://www.youtube.com/watch?v=eGyKTiL6iEc"
+                },
+                {
+                    "source": "Ani-one",
+                    "episode": 14,
+                    "link": "https://www.youtube.com/watch?v=4UObFtxW77c"
+                },
+                {
+                    "source": "Ani-one",
+                    "episode": 15,
+                    "link": "https://www.youtube.com/watch?v=Hk_hDe921oQ"
+                },
+                {
+                    "source": "Ani-one",
+                    "episode": 16,
+                    "link": "https://www.youtube.com/watch?v=fYS_u7Krvmw"
+                },
+                {
+                    "source": "Ani-one",
+                    "episode": 17,
+                    "link": "https://www.youtube.com/watch?v=_V1lxdXhldQ"
+                },
+                {
+                    "source": "Ani-one",
+                    "episode": 18,
+                    "link": "https://www.youtube.com/watch?v=GX0R8zYOQgU"
+                },
+                {
+                    "source": "Ani-one",
+                    "episode": 19,
+                    "link": "https://www.youtube.com/watch?v=_Z15J_CYhYk"
+                },
+                {
+                    "source": "Ani-one",
+                    "episode": 20,
+                    "link": "https://www.youtube.com/watch?v=JLSWlU_w08s"
+                },
+                {
+                    "source": "Ani-one",
+                    "episode": 21,
+                    "link": "https://www.youtube.com/watch?v=9JLvXQ-PAzA"
+                },
+                {
+                    "source": "Ani-one",
+                    "episode": 22,
+                    "link": "https://www.youtube.com/watch?v=Rv5TWbLyY8c"
+                },
+                {
+                    "source": "Ani-one",
+                    "episode": 23,
+                    "link": "https://www.youtube.com/watch?v=Kf8dAcJHJ04"
+                },
+                {
+                    "source": "Ani-one",
+                    "episode": 24,
+                    "link": "https://www.youtube.com/watch?v=Q2BirGUGH0s"
+                },
+                {
+                    "source": "Ani-one",
+                    "episode": 25,
+                    "link": "https://www.youtube.com/watch?v=5KvK77BAX4E"
+                },
+                {
+                    "source": "Netflix",
+                    "episode": 14,
+                    "link": "https://www.netflix.com/watch/81746629"
+                },
+                {
+                    "source": "Netflix",
+                    "episode": 15,
+                    "link": "https://www.netflix.com/watch/81746630"
+                },
+                {
+                    "source": "Netflix",
+                    "episode": 16,
+                    "link": "https://www.netflix.com/watch/81746631"
+                },
+                {
+                    "source": "Netflix",
+                    "episode": 17,
+                    "link": "https://www.netflix.com/watch/81746632"
+                },
+                {
+                    "source": "Netflix",
+                    "episode": 18,
+                    "link": "https://www.netflix.com/watch/81746633"
+                },
+                {
+                    "source": "Netflix",
+                    "episode": 19,
+                    "link": "https://www.netflix.com/watch/81746634"
+                },
+                {
+                    "source": "Netflix",
+                    "episode": 20,
+                    "link": "https://www.netflix.com/watch/81746635"
+                },
+                {
+                    "source": "Netflix",
+                    "episode": 21,
+                    "link": "https://www.netflix.com/watch/81746636"
+                },
+                {
+                    "source": "Netflix",
+                    "episode": 22,
+                    "link": "https://www.netflix.com/watch/81746637"
+                },
+                {
+                    "source": "Netflix",
+                    "episode": 23,
+                    "link": "https://www.netflix.com/watch/81746638"
+                },
+                {
+                    "source": "Netflix",
+                    "episode": 24,
+                    "link": "https://www.netflix.com/watch/81746639"
+                },
+                {
+                    "source": "Netflix",
+                    "episode": 25,
+                    "link": "https://www.netflix.com/watch/81746640"
+                },
+                {
+                    "source": "VieON",
+                    "episode": 1,
+                    "link": "https://vieon.vn/sengoku-youko-2--eps-recap.html"
+                },
+                {
+                    "source": "VieON",
+                    "episode": 14,
+                    "link": "https://vieon.vn/sengoku-youko-2--eps-tap-1.html"
+                },
+                {
+                    "source": "VieON",
+                    "episode": 15,
+                    "link": "https://vieon.vn/sengoku-youko-2--eps-tap-2.html"
+                },
+                {
+                    "source": "VieON",
+                    "episode": 16,
+                    "link": "https://vieon.vn/sengoku-youko-2--eps-tap-3.html"
+                },
+                {
+                    "source": "VieON",
+                    "episode": 17,
+                    "link": "https://vieon.vn/sengoku-youko-2--eps-tap-4.html"
+                },
+                {
+                    "source": "VieON",
+                    "episode": 18,
+                    "link": "https://vieon.vn/sengoku-youko-2--eps-tap-5.html"
+                },
+                {
+                    "source": "VieON",
+                    "episode": 19,
+                    "link": "https://vieon.vn/sengoku-youko-2--eps-tap-6.html"
+                },
+                {
+                    "source": "VieON",
+                    "episode": 20,
+                    "link": "https://vieon.vn/sengoku-youko-2--eps-tap-7.html"
+                },
+                {
+                    "source": "VieON",
+                    "episode": 21,
+                    "link": "https://vieon.vn/sengoku-youko-2--eps-tap-8.html"
+                },
+                {
+                    "source": "VieON",
+                    "episode": 22,
+                    "link": "https://vieon.vn/sengoku-youko-2--eps-tap-9.html"
+                },
+                {
+                    "source": "VieON",
+                    "episode": 23,
+                    "link": "https://vieon.vn/sengoku-youko-2--eps-tap-10.html"
+                },
+                {
+                    "source": "VieON",
+                    "episode": 24,
+                    "link": "https://vieon.vn/sengoku-youko-2--eps-tap-11.html"
+                },
+                {
+                    "source": "VieON",
+                    "episode": 25,
+                    "link": "https://vieon.vn/sengoku-youko-2--eps-tap-12.html"
+                }
+            ],
+            "description": "Tiếp nối câu chuyện dang dở của Sengoku Youko.",
+            "thumbnail": "https://a4vf.net/wp-content/uploads/2024/06/senyoku-youko.png"
+        },
+        {
+            "title": "Được Gặp Em Tại Ngục Tối Liệu Có Sai? (Phần 5)",
+            "show_time": "2024-10-26 20:15:00",
+            "lastest_episode": 3,
+            "latest_episode_links": [
+                {
+                    "source": "FPT Play",
+                    "episode": 1,
+                    "link": "https://fptplay.vn/xem-video/duoc-gap-em-tai-nguc-toi-lieu-co-sai-phan-5-6707c919563347266866c7a0/tap-1"
+                },
+                {
+                    "source": "FPT Play",
+                    "episode": 2,
+                    "link": "https://fptplay.vn/xem-video/duoc-gap-em-tai-nguc-toi-lieu-co-sai-phan-5-6707c919563347266866c7a0/tap-2"
+                },
+                {
+                    "source": "FPT Play",
+                    "episode": 3,
+                    "link": "https://fptplay.vn/xem-video/duoc-gap-em-tai-nguc-toi-lieu-co-sai-phan-5-6707c919563347266866c7a0/tap-3"
+                }
+            ],
+            "description": "Được Gặp Em Tại Ngục Tối Liệu Có Sai? (Phần 5) tiếp tục dõi theo hành trình của Bell – một nhà thám hiểm trẻ tuổi dưới sự bảo trợ của nữ thần Hestia. Sau khi thoát khỏi độ sâu tối tăm của hầm ngục Dungeon cùng với Ryu, Bell đang mong chờ những ngày tháng sắp tới hơn bao giờ hết. Nhưng chờ đợi cậu không chỉ có lễ hội Nữ thần mà còn là những mối nguy hiểm mới, nhiều kẻ thù với sức mạnh khủng khiếp. Trận chiến kịch tính cùng bao khoảnh khắc đầy cảm xúc đang chào đón Bell trên con đường trở thành một nhà thám hiểm vĩ đại nơi ngục tối.",
+            "thumbnail": "https://a4vf.net/wp-content/uploads/2024/10/dungeon-deai.jpg"
+        }
+    ]
 }
