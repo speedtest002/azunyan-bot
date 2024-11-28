@@ -1,3 +1,4 @@
+from discord import *
 from discord.ext import commands
 #import ...
 
@@ -7,7 +8,7 @@ class TemplateCommand(commands.Cog):
 
     #if you want to make hybrid command, use:
     @commands.hybrid_command(name="command_name")
-    async def command_name(ctx, *, parameter_1: str, parameter_2: int):
+    async def command_name(ctx, parameter_1: str, parameter_2: int):
         """
         Decription of the command
 
