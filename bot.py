@@ -37,7 +37,7 @@ async def main():
                 intents=intents,
                 case_insensitive=True,
         ) as bot:
-            #asyncio.create_task(uvicorn.Server(uvicorn.Config(SendMessage(bot).app, host=str(os.getenv("HOST")), port=int(os.getenv("PORT")), log_level="info")).serve())
+            asyncio.create_task(uvicorn.Server(uvicorn.Config(SendMessage(bot).app, host=str(os.getenv("HOST")), port=int(os.getenv("PORT")), log_level="info")).serve())
             await bot.start(str(os.getenv('DISCORD_TOKEN')))
 
 asyncio.run(main())
