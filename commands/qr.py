@@ -48,21 +48,23 @@ class QRCodeCommand(commands.Cog):
                 return
             user_data = {
             "_id": user_id,
-            "number": số_tài_khoản,
-            "name": ngân_hàng
+            "bank": ngân_hàng,
+            "number": số_tài_khoản
+            
             }
             self.qr_collection.insert_one(user_data)
         else:
             if số_tài_khoản is not None and ngân_hàng is not None:  # Có thông tin mới để cập nhật
                 updated_data = {
-                    "number": số_tài_khoản,
-                    "name": ngân_hàng
+                    "bank": ngân_hàng,
+                    "number": số_tài_khoản
+                    
                 }
                 self.qr_collection.update_one({"_id": user_id}, {"$set": updated_data})
                 user_data.update(updated_data)
             else:
                 số_tài_khoản = user_data["number"]
-                ngân_hàng = user_data["name"]
+                ngân_hàng = user_data["bank"]
         
         
         url = f"https://img.vietqr.io/image/{ngân_hàng}-{số_tài_khoản}-print.png?"
