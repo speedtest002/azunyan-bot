@@ -44,7 +44,7 @@ class QRCodeCommand(commands.Cog):
             bank = user_data["bank"]
             number = user_data["number"]
             url = f"https://img.vietqr.io/image/{bank}-{number}-print.png"
-            ctx.send(f"[Mã QR của <@{user_id}>]({url})")
+            await ctx.send(f"[Mã QR của <@{user_id}>]({url})")
             return
 
         if số_tài_khoản is not None and ngân_hàng is None:
