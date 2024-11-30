@@ -35,6 +35,18 @@ class QRCodeCommand(commands.Cog):
         chủ_tài_khoản: str = None
             Tên chủ tài khoản
         """
+        if ctx.message.mentions is not None:
+            user_id = ctx.message.mentions[0].id
+            user_data = self.qr_collection.find_one({"_id": user_id})
+            if user_data is None:
+                await ctx.send("Người dùng này chưa lưu thông tin QR!", delete_after=5)
+                return
+            bank = user_data["bank"]
+            number = user_data["number"]
+            url = f"https://img.vietqr.io/image/{bank}-{number}-print.png"
+            ctx.send(f"[Mã QR của <@{user_id}>]({url})")
+            return
+
         if số_tài_khoản is not None and ngân_hàng is None:
             await ctx.message.delete()
             await ctx.send("Vui lòng nhập tên ngân hàng (ví dụ: vcb hoặc vietcombank).", ephemeral=True, delete_after=5)
@@ -66,7 +78,7 @@ class QRCodeCommand(commands.Cog):
                 số_tài_khoản = user_data["number"]
                 ngân_hàng = user_data["bank"]
         
-        
+        #"SEND" flag
         url = f"https://img.vietqr.io/image/{ngân_hàng}-{số_tài_khoản}-print.png?"
         if số_tiền is not None:
             url += f"amount={số_tiền}"
