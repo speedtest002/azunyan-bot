@@ -44,7 +44,7 @@ class QRCodeCommand(commands.Cog):
             bank = user_data["bank"]
             number = user_data["number"]
             url = f"https://img.vietqr.io/image/{bank}-{number}-print.png"
-            await ctx.send(f"[Mã QR của <@{user_id}>]({url})")
+            await ctx.send(f"[Mã QR]({url}) của <@{user_id}>")
             return
 
         if số_tài_khoản is not None and ngân_hàng is None:
@@ -70,7 +70,6 @@ class QRCodeCommand(commands.Cog):
                 updated_data = {
                     "bank": ngân_hàng,
                     "number": số_tài_khoản
-                    
                 }
                 self.qr_collection.update_one({"_id": user_id}, {"$set": updated_data})
                 user_data.update(updated_data)
