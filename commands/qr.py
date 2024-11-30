@@ -1,11 +1,12 @@
 from discord.ext import commands
 from discord import *
-import json
+from feature import MongoManager
 
 class QRCodeCommand(commands.Cog):
     def __init__(self, bot):
         self.bot = bot
-        
+        self.qr_collection = MongoManager.get_collection("qr")
+
     @commands.hybrid_command(name = "qr_ngân_hàng", aliases = ['qr', 'bank'], with_app_command=True)
     @app_commands.allowed_installs(guilds=True, users=True)
     @app_commands.allowed_contexts(guilds=True, dms=True, private_channels=True)
@@ -36,18 +37,34 @@ class QRCodeCommand(commands.Cog):
         """
         if số_tài_khoản is not None and ngân_hàng is None:
             await ctx.message.delete()
-            await ctx.send("Vui lòng nhập tên ngân hàng (ví dụ: vcb hoặc vietcombank).", ephemeral=True)
+            await ctx.send("Vui lòng nhập tên ngân hàng (ví dụ: vcb hoặc vietcombank).", ephemeral=True, delete_after=5)
             return
-        user_id = str(ctx.author.id)
-        if số_tài_khoản is None and ngân_hàng is None:
-            with open('user_qr.json', 'r', encoding='utf-8') as uf:
-                user_data = json.load(uf)
-            link_qr = user_data["user_qr"].get(user_id, [])
-            if link_qr == []:
-                await ctx.send("Bạn cần dùng lệnh này lần đầu với đúng cú pháp để lưu thông tin QR!")
+        
+        user_id = ctx.author.id
+        user_data = self.qr_collection.find_one({"_id": user_id})
+        if user_data is None:
+            if số_tài_khoản is None and ngân_hàng is None:
+                await ctx.send("Bạn cần dùng lệnh này lần đầu với đúng cú pháp để lưu thông tin QR!", delete_after=5)
                 return
-            await ctx.send(link_qr)
-            return
+            user_data = {
+            "_id": user_id,
+            "number": số_tài_khoản,
+            "name": ngân_hàng
+            }
+            self.qr_collection.insert_one(user_data)
+        else:
+            if số_tài_khoản is not None and ngân_hàng is not None:  # Có thông tin mới để cập nhật
+                updated_data = {
+                    "number": số_tài_khoản,
+                    "name": ngân_hàng
+                }
+                self.qr_collection.update_one({"_id": user_id}, {"$set": updated_data})
+                user_data.update(updated_data)
+            else:
+                số_tài_khoản = user_data["number"]
+                ngân_hàng = user_data["name"]
+        
+        
         url = f"https://img.vietqr.io/image/{ngân_hàng}-{số_tài_khoản}-print.png?"
         if số_tiền is not None:
             url += f"amount={số_tiền}"
@@ -57,18 +74,7 @@ class QRCodeCommand(commands.Cog):
         if chủ_tài_khoản is not None:
             chủ_tài_khoản = chủ_tài_khoản.replace(" ", "%20")
             url += f"&accountName={chủ_tài_khoản}"
-        
-        with open('user_qr.json', 'r', encoding='utf-8') as uf:
-            data = json.load(uf)
-
-        # Thay đổi giá trị URL cho khóa user_id
-        data["user_qr"][user_id] = url
-
-        # Ghi đè nội dung mới vào file JSON
-        with open('user_qr.json', 'w', encoding='utf-8') as uf:
-            json.dump(data, uf, ensure_ascii=False, indent=4)
         await ctx.send(url)
-
     
 async def setup(bot):
     await bot.add_cog(QRCodeCommand(bot))
