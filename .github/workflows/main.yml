@@ -2,8 +2,8 @@ name: Sillydev hosting
 
 on:
   push:
-    branches:
-      - main
+    #branches:
+    #  - main
     workflow_dispatch:
 
 jobs:
@@ -24,7 +24,7 @@ jobs:
         echo "DISCORD_CHANNEL_ID=${{ vars.DISCORD_CHANNEL_ID }}" >> .env
         echo "HOST=${{ vars.HOST }}" >> .env
         echo "PORT=${{ vars.PORT }}" >> .env
-        
+        echo "MONGODB_URI=${{ secrets.MONGO_URI }}" >> .env
         echo "GH_ACCESS_TOKEN=${{ secrets.GH_ACCESS_TOKEN}}" >> .env
         echo "GH_USERNAME=${{ vars.GH_USERNAME }}" >> .env
         echo "GH_REPO=${{ vars.GH_REPO }}" >> .env

@@ -37,11 +37,7 @@ async def main():
                 intents=intents,
                 case_insensitive=True,
         ) as bot:
-            send_message = SendMessage(bot)
-            config = uvicorn.Config(send_message.app, host=str(os.getenv("HOST")), port=int(os.getenv("PORT")), log_level="info")
-            server = uvicorn.Server(config)
-            asyncio.create_task(server.serve())
-            client = MongoClient(str(os.getenv("MONGO_URI")))
+            asyncio.create_task(uvicorn.Server(uvicorn.Config(SendMessage(bot).app, host=str(os.getenv("HOST")), port=int(os.getenv("PORT")), log_level="info")).serve())
             await bot.start(str(os.getenv('DISCORD_TOKEN')))
 
 asyncio.run(main())
