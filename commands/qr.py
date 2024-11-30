@@ -35,16 +35,16 @@ class QRCodeCommand(commands.Cog):
         chủ_tài_khoản: str = None
             Tên chủ tài khoản
         """
-        if ctx.message.mentions is not None:
-            user_id = ctx.message.mentions[0].id
-            user_data = self.qr_collection.find_one({"_id": user_id})
-            if user_data is None:
-                await ctx.send("Người dùng này chưa lưu thông tin QR!", delete_after=5)
-                return
-            bank = user_data["bank"]
-            number = user_data["number"]
-            url = f"https://img.vietqr.io/image/{bank}-{number}-print.png"
-            await ctx.send(f"[Mã QR]({url}) của <@{user_id}>")
+        if len(ctx.message.mentions) > 0:
+            for user in ctx.message.mentions:
+                user_id = user.id
+                user_data = self.qr_collection.find_one({"_id": user_id})
+                if user_data is None:
+                    await ctx.send(f"<@{user_id}> chưa có thông tin QR", delete_after=5)
+                bank = user_data["bank"]
+                number = user_data["number"]
+                url = f"https://img.vietqr.io/image/{bank}-{number}-print.png"
+                await ctx.send(f"[Mã QR]({url}) của <@{user_id}>")
             return
 
         if số_tài_khoản is not None and ngân_hàng is None:
@@ -61,8 +61,7 @@ class QRCodeCommand(commands.Cog):
             user_data = {
             "_id": user_id,
             "bank": ngân_hàng,
-            "number": số_tài_khoản
-            
+            "number": số_tài_khoản            
             }
             self.qr_collection.insert_one(user_data)
         else:
