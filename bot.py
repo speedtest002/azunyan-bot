@@ -7,11 +7,13 @@ from aiohttp import ClientSession
 import uvicorn
 from dotenv import load_dotenv
 from feature import *
-from pymongo import MongoClient
+#from pymongo import MongoClient
 
 load_dotenv()
 
 async def main():
+    check_env() # Check required environment variables
+
     #Logging
     logger = logging.getLogger('discord')
     logger.setLevel(logging.INFO)
@@ -19,7 +21,7 @@ async def main():
         filename='discord.log',
         encoding='utf-8',
         maxBytes=64 * 1024 * 1024,  # 64 MiB
-        backupCount=5,  # Rotate through 5 files
+        backupCount=5,
     )
     dt_fmt = '%Y-%m-%d %H:%M:%S'
     formatter = logging.Formatter('[{asctime}] [{levelname:<8}] {name}: {message}', dt_fmt, style='{')
@@ -37,7 +39,8 @@ async def main():
                 intents=intents,
                 case_insensitive=True,
         ) as bot:
-            asyncio.create_task(uvicorn.Server(uvicorn.Config(SendMessage(bot).app, host=str(os.getenv("HOST")), port=int(os.getenv("PORT")), log_level="info")).serve())
+            if(os.getenv('HOST') != None or os.getenv('PORT') != None):
+                asyncio.create_task(uvicorn.Server(uvicorn.Config(SendMessage(bot).app, host=str(os.getenv("HOST")), port=int(os.getenv("PORT")), log_level="info")).serve())
             await bot.start(str(os.getenv('DISCORD_TOKEN')))
 
 asyncio.run(main())
