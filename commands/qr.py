@@ -107,10 +107,25 @@ class QRCodeCommand(commands.Cog):
         description: str = None,
         account_name: str = None
     ):
-        user_id = ctx.author.id
-        state, message = self.qr_bank_core(user_id, bank_number, bank_name, amount, description, account_name)
-        if state is False:
-            await ctx.send(message, ephemeral=True)
+        """
+        Tạo mã QR từ số tài khoản ngân hàng
+
+        Parameters
+        ----------
+        số_tài_khoản: str,
+            Số tài khoản người nhận
+        ngân_hàng: str
+            Tên ngân hàng
+        số_tiền: str = None, 
+            Số tiền nhận
+        nội_dung: str = None,
+            Nội dung chuyển khoản
+        chủ_tài_khoản: str = None
+            Tên chủ tài khoản
+        """
+        if số_tài_khoản is not None and ngân_hàng is None:
+            await ctx.message.delete()
+            await ctx.send("Vui lòng nhập tên ngân hàng (ví dụ: vcb hoặc vietcombank).", ephemeral=True, delete_after=5)
             return
         await ctx.send(message)
 
@@ -155,54 +170,35 @@ class QRCodeCommand(commands.Cog):
                     url = self.qr_generate(bank_name=bank, bank_number=number)
                     await ctx.send(f"[Mã QR]({url}) của <@{user_id}>")
                 return
-            
-            param = self.parse(args)
-            user_id = ctx.author.id
-            state, message = self.qr_bank_core(user_id, param[1], param[0], param[2], param[3])
-            await ctx.send(message, ephemeral=state)
-        except Exception as e:
-            await ctx.send(f"Cú pháp lệnh không hợp lệ, dùng lệnh `{os.getenv('PREFIX')}qr -h` để xem hướng dẫn ", ephemeral=True)
-
-
-    ### zalo qr clone
-    def load_banks(self):
-        bank_data = {}
-        try:
-            banks = self.banks_collection.find()
-            for bank in banks:
-                for alias in bank["aliases"]:
-                    bank_data[alias] = bank["name"]
-        except Exception as e:
-            print(f"Không thể tải dữ liệu ngân hàng từ MongoDB: {e}")
-        return bank_data
-
-    @commands.Cog.listener("on_message")
-    async def send_qr_on_message(self, message):
-        if message.author.bot:
-            return
-        if any(message.content.startswith(prefix) for prefix in await self.bot.get_prefix(message)):
-            return
-        content = message.content.lower()
-
-        stk_match = re.search(r'\b\d{6,19}\b', content) # theo VietQR Số tài khoản người nhận quy ước bao gồm chữ hoặc số, tối đa 19 kí tự. Here I use number only
-        stk = stk_match.group() if stk_match else None
-
-        if not stk:
-            return
-
-        words = content.split()
-
-        bank_name = None
-        for word in words:
-            if word in self.bank_aliases:
-                bank_name = self.bank_aliases[word]
-                break
-
-        if not bank_name:
-            return
-
-        qr_code = self.qr_generate(stk, bank_name)
-        await message.channel.send(f"{qr_code}")
-
+            user_data = {
+            "_id": user_id,
+            "number": số_tài_khoản,
+            "name": ngân_hàng
+            }
+            self.qr_collection.insert_one(user_data)
+        else:
+            if số_tài_khoản is not None and ngân_hàng is not None:  # Có thông tin mới để cập nhật
+                updated_data = {
+                    "number": số_tài_khoản,
+                    "name": ngân_hàng
+                }
+                self.qr_collection.update_one({"_id": user_id}, {"$set": updated_data})
+                user_data.update(updated_data)
+            else:
+                số_tài_khoản = user_data["number"]
+                ngân_hàng = user_data["name"]
+        
+        
+        url = f"https://img.vietqr.io/image/{ngân_hàng}-{số_tài_khoản}-print.png?"
+        if số_tiền is not None:
+            url += f"amount={số_tiền}"
+        if nội_dung is not None:
+            nội_dung = nội_dung.replace(" ", "%20")
+            url += f"&addInfo={nội_dung}"
+        if chủ_tài_khoản is not None:
+            chủ_tài_khoản = chủ_tài_khoản.replace(" ", "%20")
+            url += f"&accountName={chủ_tài_khoản}"
+        await ctx.send(url)
+    
 async def setup(bot):
     await bot.add_cog(QRCodeCommand(bot))

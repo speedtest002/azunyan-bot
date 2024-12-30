@@ -3,3 +3,4 @@
 /.idea/
 /*.log
 __pycache__/
+test.py
