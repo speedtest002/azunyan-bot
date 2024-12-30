@@ -82,7 +82,7 @@ class QRCodeCommand(commands.Cog):
             if bank_number is not None and bank_name is not None: # Có thông tin mới để cập nhật
                 if bank_name not in self.bank_aliases:
                     return False, f"Tên ngân hàng không hợp lệ, vui lòng kiểm tra lại hoặc dùng lệnh `{os.getenv('PREFIX')}qr -h` để xem hướng dẫn."
-                bank_name = self.bank_aliases[bank_name]
+                bank_name = self.bank_aliases[bank_name.lower()]
                 if (user_data["number"] == bank_number and user_data["name"] == bank_name) is False:
                     self.update_information(user_id, user_data, bank_number, bank_name)
             else: # Không có thông tin mới để cập nhật
