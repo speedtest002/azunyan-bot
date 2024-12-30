@@ -144,6 +144,18 @@ class QRCodeCommand(commands.Cog):
     @commands.command(name="qr", aliases=["bank"])
     async def qr_bank_prefix(self, ctx, *args):
         try:
+            if len(ctx.message.mentions) > 0:
+                for user in ctx.message.mentions:
+                    user_id = user.id
+                    user_data = self.qr_collection.find_one({"_id": user_id})
+                    if user_data is None:
+                        await ctx.send(f"<@{user_id}> chưa có thông tin QR", delete_after=5)
+                    bank = user_data["bank"]
+                    number = user_data["number"]
+                    url = self.qr_generate(bank_name=bank, bank_number=number)
+                    await ctx.send(f"[Mã QR]({url}) của <@{user_id}>")
+                return
+            
             param = self.parse(args)
             user_id = ctx.author.id
             state, message = self.qr_bank_core(user_id, param[1], param[0], param[2], param[3])
