@@ -16,6 +16,9 @@ class QRCodeCommand(commands.Cog):
         self.runner = CliRunner()
         self.cli_command = self._define_command()
 
+    def tra_cuu_stk(self, stk: str) -> tuple[bool, str]:
+        pass
+
     def find_information(self, user_id) -> bool: #kiem tra xem user_id da co thong tin chua
         user_data = self.qr_collection.find_one({"_id": user_id})
         if user_data is None:
@@ -67,15 +70,19 @@ class QRCodeCommand(commands.Cog):
         #    return False, f"Vui lòng nhập tên ngân hàng (ví dụ: vcb hoặc vietcombank hoặc dùng lệnh {os.getenv("PREFIX")}qr --help/-h để xem hướng dẫn)."
             
         user_data = self.qr_collection.find_one({"_id": user_id})
+        #bank_name check
 
         if self.find_information(user_id) is False: # for Prefix only
             if bank_number is None or bank_name is None:
-                return False, f"Bạn cần dùng lệnh này lần đầu với đầy đủ thông tin `stk và ngân hàng` để lưu thông tin QR! (dùng `{os.getenv('PREFIX')}qr --help/-h` để xem hướng dẫn)"
+                return False, f"Bạn cần dùng lệnh này lần đầu với đầy đủ thông tin `stk` và `ngân hàng` để lưu thông tin QR! (dùng `{os.getenv('PREFIX')}qr -h` để xem hướng dẫn)"
             else:
                 self.insert_information(user_id, bank_number, bank_name)
 
         else: # for both Slash and Prefix
             if bank_number is not None and bank_name is not None: # Có thông tin mới để cập nhật
+                if bank_name not in self.bank_aliases:
+                    return False, f"Tên ngân hàng không hợp lệ, vui lòng kiểm tra lại hoặc dùng lệnh `{os.getenv('PREFIX')}qr -h` để xem hướng dẫn."
+                bank_name = self.bank_aliases[bank_name]
                 if (user_data["number"] == bank_number and user_data["name"] == bank_name) is False:
                     self.update_information(user_id, user_data, bank_number, bank_name)
             else: # Không có thông tin mới để cập nhật
@@ -158,7 +165,7 @@ class QRCodeCommand(commands.Cog):
         return bank_data
 
     @commands.Cog.listener("on_message")
-    async def send_qr(self, message):
+    async def send_qr_on_message(self, message):
         if message.author.bot:
             return
         if any(message.content.startswith(prefix) for prefix in await self.bot.get_prefix(message)):
