@@ -1,10 +1,10 @@
 name: Sillydev hosting
 
 on:
-  push:
+  #push:
     #branches:
     #  - main
-    workflow_dispatch:
+  workflow_dispatch:
 
 jobs:
   deploy:
