@@ -14,7 +14,7 @@ class OmikujiCommand(commands.Cog):
             random.seed(user_name + str(datetime.today().year))
             omikuji = random.choice(list_omikuji)
             return omikuji
-        await ctx.send("Bạn đã bốc trúng quẻ ",get_omikuji(ctx.author.name),".\nDù có là quẻ gì đi nữa, hãy cố gắng hết mình trong năm nay nhé!")
+        await ctx.send(f"Bạn đã bốc trúng quẻ {get_omikuji(ctx.author.name)}.\nDù có là quẻ gì đi nữa, hãy cố gắng hết mình trong năm nay nhé!")
     
 async def setup(bot):
     await bot.add_cog(OmikujiCommand(bot))
