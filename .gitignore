@@ -3,3 +3,6 @@
 /.idea/
 /*.log
 __pycache__/
+/data/
+bot_test.py
+musicDB.jsonl
