@@ -12,5 +12,4 @@ class PingCommand(commands.Cog):
         await ctx.send('Ping is {0} ms'.format(round(self.bot.latency * 1000, 1)))
 
 async def setup(bot):
-    print("PingCommand is being loaded")
     await bot.add_cog(PingCommand(bot))
