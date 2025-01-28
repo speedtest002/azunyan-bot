@@ -7,7 +7,7 @@ class ChatCommand(commands.Cog):
     @app_commands.command(name = "chat", description="Gửi tin nhắn với nội dung")
     @app_commands.describe(nội_dung="Nội dung cần gửi")
     async def chat(self, ctx, nội_dung: str):
-        ctx.message.send(nội_dung)
+        await ctx.message.send(nội_dung)
 
     @commands.command(name="chat")
     async def chat(self, ctx, *noidung):        

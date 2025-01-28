@@ -1,5 +1,6 @@
 from discord.ext import commands
 from discord import *
+import discord
 from feature import MongoManager
 import re
 import os
@@ -100,19 +101,19 @@ class QRCodeCommand(commands.Cog):
     @app_commands.describe(bank_number = "Số tài khoản người nhận", bank_name = "Tên ngân hàng", amount = "Số tiền nhận", description = "Nội dung chuyển khoản", account_name = "Tên chủ tài khoản")
     async def qr_bank_slash(
         self,
-        ctx: commands.Context,
+        ctx,
         bank_number: str,
         bank_name: str,
         amount: str = None, 
         description: str = None,
         account_name: str = None
     ):
-        user_id = ctx.author.id
+        user_id = ctx.user.id
         state, message = self.qr_bank_core(user_id, bank_number, bank_name, amount, description, account_name)
         if state is False:
-            await ctx.send(message, ephemeral=True)
+            await ctx.response.send_message(message, ephemeral=state)
             return
-        await ctx.send(message)
+        await ctx.response.send_message(message)
 
     # prefix qr
     #azuqr -b vcb -n 123456789 -a 100000 -d "Chuyển tiền" -c
