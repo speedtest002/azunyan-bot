@@ -9,7 +9,7 @@ on:
 jobs:
   deploy:
     runs-on: ubuntu-latest
-
+    environment: secrets
     steps:
       - name: Checkout repository
         uses: actions/checkout@v3
