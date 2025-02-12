@@ -1,0 +1,10 @@
+version: '3.8'
+services:
+  discord-bot:
+    build: .
+    container_name: azunyan-bot
+    env_file: 
+      - .env
+    volumes:
+      - .:/app
+    restart: unless-stopped
