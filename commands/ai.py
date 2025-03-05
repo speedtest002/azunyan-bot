@@ -65,12 +65,14 @@ class AIChatCommand(commands.Cog):
             await ctx.send('Bạn chưa chọn model. Hãy chọn model bằng cách dùng lệnh `/ai_setting` trong dm với bot.', ephemeral=True)
             return
         
-        response_message = await ctx.send("<:loading:1343244957850271906>")  # tin nhắn ban đầu
+        first_embed = Embed(description="\u200b",color=Color.purple())
+        response_message = await ctx.send(embed=first_embed)  # tin nhắn ban đầu
+        await asyncio.sleep(2)
         #xu ly prompt
         prompt = self.parse_prompt(prompt)
         try:
             response_stream = self.to_the_moon(api_key=api_key, model=model, message=prompt)
-            await self.update_embed(response_message, response_stream)
+            await self.update_embed(response_message, response_stream, model=model)
             return
         except Exception as e:
             print(e)
@@ -101,9 +103,9 @@ class AIChatCommand(commands.Cog):
             if chunk.choices[0].delta.content:
                 yield chunk.choices[0].delta.content
                 
-    async def update_embed(self, message: Message, response_stream):
+    async def update_embed(self, message: Message, response_stream, model: str):
         embed = Embed(description="", color=Color.blue(), )
-
+        embed.set_footer(text=model)
         async for chunk in response_stream:
             embed.description += chunk  # Thêm dữ liệu mới vào Embed
             await asyncio.sleep(0.5)
