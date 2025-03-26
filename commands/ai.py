@@ -65,6 +65,9 @@ class AIChatCommand(commands.Cog):
         response_message = await ctx.send(embed=first_embed)  # tin nhắn ban đầu
         await asyncio.sleep(1)
         #xu ly prompt
+        if type(prompt) == List:
+            prompt = " ".join(prompt) # trường hợp gọi bằng prefix thì nó là list
+
         prompt = self.parse_prompt(prompt)
         try:
             response_stream = self.to_the_moon(api_key=api_key, model=model, message=prompt)
