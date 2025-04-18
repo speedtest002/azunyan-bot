@@ -111,7 +111,7 @@ class AnisongDBCommand(commands.Cog):
                     for song in song_list: #duyệt từng bài trong mỗi loại
                         if str(song["songId"]) in matched_songs.keys():
                             result = {}
-                            result["animeName"] = anime_entry["mainNames"]["JA"]
+                            result["animeName"] = anime_entry["names"][-1]["name"]
                             result["songName"] = matched_songs[str(song["songId"])]["songName"]
                             result["artistName"] = matched_songs[str(song["songId"])]["artistName"]
                             results.append(result)
@@ -122,11 +122,8 @@ class AnisongDBCommand(commands.Cog):
         matched_animes = {}
         for anime_id, anime_info in anime_data.items():
             if any(re.match(anime_regex, entry["name"].lower()) for entry in anime_info["names"]):
-                ja_name = next(
-                    (entry["name"] for entry in anime_info["names"] if entry["language"] == "JA"),
-                    anime_info["names"][0]["name"]  # fallback nếu không có JA
-                )
-                anime = {anime_id: {"animeName": ja_name, "songLinks": []}}
+                name = anime_info["names"][-1]["name"]
+                anime = {anime_id: {"animeName": name, "songLinks": []}}
                 for song_list in anime_info["songLinks"].values():
                     for song in song_list:
                         anime[anime_id]["songLinks"].append(song["songId"])
