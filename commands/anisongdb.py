@@ -3,84 +3,145 @@ import discord
 import re
 import json
 
+ANIME_REGEX_REPLACE_RULES = [
+    # Ļ can't lower correctly with sqlite lower function hence why next line is needed
+    {"input": "ļ", "replace": "[ļĻ]"},
+    {"input": "l", "replace": "[l˥ļĻΛ]"},
+    # Ź can't lower correctly with sqlite lower function hence why next line is needed
+    {"input": "ź", "replace": "[źŹ]"},
+    {"input": "z", "replace": "[zźŹ]"},
+    {"input": "ou", "replace": "(ou|ō|o)"},
+    {"input": "oo", "replace": "(oo|ō|o)"},
+    {"input": "oh", "replace": "(oh|ō|o)"},
+    {"input": "wo", "replace": "(wo|o)"},
+    # Ō can't lower correctly with sqlite lower function hence why next line is needed
+    {"input": "ō", "replace": "[Ōō]"},
+    {"input": "o", "replace": "([oōŌóòöôøӨΦο]|ou|oo|oh|wo)"},
+    {"input": "uu", "replace": "(uu|u|ū)"},
+    # Ū can't lower correctly with sqlite lower function hence why next line is needed
+    {"input": "ū", "replace": "[ūŪ]"},
+    {"input": "u", "replace": "([uūŪûúùüǖμ]|uu)"},
+    {"input": "aa", "replace": "(aa|a)"},
+    {"input": "ae", "replace": "(ae|æ)"},
+    # Λ can't lower correctly with sqlite lower function hence why next line is needed
+    {"input": "λ", "replace": "[λΛ]"},
+    {"input": "a", "replace": "([aäãά@âàáạåæā∀Λ]|aa)"},
+    {"input": "c", "replace": "[cςč℃Ↄ]"},
+    # É can't lower correctly with sql lower function
+    {"input": "é", "replace": "[éÉ]"},
+    {"input": "e", "replace": "[eəéÉêёëèæē]"},
+    {"input": "'", "replace": "['’ˈ]"},
+    {"input": "n", "replace": "[nñ]"},
+    {"input": "0", "replace": "[0Ө]"},
+    {"input": "2", "replace": "[2²₂]"},
+    {"input": "3", "replace": "[3³]"},
+    {"input": "5", "replace": "[5⁵]"},
+    {"input": "*", "replace": "[*✻＊✳︎]"},
+    {
+        "input": " ",
+        "replace": "([^\\w]+|_+)",
+    },
+    {"input": "i", "replace": "([iíίɪ]|ii)"},
+    {"input": "x", "replace": "[x×]"},
+    {"input": "b", "replace": "[bßβ]"},
+    {"input": "r", "replace": "[rЯ]"},
+    {"input": "s", "replace": "[sς]"},
+]
+
+
 class AnisongDBCommand(commands.Cog):
     def __init__(self, bot):
-        self.data_file = "musicDB.jsonl"
-        self.data = self.load_data(self.data_file)
+        self.anime_file = "animeMap.json"
+        self.song_file = "songMap.json"
+        self.artist_file = "artistMap.json"
+        self.group_file = "groupMap.json"
+        self.anime_data = self.load_data(self.anime_file)
+        self.song_data = self.load_data(self.song_file)
+        self.artist_data = self.load_data(self.artist_file)
+        self.group_data = self.load_data(self.group_file)
         self.bot = bot
 
-    def normalize_string(self, s):
-        return re.sub(r"[^a-zA-Z0-9]", "", s).lower()
+    def apply_regex_rules(self, search):
+        for rule in ANIME_REGEX_REPLACE_RULES:
+            search = search.replace(rule["input"], rule["replace"])
+        return search
 
+    def escapeRegExp(self, str):
+        str = re.escape(str)
+        str = str.replace("\ ", " ")
+        str = str.replace("\*", "*")
+        return str
+
+    def get_regex_search(self, og_search):
+        og_search = self.escapeRegExp(og_search.lower())
+        search = self.apply_regex_rules(og_search)
+        search = ".*" + search + ".*"
+        return search
+    
     def load_data(self, file_path):
-        data = []
         try:
-            with open(file_path, "r", encoding="utf-8") as file:
-                for line in file:
-                    try:
-                        data.append(json.loads(line))
-                    except json.JSONDecodeError as e:
-                        print(f"Lỗi JSON trong dòng: {line}\n{e}")
+            with open(f"data/{file_path}", "r", encoding="utf-8") as file:
+                data = json.load(file)  # đọc toàn bộ file 1 lần
             print("Dữ liệu đã được nạp thành công!")
+            return data
         except Exception as e:
-            print(f"Lỗi khi mở file: {e}")
-        return data
+            print(f"Lỗi khi đọc file JSON: {e}")
+            return None
 
     # Hàm tìm kiếm
-    def search_data(self, data, query):
-        query_normalized = self.normalize_string(query)
+    def azusong(self, anime_data, song_data, artist_data, group_data, query):
+        song_regex = self.get_regex_search(query)
         results = []
+        matched_songs = {}
+        for song_id, song_info in song_data.items():
+            song_name = song_info["name"]
 
-        # Danh sách các trường cần ưu tiên, thêm các trường HQ, MQ, audio
-        priority_keys = ["songName", "animeJPName", "animeENName", "HQ", "MQ", "audio"]
+            if re.match(song_regex, song_name.lower()):
+                song = {song_id: {"songName": song_name, "artistName": None}}
+                if song_info["songArtistId"]:
+                    artistId = str(song_info["songArtistId"])
+                    song[song_id]["artistName"] = artist_data[artistId]["name"]
+                else:
+                    groupId = str(song_info["songGroupId"])
+                    song[song_id]["artistName"] = group_data[groupId]["name"]
+                matched_songs.update(song)
+        if matched_songs:
+            for anime_entry in anime_data.values(): #với mỗi anime
+                for song_list in anime_entry["songLinks"].values(): #duyệt từng loại OP ED INS
+                    for song in song_list: #duyệt từng bài trong mỗi loại
+                        if str(song["songId"]) in matched_songs.keys():
+                            result = {}
+                            animeNameJA = anime_entry["mainNames"]["JA"]
+                            animeNameEN = anime_entry["mainNames"]["EN"]
+                            result["animeName"] = animeNameJA if animeNameJA is not None else animeNameEN # nếu không có tên JA thì lấy tên EN
+                            result["songName"] = matched_songs[str(song["songId"])]["songName"]
+                            result["artistName"] = matched_songs[str(song["songId"])]["artistName"]
+                            results.append(result)
+        return results
+    
+    def azuani(self, anime_data, song_data, artist_data, group_data, query):
+        pass
 
-        for entry in data:
-            matched_priority = None
-            matched_value = None
-
-            # Kiểm tra các trường theo độ ưu tiên
-            for key in priority_keys:
-                value = entry.get(key)
-                if value:  # Bỏ qua nếu value là None hoặc rỗng
-                    if isinstance(value, list):
-                        value = " ".join(value)
-                    if query_normalized in self.normalize_string(value):
-                        matched_priority = key
-                        matched_value = value
-                        break  # Dừng nếu đã tìm thấy khớp trong một trường
-
-            # Nếu khớp, thêm vào danh sách kết quả
-            if matched_priority:
-                results.append((matched_priority, len(matched_value), entry))
-
-        # Sắp xếp kết quả theo độ ưu tiên và số ký tự của giá trị
-        results.sort(key=lambda x: (priority_keys.index(x[0]), x[1]))
-
-        # Trả về danh sách các entry (chỉ lấy dữ liệu chính)
-        return [entry for _, _, entry in results]
-
-    @commands.command(name="anisongdb", aliases=["anisong", "song"])
+    @commands.command(name="song", aliases=["s"])
     async def anisongdb(self, ctx, *search_query):
         search_query = " ".join(search_query).strip()
         if not search_query:
             await ctx.send("Vui lòng nhập từ khóa tìm kiếm.")
             return
 
-        results = self.search_data(self.data, search_query)
+        results = self.azusong(self.anime_data, self.song_data, self.artist_data, self.group_data, search_query)
         if not results:
             await ctx.send("Không tìm thấy kết quả nào.")
             return
-
         embed = discord.Embed(
             title="Kết quả tìm kiếm",
             description="Danh sách các bài hát tìm thấy",
             color=0x00ff00
         )
-
         for idx, result in enumerate(results[:6]):  # Giới hạn tối đa 5 kết quả
             embed.add_field(
-                name="Anime (JP)" if idx == 0 else "",
-                value=result.get("animeJPName", "N/A"),
+                name="Anime" if idx == 0 else "",
+                value=result.get("animeName", "N/A"),
                 inline=True
             )
             embed.add_field(
@@ -90,10 +151,10 @@ class AnisongDBCommand(commands.Cog):
             )
             embed.add_field(
                 name="Artist" if idx == 0 else "",
-                value=result.get("songArtist", "N/A"),
+                value=result.get("artistName", "N/A"),
                 inline=True
             )
-        
+       
         await ctx.send(embed=embed)
 
 async def setup(bot):
