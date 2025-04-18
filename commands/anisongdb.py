@@ -80,7 +80,7 @@ class AnisongDBCommand(commands.Cog):
     
     def load_data(self, file_path):
         try:
-            with open(file_path, "r", encoding="utf-8") as file:
+            with open(f"data/{file_path}", "r", encoding="utf-8") as file:
                 data = json.load(file)  # đọc toàn bộ file 1 lần
             print("Dữ liệu đã được nạp thành công!")
             return data
@@ -118,7 +118,8 @@ class AnisongDBCommand(commands.Cog):
         return results
     def azuani(self, anime_data, song_data, artist_data, group_data, query):
         pass
-    @commands.command(name="anisongdb", aliases=["anisong", "song"])
+
+    @commands.command(name="song", aliases=["s"])
     async def anisongdb(self, ctx, *search_query):
         search_query = " ".join(search_query).strip()
         if not search_query:
@@ -126,20 +127,19 @@ class AnisongDBCommand(commands.Cog):
             return
 
         results = self.azusong(self.anime_data, self.song_data, self.artist_data, self.group_data, search_query)
+        #await ctx.send(f"{results}")
         if not results:
             await ctx.send("Không tìm thấy kết quả nào.")
             return
-
         embed = discord.Embed(
             title="Kết quả tìm kiếm",
             description="Danh sách các bài hát tìm thấy",
             color=0x00ff00
         )
-
         for idx, result in enumerate(results[:6]):  # Giới hạn tối đa 5 kết quả
             embed.add_field(
                 name="Anime (JP)" if idx == 0 else "",
-                value=result.get("animeJPName", "N/A"),
+                value=result.get("animeName", "N/A"),
                 inline=True
             )
             embed.add_field(
@@ -149,10 +149,10 @@ class AnisongDBCommand(commands.Cog):
             )
             embed.add_field(
                 name="Artist" if idx == 0 else "",
-                value=result.get("songArtist", "N/A"),
+                value=result.get("artistName", "N/A"),
                 inline=True
             )
-        
+       
         await ctx.send(embed=embed)
 
 async def setup(bot):
