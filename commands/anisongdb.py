@@ -117,7 +117,35 @@ class AnisongDBCommand(commands.Cog):
                             results.append(result)
         return results
     def azuani(self, anime_data, song_data, artist_data, group_data, query):
-        pass
+        anime_regex = self.get_regex_search(query)
+        results = []
+        matched_animes = {}
+        for anime_id, anime_info in anime_data.items():
+            if any(re.match(anime_regex, entry["name"].lower()) for entry in anime_info["names"]):
+                ja_name = next(
+                    (entry["name"] for entry in anime_info["names"] if entry["language"] == "JA"),
+                    anime_info["names"][0]["name"]  # fallback nếu không có JA
+                )
+                anime = {anime_id: {"animeName": ja_name, "songLinks": []}}
+                for song_list in anime_info["songLinks"].values():
+                    for song in song_list:
+                        anime[anime_id]["songLinks"].append(song["songId"])
+                matched_animes.update(anime)
+        if matched_animes:
+            for anime_entry in matched_animes.values():
+                for songId in anime_entry["songLinks"]:
+                    songId = str(songId)
+                    result = {}
+                    result["animeName"] = anime_entry["animeName"]
+                    result["songName"] = song_data[songId]["name"]
+                    if song_data[songId]["songArtistId"]:
+                        artistId = str(song_data[songId]["songArtistId"])
+                        result["artistName"] = artist_data[artistId]["name"]
+                    else:
+                        groupId = str(song_data[songId]["songGroupId"])
+                        result["artistName"] = group_data[groupId]["name"]
+                    results.append(result)
+        return results
     @commands.command(name="anisongdb", aliases=["anisong", "song"])
     async def anisongdb(self, ctx, *search_query):
         search_query = " ".join(search_query).strip()
