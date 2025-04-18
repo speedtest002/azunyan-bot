@@ -111,11 +111,14 @@ class AnisongDBCommand(commands.Cog):
                     for song in song_list: #duyệt từng bài trong mỗi loại
                         if str(song["songId"]) in matched_songs.keys():
                             result = {}
-                            result["animeName"] = anime_entry["mainNames"]["JA"]
+                            animeNameJA = anime_entry["mainNames"]["JA"]
+                            animeNameEN = anime_entry["mainNames"]["EN"]
+                            result["animeName"] = animeNameJA if animeNameJA is not None else animeNameEN # nếu không có tên JA thì lấy tên EN
                             result["songName"] = matched_songs[str(song["songId"])]["songName"]
                             result["artistName"] = matched_songs[str(song["songId"])]["artistName"]
                             results.append(result)
         return results
+    
     def azuani(self, anime_data, song_data, artist_data, group_data, query):
         pass
 
@@ -127,7 +130,6 @@ class AnisongDBCommand(commands.Cog):
             return
 
         results = self.azusong(self.anime_data, self.song_data, self.artist_data, self.group_data, search_query)
-        #await ctx.send(f"{results}")
         if not results:
             await ctx.send("Không tìm thấy kết quả nào.")
             return
@@ -138,7 +140,7 @@ class AnisongDBCommand(commands.Cog):
         )
         for idx, result in enumerate(results[:6]):  # Giới hạn tối đa 5 kết quả
             embed.add_field(
-                name="Anime (JP)" if idx == 0 else "",
+                name="Anime" if idx == 0 else "",
                 value=result.get("animeName", "N/A"),
                 inline=True
             )
