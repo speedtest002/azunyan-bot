@@ -88,6 +88,21 @@ class AnisongDBCommand(commands.Cog):
             print(f"Lỗi khi đọc file JSON: {e}")
             return None
 
+    def remove_duplicate_songs(self, song_list):
+        """
+        Loại bỏ các dictionary trùng lặp trong danh sách dựa trên 'songId',
+        chỉ giữ lại phần tử đầu tiên của mỗi songId duy nhất, sử dụng dictionary.
+        """
+        seen_songs = {}
+        
+        for song in song_list:
+            if 'songId' in song:
+                song_id = song['songId']
+                if song_id not in seen_songs:
+                    seen_songs[song_id] = song
+            # Các dictionary không có 'songId' sẽ bị bỏ qua
+        return list(seen_songs.values())
+    
     # Hàm tìm kiếm
     def azusong(self, anime_data, song_data, artist_data, group_data, query):
         song_regex = self.get_regex_search(query)
@@ -116,13 +131,14 @@ class AnisongDBCommand(commands.Cog):
                             result["animeName"] = animeNameJA if animeNameJA is not None else animeNameEN # nếu không có tên JA thì lấy tên EN
                             result["songName"] = matched_songs[str(song["songId"])]["songName"]
                             result["artistName"] = matched_songs[str(song["songId"])]["artistName"]
+                            result["songId"] = song["songId"]
                             results.append(result)
         return results
     
     def azuani(self, anime_data, song_data, artist_data, group_data, query):
         pass
 
-    @commands.command(name="song", aliases=["s"])
+    @commands.command(name="song", aliases=["s","sd"]) #sp = s + dup (default = s is not dup)
     async def anisongdb(self, ctx, *search_query):
         search_query = " ".join(search_query).strip()
         if not search_query:
@@ -133,12 +149,15 @@ class AnisongDBCommand(commands.Cog):
         if not results:
             await ctx.send("Không tìm thấy kết quả nào.")
             return
+        if not ctx.invoked_with=='sd':
+            results = self.remove_duplicate_songs(results)  # Loại bỏ các bài hát trùng lặp
+        results.sort(key=lambda x: len(x["songName"])) #sort by length of song name
         embed = discord.Embed(
             title="Kết quả tìm kiếm",
             description="Danh sách các bài hát tìm thấy",
             color=0x00ff00
         )
-        for idx, result in enumerate(results[:6]):  # Giới hạn tối đa 5 kết quả
+        for idx, result in enumerate(results[:8]):  # Giới hạn tối đa 8*3=24 kết quả, limit cua discord la 25
             embed.add_field(
                 name="Anime" if idx == 0 else "",
                 value=result.get("animeName", "N/A"),
