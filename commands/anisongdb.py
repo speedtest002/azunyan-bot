@@ -103,6 +103,17 @@ class AnisongDBCommand(commands.Cog):
             # Các dictionary không có 'songId' sẽ bị bỏ qua
         return list(seen_songs.values())
     
+    def normalize_for_compare(self, text): # remove space and lower case
+        return re.sub(r"\s+", "", text.lower())
+    
+    def clean_metadata(self, title):
+        """
+        Xoá các phần không cần thiết như (feat. ...), (Inst), [Bonus Track], v.v.
+        """
+        # Loại bỏ nội dung trong () hoặc []
+        cleaned = re.sub(r"\s*[\[\(].*?[\]\)]", "", title)
+        return cleaned.strip()
+    
     # Hàm tìm kiếm
     def azusong(self, anime_data, song_data, artist_data, group_data, query):
         song_regex = self.get_regex_search(query)
@@ -110,8 +121,11 @@ class AnisongDBCommand(commands.Cog):
         matched_songs = {}
         for song_id, song_info in song_data.items():
             song_name = song_info["name"]
-
-            if re.match(song_regex, song_name.lower()):
+            clean_song_name = self.clean_metadata(song_name)
+            normalized_song_name = self.normalize_for_compare(clean_song_name)
+            normalized_query = self.normalize_for_compare(query)
+            #if re.match(song_regex, song_name.lower()):
+            if re.match(song_regex, clean_song_name.lower()) or normalized_query in normalized_song_name:
                 song = {song_id: {"songName": song_name, "artistName": None}}
                 if song_info["songArtistId"]:
                     artistId = str(song_info["songArtistId"])
