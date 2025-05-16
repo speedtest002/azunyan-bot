@@ -90,8 +90,15 @@ class AnisongDBCommand(commands.Cog):
 
     def remove_duplicate_songs(self, song_list):
         """
-        Loại bỏ các dictionary trùng lặp trong danh sách dựa trên 'songId',
-        chỉ giữ lại phần tử đầu tiên của mỗi songId duy nhất, sử dụng dictionary.
+        Removes duplicate songs from a list based on the 'songId' key.
+        
+        Only the first occurrence of each unique 'songId' is kept; entries without 'songId' are ignored.
+        
+        Args:
+            song_list: A list of song dictionaries to deduplicate.
+        
+        Returns:
+            A list of song dictionaries with duplicates removed.
         """
         seen_songs = {}
         
@@ -104,11 +111,22 @@ class AnisongDBCommand(commands.Cog):
         return list(seen_songs.values())
     
     def normalize_for_compare(self, text): # remove space and lower case
+        """
+        Normalizes text for comparison by converting to lowercase and removing all whitespace.
+        
+        Args:
+            text: The input string to normalize.
+        
+        Returns:
+            The normalized string with all spaces removed and all characters in lowercase.
+        """
         return re.sub(r"\s+", "", text.lower())
     
     def clean_metadata(self, title):
         """
-        Xoá các phần không cần thiết như (feat. ...), (Inst), [Bonus Track], v.v.
+        Removes extraneous metadata from a song title.
+        
+        Strips content within parentheses or brackets (such as "(feat. ...)", "(Inst)", "[Bonus Track]") from the title and trims whitespace.
         """
         # Loại bỏ nội dung trong () hoặc []
         cleaned = re.sub(r"\s*[\[\(].*?[\]\)]", "", title)
@@ -116,6 +134,17 @@ class AnisongDBCommand(commands.Cog):
     
     # Hàm tìm kiếm
     def azusong(self, anime_data, song_data, artist_data, group_data, query):
+        """
+        Searches for songs matching the query and returns associated anime and artist information.
+        
+        Iterates through the song data to find songs whose names match the query using both regex and normalized substring comparison. For each matched song, retrieves the corresponding artist or group name and associates it with anime entries that include the song. Returns a list of dictionaries containing the anime name, song name, artist name, and song ID for each match.
+        
+        Args:
+            query: The search string used to find matching songs.
+        
+        Returns:
+            A list of dictionaries, each with keys 'animeName', 'songName', 'artistName', and 'songId' for matched songs.
+        """
         song_regex = self.get_regex_search(query)
         results = []
         matched_songs = {}
