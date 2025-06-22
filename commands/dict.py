@@ -1,13 +1,14 @@
 import discord
 from discord.ext import commands
 import requests
+import urllib.parse
 
-class TemplateCommand(commands.Cog):
+class DictionaryCommand(commands.Cog):
     def __init__(self, bot):
         self.bot = bot
 
-    @commands.command(name="dictionary", aliases=["dict","d"])
-    async def dictionary(self, ctx, word: str):
+    @commands.hybrid_command(name="dictionary", aliases=["dict","d"])
+    async def dictionary(self, ctx,*,word: str):
         """
         Tra từ vựng bằng dictionaryapi.dev
 
@@ -16,7 +17,8 @@ class TemplateCommand(commands.Cog):
         word: str
             Từ cần tra nghĩa
         """
-        url = f"https://api.dictionaryapi.dev/api/v2/entries/en/{word}"
+        encoded_word = urllib.parse.quote(word)  # This handles spaces and other special characters
+        url = f"https://api.dictionaryapi.dev/api/v2/entries/en/{encoded_word}"
         response = requests.get(url)
 
         if response.status_code == 200:
@@ -40,4 +42,4 @@ class TemplateCommand(commands.Cog):
             await ctx.send("Word not found or an error occurred.")
 
 async def setup(bot):
-    await bot.add_cog(TemplateCommand(bot))
+    await bot.add_cog(DictionaryCommand(bot))
