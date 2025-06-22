@@ -1,37 +1,61 @@
-from discord import *
 from discord.ext import commands
 import math
+
 class Calculate(commands.Cog):
     def __init__(self, bot):
         self.bot = bot
 
-    @commands.hybrid_command(name="calculate", aliases=["cal"])
-    async def calculate(self,ctx):
+    @commands.hybrid_command(name="calculate", aliases=["cal","c","tinh"])
+    async def calculate(self, ctx, *, expression: str):
         """
-        Các phép tính cơ bản
+        Các phép tính cơ bản (hỗ trợ + - * / ** sqrt log sin cos tan ...)
         """
+        def safe_eval(expr):
+            expr = expr.replace("^", "**")  # Chuyển ^ thành lũy thừa
+            expr = expr.replace("x", "*").replace("÷", "/").replace("π", "pi").replace("\*","*")  
 
-        def safe_eval(expression):
-            # Define allowed functions and operators
             allowed_names = {
+                # Toán học cơ bản
                 "sqrt": math.sqrt,
                 "pow": pow,
                 "abs": abs,
                 "round": round,
                 "log": math.log,
+                "pi": math.pi,
+                "e": math.e,
+                "mod": lambda x, y: x % y, 
+
+                # Lượng giác (radian)
                 "sin": math.sin,
                 "cos": math.cos,
                 "tan": math.tan,
-                "pi": math.pi,
-                "e": math.e
+
+                # Lượng giác (độ)
+                "sind": lambda x: math.sin(math.radians(x)),
+                "cosd": lambda x: math.cos(math.radians(x)),
+                "tand": lambda x: math.tan(math.radians(x)),
             }
 
             try:
-                # Evaluate the expression safely
-                result = eval(expression, {"__builtins__": {}}, allowed_names)
+                result = eval(expr, {"__builtins__": {}}, allowed_names)
                 return result
             except Exception as e:
-                return f"Error: {e}"
-        await ctx.send(round(safe_eval(ctx.message.content.split(" ", 1)[1]),4))
+                return f"Lỗi: {e}"
+
+
+        result = safe_eval(expression)
+        if isinstance(result, (int, float)):
+            result_str = f"{round(result, 4)}"
+        else:
+            result_str = result
+        safe_expr = expression.replace("*", "\\*")
+
+        if ctx.interaction:
+            # Là slash command
+            await ctx.send(f"{safe_expr} = {result_str}")
+        else:
+            # Là prefix command
+            await ctx.send(f"Kết quả: {result_str}")
+
 async def setup(bot):
     await bot.add_cog(Calculate(bot))
