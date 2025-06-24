@@ -8,7 +8,6 @@ from dotenv import load_dotenv
 import os
 
 
-
 vn_tz = pytz.timezone('Asia/Ho_Chi_Minh')
 now = datetime.now(vn_tz)
 channel_id = os.getenv("DISCORD_CHANNEL_ID") 
@@ -32,7 +31,6 @@ def get_lunar_date():
             lunar_data = result['data']
             day = lunar_data['day']
             month = lunar_data['month']
-            year = lunar_data['year']
             cycle = lunar_data['sexagenaryCycle']
             return f"Nhằm ngày {day} tháng {month} năm {cycle}"
         else:
@@ -90,48 +88,47 @@ class Ohio(commands.Cog):
         self.bot.loop.create_task(self.schedule_message())
 
     async def schedule_message(self):
-        # Set up time
         await self.bot.wait_until_ready()
 
         vn_tz = pytz.timezone('Asia/Ho_Chi_Minh')
         now = datetime.now(vn_tz)
-        #Thời gian
-        target_time = now.replace(hour=8, minute=0, second=0, microsecond=0)
+        target_time = now.replace(hour=7, minute=30, second=0, microsecond=0)
 
         if now > target_time:
             target_time += timedelta(days=1)
 
         wait_seconds = (target_time - now).total_seconds()
-        
         await asyncio.sleep(wait_seconds)
 
-        #Main text part
-        text_to_send = (
-            f"Ohio!\nHôm nay là {get_day_of_week()}, {get_current_date()},\n"
-            f"{get_lunar_date()}\nChúc bạn một ngày tốt lành!\n"
-            )
-    
-        #Quote part
+        # Lấy dữ liệu
+        day_of_week = get_day_of_week()
+        current_date = get_current_date()
+        lunar_date = get_lunar_date()
+
         quote, char_name, title = get_random_vndb_quote()
 
         if char_name is None:
-            description = f'"{quote}"\n\n— {title}'
+            quote_text = f'"{quote}"\n\n— {title}'
         else:
-            description = f'"{quote}"\n\n— {char_name}, {title}'
+            quote_text = f'"{quote}"\n\n— {char_name}, {title}'
 
-        # Create embed for quote
+        # Tạo embed
         embed = discord.Embed(
-            title=f"Quote of the day:",
-            description=description,
+            title="Ohio! Chúc bạn ngày mới tốt lành!",
+            description=(
+                f"Hôm nay là **{day_of_week}, {current_date}**\n"
+                f"Nhằm ngày **{lunar_date}**\n\n"
+                f"💬 **Quote of the day:**\n{quote_text}"
+            ),
             color=0x00ff00
         )
 
-        
-        channel_id = 590737241614188563
+        # GIF trong embed
+        embed.set_image(url="https://files.catbox.moe/v7uyjl.gif")
+        channel_id = channel_id
         channel = self.bot.get_channel(channel_id)
+
         if channel:
-            await channel.send(text_to_send)
-            await channel.send("https://tenor.com/bPUK1.gif")
             await channel.send(embed=embed)
         else:
             print("Không tìm thấy kênh.")
