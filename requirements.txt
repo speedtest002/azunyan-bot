@@ -4,7 +4,6 @@ aiosignal
 annotated-types
 anyio
 async-timeout
-asyncio
 asyncpg
 attrs
 beautifulsoup4
@@ -46,3 +45,4 @@ urllib3
 uvicorn
 wrapt
 yarl
+python-socketio

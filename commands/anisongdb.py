@@ -2,7 +2,8 @@ from discord.ext import commands
 import discord
 import re
 import sqlite3
-from feature.create_database import create_database
+import subprocess
+import asyncio
 
 ANIME_REGEX_REPLACE_RULES = [
     # Ļ can't lower correctly with sqlite lower function hence why next line is needed
@@ -214,9 +215,38 @@ class AnisongDBCommand(commands.Cog):
 
     @commands.command(name="update_anisongdb")
     @commands.is_owner()
-    async def update_anisongdb(self, ctx):       
-        create_database()
-        await ctx.send("Update sussessfuly.")
+    async def update_anisongdb(self, ctx):
+        """
+        Cập nhật database Anisong từ nguồn. Tác vụ này chạy nền và có thể mất vài phút.
+        """
+        await ctx.send("Bắt đầu quá trình cập nhật database. Tác vụ này có thể mất vài phút...", ephemeral=True)
+
+        try:
+            # Chạy script trong một tiến trình con không blocking
+            process = await asyncio.create_subprocess_exec(
+                "python3", "feature/create_database.py",
+                stdout=asyncio.subprocess.PIPE,
+                stderr=asyncio.subprocess.PIPE
+            )
+
+            # Chờ tiến trình hoàn thành
+            stdout, stderr = await process.communicate()
+
+            if process.returncode == 0:
+                await ctx.send("Cập nhật database thành công!")
+                print("AnisongDB update successful.")
+                if stdout:
+                    print(f"[stdout]:\n{stdout.decode()}")
+            else:
+                # Gửi thông báo lỗi nếu có
+                error_message = stderr.decode()
+                print(f"AnisongDB update failed with exit code {process.returncode}:\n{error_message}")
+                await ctx.send(f"❌ Đã xảy ra lỗi trong quá trình cập nhật:\n```\n{error_message[:1800]}\n```", ephemeral=True)
+
+        except FileNotFoundError:
+            await ctx.send("❌ Lỗi: Không tìm thấy file `feature/create_database.py`.", ephemeral=True)
+        except Exception as e:
+            await ctx.send(f"❌ Đã xảy ra một lỗi không mong muốn: {e}", ephemeral=True)
         
 async def setup(bot):
     await bot.add_cog(AnisongDBCommand(bot))
