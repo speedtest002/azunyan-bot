@@ -1,7 +1,8 @@
 from discord.ext import commands
 import discord
 import re
-import json
+import sqlite3
+from feature.create_database import create_database
 
 ANIME_REGEX_REPLACE_RULES = [
     # Ļ can't lower correctly with sqlite lower function hence why next line is needed
@@ -39,7 +40,7 @@ ANIME_REGEX_REPLACE_RULES = [
     {"input": "*", "replace": "[*✻＊✳︎]"},
     {
         "input": " ",
-        "replace": "([^\\w]+|_+)",
+        "replace": "([^\\w]+|_+) ",
     },
     {"input": "i", "replace": "([iíίɪ]|ii)"},
     {"input": "x", "replace": "[x×]"},
@@ -51,15 +52,8 @@ ANIME_REGEX_REPLACE_RULES = [
 
 class AnisongDBCommand(commands.Cog):
     def __init__(self, bot):
-        self.anime_file = "animeMap.json"
-        self.song_file = "songMap.json"
-        self.artist_file = "artistMap.json"
-        self.group_file = "groupMap.json"
-        self.anime_data = self.load_data(self.anime_file)
-        self.song_data = self.load_data(self.song_file)
-        self.artist_data = self.load_data(self.artist_file)
-        self.group_data = self.load_data(self.group_file)
         self.bot = bot
+        self.db_path = "data/anisong.db"
 
     def apply_regex_rules(self, search):
         for rule in ANIME_REGEX_REPLACE_RULES:
@@ -68,8 +62,8 @@ class AnisongDBCommand(commands.Cog):
 
     def escapeRegExp(self, str):
         str = re.escape(str)
-        str = str.replace("\ ", " ")
-        str = str.replace("\*", "*")
+        str = str.replace("\\ ", " ")
+        str = str.replace("\\*", "*")
         return str
 
     def get_regex_search(self, og_search):
@@ -77,16 +71,6 @@ class AnisongDBCommand(commands.Cog):
         search = self.apply_regex_rules(og_search)
         search = ".*" + search + ".*"
         return search
-    
-    def load_data(self, file_path):
-        try:
-            with open(f"data/{file_path}", "r", encoding="utf-8") as file:
-                data = json.load(file)  # đọc toàn bộ file 1 lần
-            print("Dữ liệu đã được nạp thành công!")
-            return data
-        except Exception as e:
-            print(f"Lỗi khi đọc file JSON: {e}")
-            return None
 
     def remove_duplicate_songs(self, song_list):
         """
@@ -104,52 +88,85 @@ class AnisongDBCommand(commands.Cog):
         return list(seen_songs.values())
     
     def normalize_for_compare(self, text): # remove space and lower case
-        return re.sub(r"\s+", "", text.lower())
+        return re.sub(r"\\s+", "", text.lower())
     
     def clean_metadata(self, title):
         """
         Xoá các phần không cần thiết như (feat. ...), (Inst), [Bonus Track], v.v.
         """
         # Loại bỏ nội dung trong () hoặc []
-        cleaned = re.sub(r"\s*[\[\(].*?[\]\)]", "", title)
+        cleaned = re.sub(r"\\s*\[\\(].*?\[\]\\)", "", title)
         return cleaned.strip()
     
     # Hàm tìm kiếm
-    def azusong(self, anime_data, song_data, artist_data, group_data, query):
+    def azusong(self, query):
         song_regex = self.get_regex_search(query)
-        results = []
-        matched_songs = {}
-        for song_id, song_info in song_data.items():
-            song_name = song_info["name"]
-            clean_song_name = self.clean_metadata(song_name)
-            normalized_song_name = self.normalize_for_compare(clean_song_name)
-            normalized_query = self.normalize_for_compare(query)
-            #if re.match(song_regex, song_name.lower()):
-            if re.match(song_regex, clean_song_name.lower()) or normalized_query in normalized_song_name:
-                song = {song_id: {"songName": song_name, "artistName": None}}
-                if song_info["songArtistId"]:
-                    artistId = str(song_info["songArtistId"])
-                    song[song_id]["artistName"] = artist_data[artistId]["name"]
-                else:
-                    groupId = str(song_info["songGroupId"])
-                    song[song_id]["artistName"] = group_data[groupId]["name"]
-                matched_songs.update(song)
-        if matched_songs:
-            for anime_entry in anime_data.values(): #với mỗi anime
-                for song_list in anime_entry["songLinks"].values(): #duyệt từng loại OP ED INS
-                    for song in song_list: #duyệt từng bài trong mỗi loại
-                        if str(song["songId"]) in matched_songs.keys():
-                            result = {}
-                            animeNameJA = anime_entry["mainNames"]["JA"]
-                            animeNameEN = anime_entry["mainNames"]["EN"]
-                            result["animeName"] = animeNameJA if animeNameJA is not None else animeNameEN # nếu không có tên JA thì lấy tên EN
-                            result["songName"] = matched_songs[str(song["songId"])]["songName"]
-                            result["artistName"] = matched_songs[str(song["songId"])]["artistName"]
-                            result["songId"] = song["songId"]
-                            results.append(result)
-        return results
-    
-    def azuani(self, anime_data, song_data, artist_data, group_data, query):
+        normalized_query = self.normalize_for_compare(query)
+        
+        try:
+            conn = sqlite3.connect(self.db_path)
+            conn.row_factory = sqlite3.Row
+            cursor = conn.cursor()
+
+            cursor.execute("SELECT songId, name FROM songs")
+            all_songs = cursor.fetchall()
+
+            matched_song_ids = []
+            for song in all_songs:
+                song_name = song['name']
+                if not song_name:
+                    continue
+                
+                clean_song_name = self.clean_metadata(song_name)
+                normalized_song_name = self.normalize_for_compare(clean_song_name)
+                
+                if re.match(song_regex, clean_song_name.lower()) or (normalized_query and normalized_query in normalized_song_name):
+                    matched_song_ids.append(song['songId'])
+
+            if not matched_song_ids:
+                conn.close()
+                return []
+
+            placeholders = ','.join('?' for _ in matched_song_ids)
+            sql_get_all_info = f"""
+                SELECT
+                    an.mainNameJA as animeNameJA,
+                    an.mainNameEN as animeNameEN,
+                    s.name as songName,
+                    s.songId,
+                    ar.name as artistName,
+                    gr.name as groupName
+                FROM animeSong AS ans
+                JOIN animes AS an ON ans.animeId = an.animeId
+                JOIN songs AS s ON ans.songId = s.songId
+                LEFT JOIN artists AS ar ON s.songArtistId = ar.artistId
+                LEFT JOIN groups AS gr ON s.songGroupId = gr.groupId
+                WHERE ans.songId IN ({placeholders})
+            """
+
+            cursor.execute(sql_get_all_info, matched_song_ids)
+            query_results = cursor.fetchall()
+            conn.close()
+
+            results = []
+            for row in query_results:
+                result = {}
+                animeNameJA = row["animeNameJA"]
+                animeNameEN = row["animeNameEN"]
+                result["animeName"] = animeNameJA if animeNameJA is not None else animeNameEN
+                result["songName"] = row["songName"]
+                result["artistName"] = row["artistName"] if row["artistName"] is not None else row["groupName"]
+                result["songId"] = row["songId"]
+                results.append(result)
+            return results
+        except sqlite3.Error as e:
+            print(f"Database error: {e}")
+            return []
+        except Exception as e:
+            print(f"An error occurred: {e}")
+            return []
+
+    def azuani(self, query):
         pass
 
     @commands.command(name="song", aliases=["s","sd"]) #sp = s + dup (default = s is not dup)
@@ -159,7 +176,7 @@ class AnisongDBCommand(commands.Cog):
             await ctx.send("Vui lòng nhập từ khóa tìm kiếm.")
             return
 
-        results = self.azusong(self.anime_data, self.song_data, self.artist_data, self.group_data, search_query)
+        results = self.azusong(search_query)
         if not results:
             await ctx.send("Không tìm thấy kết quả nào.")
             return
@@ -190,5 +207,11 @@ class AnisongDBCommand(commands.Cog):
        
         await ctx.send(embed=embed)
 
+    @commands.command(name="update_anisongdb")
+    @commands.is_owner()
+    async def update_anisongdb(self, ctx):       
+        create_database()
+        await ctx.send("Update sussessfuly.")
+        
 async def setup(bot):
     await bot.add_cog(AnisongDBCommand(bot))
