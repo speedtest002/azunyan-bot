@@ -95,7 +95,7 @@ class AnisongDBCommand(commands.Cog):
         Xoá các phần không cần thiết như (feat. ...), (Inst), [Bonus Track], v.v.
         """
         # Loại bỏ nội dung trong () hoặc []
-        cleaned = re.sub(r"\\s*\[\\(].*?\[\]\\)", "", title)
+        cleaned = re.sub(r"\\s*(\[.*?\]|\(.*?\))", "", title)
         return cleaned.strip()
     
     # Hàm tìm kiếm
@@ -108,7 +108,12 @@ class AnisongDBCommand(commands.Cog):
             conn.row_factory = sqlite3.Row
             cursor = conn.cursor()
 
-            cursor.execute("SELECT songId, name FROM songs")
+            # Check for songId column, fallback to id if not exists
+            cursor.execute("PRAGMA table_info(songs)")
+            columns = [row['name'] for row in cursor.fetchall()]
+            id_column = 'songId' if 'songId' in columns else 'id'
+
+            cursor.execute(f"SELECT {id_column}, name FROM songs")
             all_songs = cursor.fetchall()
 
             matched_song_ids = []
@@ -120,8 +125,8 @@ class AnisongDBCommand(commands.Cog):
                 clean_song_name = self.clean_metadata(song_name)
                 normalized_song_name = self.normalize_for_compare(clean_song_name)
                 
-                if re.match(song_regex, clean_song_name.lower()) or (normalized_query and normalized_query in normalized_song_name):
-                    matched_song_ids.append(song['songId'])
+                if re.search(song_regex, clean_song_name.lower()) or (normalized_query and normalized_query in normalized_song_name):
+                    matched_song_ids.append(song[id_column])
 
             if not matched_song_ids:
                 conn.close()
@@ -133,12 +138,12 @@ class AnisongDBCommand(commands.Cog):
                     an.mainNameJA as animeNameJA,
                     an.mainNameEN as animeNameEN,
                     s.name as songName,
-                    s.songId,
+                    s.{id_column} as songId,
                     ar.name as artistName,
                     gr.name as groupName
                 FROM animeSong AS ans
                 JOIN animes AS an ON ans.animeId = an.animeId
-                JOIN songs AS s ON ans.songId = s.songId
+                JOIN songs AS s ON ans.songId = s.{id_column}
                 LEFT JOIN artists AS ar ON s.songArtistId = ar.artistId
                 LEFT JOIN groups AS gr ON s.songGroupId = gr.groupId
                 WHERE ans.songId IN ({placeholders})

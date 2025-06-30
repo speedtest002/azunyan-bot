@@ -110,7 +110,7 @@ def create_database(db_path='data/anisong.db'):
         cursor.execute('CREATE INDEX idx_artists_name ON artists (name)')
         cursor.execute('CREATE INDEX idx_animes_name_en ON animes (mainNameEN)')
         cursor.execute('CREATE INDEX idx_animeSong_songId ON animeSong (songId)')
-
+        print("update successfully")
     except sqlite3.Error as e:
         conn.rollback()
         # Optionally, you could log the error to a file here instead of printing
