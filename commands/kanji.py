@@ -33,12 +33,19 @@ class Kanji(commands.Cog):
         )
         embed.add_field(name="Kunyomi", value=kanji_data.get('kun', 'N/A'), inline=False)
         embed.add_field(name="Onyomi", value=kanji_data.get('on', 'N/A'), inline=False)
+        embed.add_field(name="Hán Việt", value=kanji_data["examples"][0].get("h", "N/A"), inline=False)
         embed.add_field(name="Parts", value=", ".join([part['w'] for part in kanji_data.get('compDetail', [])]) if kanji_data.get('compDetail') else 'N/A', inline=False)
         embed.add_field(name="Meaning", value=kanji_data.get('detail', 'N/A'), inline=False)
         embed.add_field(name="Newspaper Frequency Rank", value=kanji_data.get('freq', 'N/A'), inline=False)
-        if kanji_data.get('examples'):
-            examples = "\n".join([f"{ex['w']} ({ex['p']}): {ex['m']}" for ex in kanji_data['examples']])
-            embed.add_field(name="Examples", value=examples, inline=False)
+        example_list = []
+        for ex in kanji_data['examples']:
+            example_str = f"{ex['w']} ({ex['p']})"
+            example_str += f": {ex['m']}"
+            if ex.get('h'):
+                example_str += f" ({ex['h']})"
+            example_list.append(example_str)
+        examples = "\n".join(example_list)
+        embed.add_field(name="Examples", value=examples, inline=False)
         return embed
 
     @commands.command(name='kanji', aliases=['k'])
