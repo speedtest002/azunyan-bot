@@ -23,30 +23,60 @@ class Kanji(commands.Cog):
 
     def parse_json_data(self, result):
         """
-            Parse the JSON data returned from the Mazii API and create a Discord embed.
+        Parse the JSON data returned from the Mazii API and create a Discord embed.
+        Only include fields that exist and are not empty.
         """
         kanji_data = result["results"][0]
+        
         embed = discord.Embed(
-            title=f"Kanji: {kanji_data.get('kanji')}",
-            description=f"JLPT Level: {kanji_data.get('level')[0] if kanji_data.get('level') else 'N/A'}\nStroke Count: {kanji_data.get('stroke_count', 'N/A')}",
+            title=f"Kanji: {kanji_data.get('kanji', 'Unknown')}",
             color=discord.Color.blue()
         )
-        embed.add_field(name="Kunyomi", value=kanji_data.get('kun', 'N/A'), inline=False)
-        embed.add_field(name="Onyomi", value=kanji_data.get('on', 'N/A'), inline=False)
-        embed.add_field(name="Hán Việt", value=kanji_data["examples"][0].get("h", "N/A"), inline=False)
-        embed.add_field(name="Parts", value=", ".join([part['w'] for part in kanji_data.get('compDetail', [])]) if kanji_data.get('compDetail') else 'N/A', inline=False)
-        embed.add_field(name="Meaning", value=kanji_data.get('detail', 'N/A'), inline=False)
-        embed.add_field(name="Newspaper Frequency Rank", value=kanji_data.get('freq', 'N/A'), inline=False)
-        example_list = []
-        for ex in kanji_data['examples']:
-            example_str = f"{ex['w']} ({ex['p']})"
-            example_str += f": {ex['m']}"
-            if ex.get('h'):
-                example_str += f" ({ex['h']})"
-            example_list.append(example_str)
-        examples = "\n".join(example_list)
-        embed.add_field(name="Examples", value=examples, inline=False)
+        level = kanji_data.get('level')
+        stroke_count = kanji_data.get('stroke_count')
+        description_parts = []
+        if level and isinstance(level, list) and len(level) > 0:
+            description_parts.append(f"JLPT: {level[0]}")
+        if stroke_count:
+            description_parts.append(f"Số nét: {stroke_count}")
+        if description_parts:
+            embed.description = "\n".join(description_parts)
+
+        if kanji_data.get('kun'):
+            embed.add_field(name="Kunyomi", value=kanji_data['kun'], inline=True)
+        if kanji_data.get('on'):
+            embed.add_field(name="Onyomi", value=kanji_data['on'], inline=True)
+        examples = kanji_data.get("examples")
+        if isinstance(examples, list) and len(examples) > 0:
+            han_viet = kanji_data.get('mean')
+            if han_viet:
+                embed.add_field(name="Hán Việt", value=han_viet, inline=True)
+        comp_detail = kanji_data.get('compDetail')
+        if isinstance(comp_detail, list) and comp_detail:
+            parts = [part.get('w') for part in comp_detail if part.get('w')]
+            if parts:
+                embed.add_field(name="Bộ", value=", ".join(parts), inline=False)
+        if kanji_data.get('detail'):
+            embed.add_field(name="Nghĩa", value='\n'.join(kanji_data['detail'].split('##')), inline=False)
+        if kanji_data.get('freq'):
+            embed.add_field(name="Phổ biến thứ", value=kanji_data['freq'], inline=False)
+        if isinstance(examples, list) and examples:
+            example_list = []
+            for ex in examples:
+                word = ex.get('w')
+                p = ex.get('p')
+                m = ex.get('m')
+                if word and p and m:
+                    ex_str = f"{word} ({p}): {m}"
+                    if ex.get('h'):
+                        ex_str += f" ({ex['h']})"
+                    example_list.append(ex_str)
+            if example_list:
+                embed.add_field(name="Ví dụ", value="\n".join(example_list), inline=False)
+
         return embed
+
+
 
     @commands.command(name='kanji', aliases=['k'])
     async def kanji(self, ctx, kanji: str):
