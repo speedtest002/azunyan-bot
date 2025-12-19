@@ -22,10 +22,11 @@ class GeminiAICommand(commands.Cog):
             raise ValueError("invalid CLOUDFLARE_WORKER_URL")
         
         self.models = [
-            'gemini-2.5-pro',
+            #'gemini-2.5-pro',
+            'gemini-3-flash',
             'gemini-2.5-flash',
             'gemini-2.5-flash-lite',
-            'gemini-2.0-flash'
+            #'gemini-2.0-flash'
         ]
 
     @commands.hybrid_command(name="ai")
