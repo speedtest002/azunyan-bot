@@ -95,7 +95,7 @@ class TraceMoeCommand(commands.Cog):
     
     def __init__(self, bot):
         self.bot = bot
-        self.ctx_menu = app_commands.ContextMenu(name="What anime is this?", callback=self.what_anime_context_menu)
+        self.ctx_menu = app_commands.ContextMenu(name="WAIT: What Anime Is This", callback=self.what_anime_context_menu)
         self.bot.tree.add_command(self.ctx_menu)
 
     async def cog_unload(self):
