@@ -147,6 +147,12 @@ class TraceMoeCommand(commands.Cog):
                 await interaction.followup.send("Không có kết quả nào", ephemeral=True)
                 return
 
+            results = [r for r in results if r.get("similarity", 0) * 100 > 70]
+            
+            if not results:
+                await interaction.followup.send("Không có kết quả", ephemeral=True)
+                return
+
             results = results[:5]
             
             anilist_ids = set(r.get("anilist") for r in results if r.get("anilist"))
