@@ -92,29 +92,13 @@ class AnisongDBCommand(commands.Cog):
         """
         Call API worker to search for songs.
         """
+        # GET /song/search
+        # parram: name
         url = f"{ANISONGDB_URL}/api/song/search"
-        payload = {
-            "songNameSearchFilter": {
-                "search": query,
-                "partialMatch": True
-            },
-            "andLogic": True,
-            "ignoreDuplicate": ignore_duplicate,
-            "openingFilter": True,
-            "endingFilter": True,
-            "insertFilter": True,
-            "normalBroadcast": True,
-            "dub": True,
-            "rebroadcast": True,
-            "standard": True,
-            "instrumental": True,
-            "chanting": True,
-            "character": True
-        }
-
+        
         try:
             async with aiohttp.ClientSession() as session:
-                async with session.post(url, json=payload) as response:
+                async with session.get(url, params={"name": query}) as response:
                     if response.status == 200:
                         return await response.json()
                     else:
