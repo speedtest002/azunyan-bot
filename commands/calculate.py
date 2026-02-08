@@ -1,4 +1,5 @@
 from discord.ext import commands
+from discord import app_commands
 import math
 
 class Calculate(commands.Cog):
@@ -6,13 +7,18 @@ class Calculate(commands.Cog):
         self.bot = bot
 
     @commands.hybrid_command(name="calculate", aliases=["cal","c","tinh"])
-    async def calculate(self, ctx, *, expression: str):
+    @app_commands.describe(
+        expression="Nhập phép tính (VD: 1+1, sqrt(16)...)",
+        precision="Số chữ số thập phân (Chỉ chỉnh được ở Slash Command)"
+    )
+    async def calculate(self, ctx,*, expression: str, precision: int = 4):
         """
         Các phép tính cơ bản (hỗ trợ + - * / ** sqrt log sin cos tan ...)
         """
         def safe_eval(expr):
             expr = expr.replace("^", "**")  # Chuyển ^ thành lũy thừa
             expr = expr.replace("x", "*").replace("÷", "/").replace("π", "pi").replace("\*","*")  
+            expr = expr.replace(",",".")
 
             allowed_names = {
                 # Toán học cơ bản
@@ -45,7 +51,7 @@ class Calculate(commands.Cog):
 
         result = safe_eval(expression)
         if isinstance(result, (int, float)):
-            result_str = f"{round(result, 4)}"
+            result_str = f"{round(result, precision)}"
         else:
             result_str = result
         safe_expr = expression.replace("*", "\\*")

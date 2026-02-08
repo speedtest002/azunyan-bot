@@ -6,7 +6,7 @@ from datetime import datetime
 import json
 import os
 import aiohttp
-
+import vnlunar
 
 RENTRY_URL = "https://rentry.co/dientich100quexam"
 
@@ -28,24 +28,17 @@ class XinXamCommand(commands.Cog):
         except Exception as e:
             print(f"❌ Lỗi load data xăm: {e}")
 
-    async def fetch_lunar_year(self):
-        url = "https://open.oapi.vn/date/convert-to-lunar"
-        now = datetime.now(pytz.timezone("Asia/Ho_Chi_Minh"))
-        payload = {"day": now.day, "month": now.month, "year": now.year}
-        try:
-            async with aiohttp.ClientSession() as session:
-                async with session.post(url, json=payload, timeout=5) as resp:
-                    if resp.status == 200:
-                        res_json = await resp.json()
-                        return res_json['data']['sexagenaryCycle']
-        except:
-            return "Bính Ngọ" # Fallback
-        return "Bính Ngọ"
-    @commands.hybrid_command(name="xinxam", description="Gieo quẻ xin xăm đoán vận mệnh đầu năm")
+    def get_current_lunar_year(self):
+        tz = pytz.timezone('Asia/Ho_Chi_Minh')
+        now = datetime.now(tz)
+        lunar_info = vnlunar.get_full_info(now.day, now.month, now.year)
+        return lunar_info['can_chi']['year']
+    
+    @commands.hybrid_command(name="xinxam", description="Xin xăm online")
     async def xinxam(self, ctx):
         await ctx.defer()
         
-        lunar_year = await self.fetch_lunar_year()
+        lunar_year = self.get_current_lunar_year()
         rng = random.Random(f"{ctx.author.id}-{lunar_year}")
         lucky_number = str(rng.randint(1, 100))
         
