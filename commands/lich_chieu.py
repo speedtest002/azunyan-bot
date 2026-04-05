@@ -3,9 +3,8 @@ from discord.ext import commands
 from discord.ui import *
 from discord import *
 import json
-import datetime
+from datetime import datetime
 import pytz
-
 class LichChieuCommand(commands.Cog):
     def __init__(self, bot):
         self.bot = bot
@@ -85,18 +84,18 @@ class LichChieuCommand(commands.Cog):
             options=options
         )
         
-        next_page = Button(label="Trang sau", style=discord.ButtonStyle.green, emoji="<:Nokotan_Smug:1259094832400302100>")
-        prev_page = Button(label="Trang trước", style=discord.ButtonStyle.blurple, emoji="<:Nokotan_Smug:1259094832400302100>")
-        index_page = Button(label=f"{current_page}/{total_pages}", style=discord.ButtonStyle.grey, disabled=True)
+        next_page = discord.ui.Button(label="Trang sau", style=discord.ButtonStyle.green, emoji="<:Nokotan_Smug:1259094832400302100>")
+        prev_page = discord.ui.Button(label="Trang trước", style=discord.ButtonStyle.blurple, emoji="<:Nokotan_Smug:1259094832400302100>")
+        index_page = discord.ui.Button(label=f"{current_page}/{total_pages}", style=discord.ButtonStyle.grey, disabled=True)
 
         # Callback cho nút chuyển trang tiếp theo
         async def next_page_callback(interaction):
-            await self.create_paginated_view(ctx, current_page + 1, message=interaction.message, ephemeral=True)
+            await self.create_paginated_view(ctx, current_page + 1, message=interaction.message)
             await interaction.response.defer()
         
         # Callback cho nút chuyển trang trước đó
         async def prev_page_callback(interaction):
-            await self.create_paginated_view(ctx, current_page - 1, message=interaction.message, ephemeral=True)
+            await self.create_paginated_view(ctx, current_page - 1, message=interaction.message)
             await interaction.response.defer()
         
         next_page.callback = next_page_callback
@@ -235,13 +234,13 @@ class LichChieuCommand(commands.Cog):
                 if latest_episode is not None:
                     # Add buttons for the latest episode link
                     buttons = [
-                        Button(label=link['source'], style=discord.ButtonStyle.link, url=link['link'])
+                        discord.ui.Button(label=link['source'], style=discord.ButtonStyle.link, url=link['link'])
                         for link in episode_links if link['episode'] == latest_episode
                     ]
                 else:
                     # Add buttons for the max episode of each source
                     buttons = [
-                        Button(label=link['source'], style=discord.ButtonStyle.link, url=link['link'])
+                        discord.ui.Button(label=link['source'], style=discord.ButtonStyle.link, url=link['link'])
                         for link in source_max_episodes.values()
                     ]
                 
