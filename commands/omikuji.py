@@ -8,7 +8,7 @@ class OmikujiCommand(commands.Cog):
     def __init__(self, bot):
         self.bot = bot
 
-    @commands.hybrid_command(name="omikuji", aliases=["bocquedaunam"])
+    @commands.hybrid_command(name="omikuji", aliases=["bocquedaunam"], description="Xin xăm đầu năm")
     async def omikuji(self,ctx):
         def get_omikuji(user_name):
             list_omikuji = ["Đại Cát", "Trung Cát", "Tiểu Cát", "Cát", "Bán Cát", "Mạt Cát","Mạt Tử Cát", "Hung", "Tiểu Hung", "Bán Hung", "Mạt Hung", "Đại Hung"]
