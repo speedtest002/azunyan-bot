@@ -1,0 +1,24 @@
+[project]
+name = "azunyan-bot"
+version = "1.0.0"
+requires-python = ">=3.13"
+dependencies = [
+    "aiohttp>=3.13.5",
+    "beautifulsoup4>=4.14.3",
+    "click>=8.3.2",
+    "google-genai>=1.70.0",
+    "hikari>=2.5.0",
+    "hikari-arc>=2.2.0",
+    "hikari-lightbulb>=3.2.3",
+    "hikari-miru>=4.2.0",
+    "httpx>=0.28.1",
+    "jaconv>=0.5.0",
+    "lxml>=6.0.2",
+    "pillow>=12.2.0",
+    "pykakasi>=2.3.0",
+    "pymongo>=4.16.0",
+    "python-dotenv>=1.2.2",
+    "pytz>=2026.1.post1",
+    "pyyaml>=6.0.3",
+    "vnlunar>=1.0.4",
+]
