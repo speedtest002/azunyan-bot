@@ -7,12 +7,8 @@ import pytz
 import vnlunar
 from datetime import datetime
 
-from core.config import settings
-
-log = logging.getLogger("azunyan.xinxam")
-
 RENTRY_URL = "https://rentry.co/dientich100quexam"
-DATA_PATH = Path(settings.data_dir) / "100quexam.json"
+DATA_PATH = Path(__file__).resolve().parents[2] / "data" / "100quexam.json"
 _fortune_map: dict = {}
 
 def _load_data() -> None:

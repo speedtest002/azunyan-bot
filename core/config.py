@@ -34,12 +34,11 @@ class Settings:
     amq_guild_id: int
     prompts_path: str
     log_dir: str
-    data_dir: str
 
 
-    def load_settings() -> Settings:
+def load_settings() -> Settings:
     owner_id = _get_int("BOT_OWNER_ID", 0) or None
-
+    
     # Mặc định tìm file prompts.yaml ở thư mục gốc nếu không có cấu hình PROMPTS_PATH
     default_prompts = str(Path(__file__).resolve().parents[1] / "prompts.yaml")
 
@@ -57,16 +56,14 @@ class Settings:
         amq_guild_id=_get_int("AMQ_GUILD_ID", 1361617403112460389),
         prompts_path=os.getenv("PROMPTS_PATH", default_prompts),
         log_dir=os.getenv("LOG_DIR", "logs"),
-        data_dir=os.getenv("DATA_DIR", "data"),
     )
 
 
-    settings = load_settings()
-    ...
-    AMQ_GUILD_ID: int = settings.amq_guild_id
-    PROMPTS_PATH: str = settings.prompts_path
-    LOG_DIR: str = settings.log_dir
-    DATA_DIR: str = settings.data_dirBOT_OWNER_ID: int = settings.bot_owner_id or 0
+settings = load_settings()
+...
+AMQ_GUILD_ID: int = settings.amq_guild_id
+PROMPTS_PATH: str = settings.prompts_path
+LOG_DIR: str = settings.log_dirBOT_OWNER_ID: int = settings.bot_owner_id or 0
 PREFIX: str = settings.prefix
 MONGO_URI: str = settings.mongo_uri
 GEMINI_API_KEY: str = settings.gemini_api_key
