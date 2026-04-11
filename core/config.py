@@ -2,6 +2,7 @@ from __future__ import annotations
 
 import os
 from dataclasses import dataclass
+from pathlib import Path
 
 from dotenv import load_dotenv
 
@@ -63,7 +64,8 @@ settings = load_settings()
 ...
 AMQ_GUILD_ID: int = settings.amq_guild_id
 PROMPTS_PATH: str = settings.prompts_path
-LOG_DIR: str = settings.log_dirBOT_OWNER_ID: int = settings.bot_owner_id or 0
+LOG_DIR: str = settings.log_dir
+BOT_OWNER_ID: int = settings.bot_owner_id or 0
 PREFIX: str = settings.prefix
 MONGO_URI: str = settings.mongo_uri
 GEMINI_API_KEY: str = settings.gemini_api_key

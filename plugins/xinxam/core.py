@@ -7,6 +7,8 @@ import pytz
 import vnlunar
 from datetime import datetime
 
+log = logging.getLogger("azunyan.xinxam")
+
 RENTRY_URL = "https://rentry.co/dientich100quexam"
 DATA_PATH = Path(__file__).resolve().parents[2] / "data" / "100quexam.json"
 _fortune_map: dict = {}
