@@ -329,10 +329,11 @@ class PrefixClient:
 
             await spec.callback(ctx)
         except PrefixParseError as exc:
+            pass
             await event.message.respond(str(exc))
         except Exception:
             log.exception("Prefix command %s failed", spec.name)
-            await event.message.respond("Co loi xay ra khi xu ly lenh nay.")
+            # await event.message.respond("Co loi xay ra khi xu ly lenh nay.")
 
     @staticmethod
     def _split_arguments(content: str) -> list[str]:
@@ -407,6 +408,27 @@ class PrefixClient:
 
         if option.type is hikari.User:
             return await self._resolve_user(raw, event)
+            
+        if option.type is hikari.Member:
+            user = await self._resolve_user(raw, event)
+            if user and event.guild_id:
+                try:
+                    return self.app.cache.get_member(event.guild_id, user.id) or \
+                           await self.app.rest.fetch_member(event.guild_id, user.id)
+                except Exception:
+                    raise PrefixParseError("Người này không nằm trong server.")
+            return None
+            
+        if option.type in (hikari.GuildTextChannel, hikari.GuildChannel):
+            channel_id = int(re.sub(r"\D", "", raw)) if re.sub(r"\D", "", raw).isdigit() else None
+            if not channel_id:
+                raise PrefixParseError(f"Kênh `{raw}` không hợp lệ.")
+            try:
+                channel = self.app.cache.get_guild_channel(channel_id) or \
+                          await self.app.rest.fetch_channel(channel_id)
+                return channel
+            except Exception:
+                raise PrefixParseError("Không tìm thấy kênh được nhắc đến.")
 
         try:
             return option.type(raw)

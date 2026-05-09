@@ -35,6 +35,7 @@ class Settings:
     amq_guild_id: int
     prompts_path: str
     log_dir: str
+    cloudflare_worker_url: str
 
 
 def load_settings() -> Settings:
@@ -57,11 +58,12 @@ def load_settings() -> Settings:
         amq_guild_id=_get_int("AMQ_GUILD_ID", 1361617403112460389),
         prompts_path=os.getenv("PROMPTS_PATH", default_prompts),
         log_dir=os.getenv("LOG_DIR", "logs"),
+        cloudflare_worker_url=os.getenv("CLOUDFLARE_WORKER_URL", ""),
     )
 
 
 settings = load_settings()
-...
+
 AMQ_GUILD_ID: int = settings.amq_guild_id
 PROMPTS_PATH: str = settings.prompts_path
 LOG_DIR: str = settings.log_dir
@@ -73,5 +75,4 @@ API_BASE_URL: str = settings.api_base_url
 BOT_SECRET: str = settings.bot_secret
 ANISONGDB_URL: str = settings.anisongdb_url
 MEDIA_URL: str = settings.media_url
-AMQ_GUILD_ID: int = settings.amq_guild_id
-PROMPTS_PATH: str = settings.prompts_path
+CLOUDFLARE_WORKER_URL: str = settings.cloudflare_worker_url
