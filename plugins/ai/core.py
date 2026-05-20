@@ -27,16 +27,13 @@ with PROMPTS_PATH.open("r", encoding="utf-8") as f:
 MODELS = [
     {"name": "gemma-4-31b-it", "model": "models/gemma-4-31b-it", "tools": ["search"], "thinking_level": "high"},
     {"name": "gemma-4-26b-a4b-it", "model": "models/gemma-4-26b-a4b-it", "tools": ["search"], "thinking_level": "high"},
-    {"name": "gemini-3.1-flash-lite-preview", "model": "models/gemini-3.1-flash-lite-preview", "tools": ["map"], "thinking_level": "high"},
+    {"name": "gemini-3.1-flash-lite", "model": "models/gemini-3.1-flash-lite", "tools": ["map"], "thinking_level": "high"},
+    {"name": "gemini-3.5-flash", "model": "models/gemini-3.5-flash", "tools": [], "thinking_level": "medium"},
+
 ]
 
-PROXY_URL = settings.cloudflare_worker_url
 
 _client_kwargs: dict[str, Any] = {"api_key": settings.gemini_api_key}
-if PROXY_URL:
-    base_url = PROXY_URL if PROXY_URL.endswith("/gemini") else f"{PROXY_URL.rstrip('/')}/gemini"
-    _client_kwargs["http_options"] = types.HttpOptions(base_url=base_url)
-
 _client = genai.Client(**_client_kwargs)
 
 

@@ -76,15 +76,32 @@ def create_bot(active_settings: Settings | None = None) -> hikari.GatewayBot:
     arc_client = arc.GatewayClient(
         bot,
         default_enabled_guilds=hikari.UNDEFINED,
+        integration_types=[
+            hikari.ApplicationIntegrationType.GUILD_INSTALL,
+            hikari.ApplicationIntegrationType.USER_INSTALL,
+        ],
+        invocation_contexts=[
+            hikari.ApplicationContextType.GUILD,
+            hikari.ApplicationContextType.BOT_DM,
+            hikari.ApplicationContextType.PRIVATE_CHANNEL,
+        ],
+
     )
 
     @arc_client.add_hook
     async def global_logging_hook(ctx: arc.GatewayContext) -> None:
         cmd_logger = logging.getLogger("azunyan.cmd")
-        guild_name = "DM"
-        if ctx.guild_id:
+        
+        if ctx.invocation_context == hikari.ApplicationContextType.BOT_DM:
+            location = "Direct Message"
+        elif ctx.invocation_context == hikari.ApplicationContextType.PRIVATE_CHANNEL:
+            location = "Group DM"
+        else:
             guild = ctx.get_guild()
-            guild_name = guild.name if guild else str(ctx.guild_id)
+            if guild:
+                location = f"Guild: {guild.name}"
+            else:
+                location = f"External Guild ({ctx.guild_id})"
         
         user_info = f"{ctx.author.display_name} ({ctx.author.id})"
         cmd_name = f"/{ctx.command.qualified_name}"
@@ -94,7 +111,7 @@ def create_bot(active_settings: Settings | None = None) -> hikari.GatewayBot:
             options_dict = _extract_options(ctx.interaction.options)
         
         args_str = str(options_dict) if options_dict else "None"
-        cmd_logger.info(f"[CMD] User: {user_info} | Guild: {guild_name} | Cmd: {cmd_name} | Args: {args_str}")
+        cmd_logger.info(f"[CMD] User: {user_info} | Location: {location} | Cmd: {cmd_name} | Args: {args_str}")
 
     lb_client = lightbulb.client_from_app(
         bot,
