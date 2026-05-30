@@ -15,7 +15,7 @@ from google import genai
 from google.genai import types
 
 from core.config import settings
-from plugins.ai.views import build_ai_embed, split_text
+from plugins.ai.views import build_ai_embed, split_text, AIPaginationView
 
 log = logging.getLogger("azunyan.ai")
 
@@ -25,11 +25,10 @@ with PROMPTS_PATH.open("r", encoding="utf-8") as f:
     _prompts = yaml.safe_load(f)
 
 MODELS = [
-    {"name": "gemma-4-31b-it", "model": "models/gemma-4-31b-it", "tools": ["search"], "thinking_level": "high"},
-    {"name": "gemma-4-26b-a4b-it", "model": "models/gemma-4-26b-a4b-it", "tools": ["search"], "thinking_level": "high"},
+    {"name": "gemma-4-31b-it", "model": "models/gemma-4-31b-it", "tools": ["search"], "thinking_level": "low"},
+    {"name": "gemma-4-26b-a4b-it", "model": "models/gemma-4-26b-a4b-it", "tools": ["search"], "thinking_level": "low"},
     {"name": "gemini-3.1-flash-lite", "model": "models/gemini-3.1-flash-lite", "tools": ["map"], "thinking_level": "high"},
     {"name": "gemini-3.5-flash", "model": "models/gemini-3.5-flash", "tools": [], "thinking_level": "medium"},
-
 ]
 
 
@@ -73,6 +72,8 @@ async def process_ai_request(
     edit_fn: Callable[[hikari.Embed], Any],
     followup_fn: Callable[[hikari.Embed], Any],
     thinking_fn: Callable[[], Any] | None = None,
+    author_id: int = 0,
+    paginate_fn: Callable[[Any], Any] | None = None,
 ) -> None:
     try:
         image_parts = [
@@ -145,15 +146,19 @@ async def process_ai_request(
 
                 if len(full_text) > 4000:
                     pages = split_text(full_text)
-                    for i, page_text in enumerate(pages):
-                        page_sources = sources if i == len(pages) - 1 else set()
-                        embed = build_ai_embed(page_text, model_name, total_tokens, True, page_sources)
-                        embed.set_footer(f"{model_name} | {total_tokens} tokens ({i+1}/{len(pages)})")
-                        if i == 0:
-                            await edit_fn(embed)
-                        else:
-                            await followup_fn(embed)
-                            await asyncio.sleep(0.5)
+                    if author_id and paginate_fn:
+                        view = AIPaginationView(pages, model_name, total_tokens, sources, author_id)
+                        await paginate_fn(view)
+                    else:
+                        for i, page_text in enumerate(pages):
+                            page_sources = sources if i == len(pages) - 1 else set()
+                            embed = build_ai_embed(page_text, model_name, total_tokens, True, page_sources)
+                            embed.set_footer(f"{model_name} | {total_tokens} tokens ({i+1}/{len(pages)})")
+                            if i == 0:
+                                await edit_fn(embed)
+                            else:
+                                await followup_fn(embed)
+                                await asyncio.sleep(0.5)
                 else:
                     await edit_fn(build_ai_embed(full_text, model_name, total_tokens, True, sources))
 
