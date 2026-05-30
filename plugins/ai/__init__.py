@@ -1,10 +1,12 @@
 """plugins/ai/__init__.py — AI plugin router for slash and prefix commands"""
 import arc
 import hikari
+import miru
 import core.prefix as lightbulb
 
+from core.state import get_app_state
 from plugins.ai.core import process_ai_request, collect_image_urls
-from plugins.ai.views import build_ai_embed
+from plugins.ai.views import build_ai_embed, AIPaginationView
 
 
 # ── arc (slash) ──────────────────────────────────────────────────────────────
@@ -16,6 +18,7 @@ async def ai_slash(
     ctx: arc.GatewayContext,
     prompt: arc.Option[str, arc.StrParams("prompt")],
     attachment: arc.Option[hikari.Attachment | None, arc.AttachmentParams("Ảnh đính kèm")] = None,
+    miru_client: miru.Client = arc.inject(),
 ) -> None:
     attachments = [attachment] if attachment else []
     image_urls = await collect_image_urls(prompt, attachments=attachments)
@@ -44,6 +47,18 @@ async def ai_slash(
             await ctx.respond(embed=thinking_embed)
             first_sent = True
 
+    async def paginate_fn(view: AIPaginationView) -> None:
+        nonlocal first_sent
+        embed = view._build_embed()
+        if not first_sent:
+            await ctx.respond(embed=embed, components=view)
+            first_sent = True
+        else:
+            await ctx.edit_initial_response(embed=embed, components=view)
+        resp = await ctx.get_last_response()
+        msg = await resp.retrieve_message()
+        miru_client.start_view(view, bind_to=msg)
+
     author_name = ctx.author.username
     if isinstance(ctx.author, hikari.Member):
         author_name = ctx.author.display_name
@@ -60,6 +75,8 @@ async def ai_slash(
         edit_fn=edit_fn,
         followup_fn=followup_fn,
         thinking_fn=thinking_fn,
+        author_id=ctx.author.id,
+        paginate_fn=paginate_fn,
     )
 
 @arc.loader
@@ -121,6 +138,16 @@ async def ai_prefix(ctx: lightbulb.PrefixContext) -> None:
     elif hasattr(ctx.author, "global_name") and ctx.author.global_name:
         author_name = ctx.author.global_name
 
+    async def paginate_fn(view: AIPaginationView) -> None:
+        nonlocal sent_msg
+        embed = view._build_embed()
+        if sent_msg is None:
+            sent_msg = await ctx.event.message.respond(embed=embed, components=view, reply=True)
+        else:
+            sent_msg = await sent_msg.edit(embed=embed, components=view)
+        miru_client = get_app_state(ctx.bot).miru
+        miru_client.start_view(view, bind_to=sent_msg)
+
     try:
         await process_ai_request(
             prompt=prompt,
@@ -132,6 +159,8 @@ async def ai_prefix(ctx: lightbulb.PrefixContext) -> None:
             edit_fn=edit_fn,
             followup_fn=followup_fn,
             thinking_fn=thinking_fn,
+            author_id=ctx.author.id,
+            paginate_fn=paginate_fn,
         )
     finally:
         await ctx.app.rest.delete_my_reaction(ctx.event.message.channel_id, ctx.event.message.id, "⏳")
