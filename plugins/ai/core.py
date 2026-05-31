@@ -25,8 +25,8 @@ with PROMPTS_PATH.open("r", encoding="utf-8") as f:
     _prompts = yaml.safe_load(f)
 
 MODELS = [
-    {"name": "gemma-4-31b-it", "model": "models/gemma-4-31b-it", "tools": ["search"], "thinking_level": "low"},
-    {"name": "gemma-4-26b-a4b-it", "model": "models/gemma-4-26b-a4b-it", "tools": ["search"], "thinking_level": "low"},
+    {"name": "gemma-4-31b-it", "model": "models/gemma-4-31b-it", "tools": ["search"], "thinking_level": "minimal"},
+    {"name": "gemma-4-26b-a4b-it", "model": "models/gemma-4-26b-a4b-it", "tools": ["search"], "thinking_level": "minimal"},
     {"name": "gemini-3.1-flash-lite", "model": "models/gemini-3.1-flash-lite", "tools": ["map"], "thinking_level": "high"},
     {"name": "gemini-3.5-flash", "model": "models/gemini-3.5-flash", "tools": [], "thinking_level": "medium"},
 ]
