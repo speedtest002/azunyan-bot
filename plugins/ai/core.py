@@ -15,7 +15,7 @@ from google import genai
 from google.genai import types
 
 from core.config import settings
-from plugins.ai.views import build_ai_embed, split_text, AIPaginationView
+from plugins.ai.views import build_ai_embed, build_source_components, split_text, AIPaginationView
 
 log = logging.getLogger("azunyan.ai")
 
@@ -68,11 +68,13 @@ async def process_ai_request(
     author_name: str,
     server_name: str,
     channel_name: str,
-    respond_fn: Callable[[hikari.Embed], Any],
-    edit_fn: Callable[[hikari.Embed], Any],
-    followup_fn: Callable[[hikari.Embed], Any],
+    respond_fn: Callable[..., Any],
+    edit_fn: Callable[..., Any],
+    followup_fn: Callable[..., Any],
     thinking_fn: Callable[[], Any] | None = None,
     author_id: int = 0,
+    guild_id: int | None = None,
+    channel_id: int | None = None,
     paginate_fn: Callable[[Any], Any] | None = None,
 ) -> None:
     try:
@@ -81,11 +83,6 @@ async def process_ai_request(
             for url in image_urls
         ]
         
-        system_prompt = "<|think|>\n" + _prompts["MainSystemPrompt"].format(
-            current_time=datetime.now(timezone(timedelta(hours=7))).strftime("%Y-%m-%d %H:%M:%S"),
-            server_name=server_name,
-            channel_name=channel_name,
-        )
         contents = [
             types.Part.from_text(text=f"{author_name}: {prompt}"),
             *image_parts,
@@ -94,6 +91,16 @@ async def process_ai_request(
         for model in MODELS:
             model_name = model["name"]
             thinking_level = model.get("thinking_level", "minimal")
+            model_start = time.time()
+
+            system_prompt = _prompts["MainSystemPrompt"].format(
+                current_time=datetime.now(timezone(timedelta(hours=7))).strftime("%Y-%m-%d %H:%M:%S"),
+                server_name=server_name,
+                channel_name=channel_name,
+                username=author_name,
+            )
+            if "gemma" in model_name:
+                system_prompt = "<|think|>\n" + system_prompt
 
             tool_list = []
             for t in model.get("tools", []):
@@ -112,7 +119,7 @@ async def process_ai_request(
                 )
                 full_text = ""
                 total_tokens = 0
-                sources: set[str] = set()
+                sources: set[tuple[str, str]] = set()
                 last_yield = 0.0
                 thinking_notified = False
 
@@ -134,14 +141,14 @@ async def process_ai_request(
                                 for gc in meta.grounding_chunks:
                                     if getattr(gc, "web", None) and gc.web.uri:
                                         title = getattr(gc.web, "title", gc.web.uri)
-                                        sources.add(f"[{title}]({gc.web.uri})")
+                                        sources.add((title, gc.web.uri))
 
                     if getattr(chunk, "usage_metadata", None):
                         total_tokens = chunk.usage_metadata.total_token_count or total_tokens
 
                     now = time.time()
                     if now - last_yield > 1.5 and full_text:
-                        await edit_fn(build_ai_embed(full_text, model_name, total_tokens, False, set()))
+                        await edit_fn(build_ai_embed(full_text, model_name, total_tokens, False))
                         last_yield = now
 
                 if len(full_text) > 4000:
@@ -151,16 +158,20 @@ async def process_ai_request(
                         await paginate_fn(view)
                     else:
                         for i, page_text in enumerate(pages):
-                            page_sources = sources if i == len(pages) - 1 else set()
-                            embed = build_ai_embed(page_text, model_name, total_tokens, True, page_sources)
-                            embed.set_footer(f"{model_name} | {total_tokens} tokens ({i+1}/{len(pages)})")
+                            embed = build_ai_embed(page_text, model_name, total_tokens, True)
+                            comps = build_source_components(sources) if i == len(pages) - 1 and sources else None
+                            embed.set_footer(
+                                text=f"{model_name} | {total_tokens} tokens ({i+1}/{len(pages)})",
+                                icon="https://www.gstatic.com/aistudio/watermark/watermark.png",
+                            )
                             if i == 0:
-                                await edit_fn(embed)
+                                await edit_fn(embed, components=comps)
                             else:
-                                await followup_fn(embed)
+                                await followup_fn(embed, components=comps)
                                 await asyncio.sleep(0.5)
                 else:
-                    await edit_fn(build_ai_embed(full_text, model_name, total_tokens, True, sources))
+                    comps = build_source_components(sources) if sources else None
+                    await edit_fn(build_ai_embed(full_text, model_name, total_tokens, True), components=comps)
 
                 return
 

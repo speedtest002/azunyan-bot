@@ -327,7 +327,10 @@ class PrefixClient:
             args_str = str(args_dict) if args_dict else "None"
             cmd_logger.info(f"[CMD] User: {user_info} | Guild: {guild_name} | Cmd: {cmd_name} | Args: {args_str}")
 
-            await spec.callback(ctx)
+            try:
+                await spec.callback(ctx)
+            except Exception as exc:
+                raise
         except PrefixParseError as exc:
             pass
             await event.message.respond(str(exc))
@@ -475,7 +478,6 @@ class PrefixClient:
     def _usage_for_single_option(self, option: OptionSpec) -> str:
         marker = "..." if option.modifier is GreedyArgument else option.name
         return f"Thiếu tham số bắt buộc `{marker}`."
-
 
 class PrefixParseError(Exception):
     """Raised when a prefix invocation cannot be parsed."""
