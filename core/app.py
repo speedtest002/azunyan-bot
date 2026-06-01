@@ -89,7 +89,7 @@ def create_bot(active_settings: Settings | None = None) -> hikari.GatewayBot:
     )
 
     @arc_client.add_hook
-    async def global_logging_hook(ctx: arc.GatewayContext) -> None:
+    async def global_pre_hook(ctx: arc.GatewayContext) -> None:
         cmd_logger = logging.getLogger("azunyan.cmd")
         
         if ctx.invocation_context == hikari.ApplicationContextType.BOT_DM:

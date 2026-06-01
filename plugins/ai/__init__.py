@@ -29,16 +29,16 @@ async def ai_slash(
 
     first_sent = False
 
-    async def edit_fn(embed: hikari.Embed) -> None:
+    async def edit_fn(embed: hikari.Embed, components=None) -> None:
         nonlocal first_sent
         if not first_sent:
-            await ctx.respond(embed=embed)
+            await ctx.respond(embed=embed, components=components)
             first_sent = True
         else:
-            await ctx.edit_initial_response(embed=embed)
+            await ctx.edit_initial_response(embed=embed, components=components)
 
-    async def followup_fn(embed: hikari.Embed) -> None:
-        await ctx.respond(embed=embed)
+    async def followup_fn(embed: hikari.Embed, components=None) -> None:
+        await ctx.respond(embed=embed, components=components)
 
     async def thinking_fn() -> None:
         nonlocal first_sent
@@ -76,6 +76,8 @@ async def ai_slash(
         followup_fn=followup_fn,
         thinking_fn=thinking_fn,
         author_id=ctx.author.id,
+        guild_id=ctx.guild_id,
+        channel_id=ctx.channel_id,
         paginate_fn=paginate_fn,
     )
 
@@ -115,15 +117,15 @@ async def ai_prefix(ctx: lightbulb.PrefixContext) -> None:
 
     sent_msg: hikari.Message | None = None
 
-    async def edit_fn(embed: hikari.Embed) -> None:
+    async def edit_fn(embed: hikari.Embed, components=None) -> None:
         nonlocal sent_msg
         if sent_msg is None:
-            sent_msg = await ctx.event.message.respond(embed=embed, reply=True)
+            sent_msg = await ctx.event.message.respond(embed=embed, components=components, reply=True)
         else:
-            await sent_msg.edit(embed=embed)
+            await sent_msg.edit(embed=embed, components=components)
 
-    async def followup_fn(embed: hikari.Embed) -> None:
-        await channel.send(embed=embed)
+    async def followup_fn(embed: hikari.Embed, components=None) -> None:
+        await channel.send(embed=embed, components=components)
 
     async def thinking_fn() -> None:
         nonlocal sent_msg
@@ -145,7 +147,7 @@ async def ai_prefix(ctx: lightbulb.PrefixContext) -> None:
             sent_msg = await ctx.event.message.respond(embed=embed, components=view, reply=True)
         else:
             sent_msg = await sent_msg.edit(embed=embed, components=view)
-        miru_client = get_app_state(ctx.bot).miru
+        miru_client = get_app_state(ctx.app).miru
         miru_client.start_view(view, bind_to=sent_msg)
 
     try:
@@ -160,6 +162,8 @@ async def ai_prefix(ctx: lightbulb.PrefixContext) -> None:
             followup_fn=followup_fn,
             thinking_fn=thinking_fn,
             author_id=ctx.author.id,
+            guild_id=ctx.event.message.guild_id,
+            channel_id=ctx.event.message.channel_id,
             paginate_fn=paginate_fn,
         )
     finally:

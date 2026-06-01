@@ -18,7 +18,7 @@ async def _handle_whatanime(ctx, session: aiohttp.ClientSession, image_url: str,
 
         view = WhatAnimeView(results, anilist_data, author_id)
         resp = await ctx.respond(embed=view._build_embed(), components=view)
-        miru_client = get_app_state(ctx.app).miru
+        miru_client = get_app_state(ctx.client.app).miru
         miru_client.start_view(view, bind_to=await resp.retrieve_message())
     except RuntimeError as e:
         await ctx.respond(str(e), flags=hikari.MessageFlag.EPHEMERAL)
