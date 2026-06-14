@@ -5,33 +5,41 @@ from plugins.song.views import SongPaginationView
 
 log = logging.getLogger("azunyan.song")
 
-async def search_songs(session: aiohttp.ClientSession, query: str) -> list:
+FILTER_CONFIGS = {
+    "song": ("song_name_search_filter", {"partial_match": True, "match_case": False}),
+    "anime": ("anime_search_filter", {"partial_match": False, "match_case": False}),
+    "artist": ("artist_search_filter", {"partial_match": False, "match_case": False, "group_granularity": 0, "max_other_artist": 99}),
+}
+
+_BASE_PAYLOAD = {
+    "and_logic": False,
+    "ignore_duplicate": False,
+    "opening_filter": True,
+    "ending_filter": True,
+    "insert_filter": True,
+    "normal_broadcast": True,
+    "dub": True,
+    "rebroadcast": True,
+    "standard": True,
+    "character": True,
+    "chanting": True,
+    "instrumental": True,
+    "tv_filter": True,
+    "movie_filter": True,
+    "ova_filter": True,
+    "ona_filter": True,
+    "special_filter": True,
+    "doujin_filter": True,
+}
+
+async def search_songs(session: aiohttp.ClientSession, query: str, search_type: str = "song") -> list:
     url = f"{ANISONGDB_URL}/api/search_request"
-    payload = {
-        "and_logic": False,
-        "ignore_duplicate": False,
-        "opening_filter": True,
-        "ending_filter": True,
-        "insert_filter": True,
-        "normal_broadcast": True,
-        "dub": True,
-        "rebroadcast": True,
-        "standard": True,
-        "character": True,
-        "chanting": True,
-        "instrumental": True,
-        "tv_filter": True,
-        "movie_filter": True,
-        "ova_filter": True,
-        "ona_filter": True,
-        "special_filter": True,
-        "doujin_filter": True,
-        "anime_search_filter": {
-            "search": query,
-            "partial_match": True,
-            "match_case": False,
-        },
-    }
+    try:
+        filter_key, filter_params = FILTER_CONFIGS[search_type]
+    except KeyError:
+        log.error("Unknown search type: %s", search_type)
+        return []
+    payload = {**_BASE_PAYLOAD, filter_key: {"search": query, **filter_params}}
     try:
         async with session.post(url, json=payload) as resp:
             return await resp.json() if resp.status == 200 else []
@@ -62,8 +70,8 @@ def format_result(song: dict) -> dict:
 
     return {"anime": anime_display, "song": song_display, "artist": artist_display}
 
-async def build_search_view(session: aiohttp.ClientSession, query: str, dedup: bool, author_id: int):
-    results = await search_songs(session, query)
+async def build_search_view(session: aiohttp.ClientSession, query: str, dedup: bool, author_id: int, search_type: str = "song"):
+    results = await search_songs(session, query, search_type)
     if not results:
         return "Không tìm thấy kết quả nào.", None
 

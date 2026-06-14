@@ -6,8 +6,8 @@ from core.state import get_app_state
 
 from plugins.song.core import build_search_view
 
-async def _handle_search(ctx, session: aiohttp.ClientSession, query: str, dedup: bool, author_id: int):
-    result, view = await build_search_view(session, query, dedup, author_id)
+async def _handle_search(ctx, session: aiohttp.ClientSession, query: str, dedup: bool, author_id: int, search_type: str = "song"):
+    result, view = await build_search_view(session, query, dedup, author_id, search_type)
     if view is None:
         await ctx.respond(result)
         return
@@ -42,6 +42,26 @@ async def song_search_all(
     await _handle_search(ctx, session, query, False, ctx.author.id)
 
 
+@song_group.include
+@arc.slash_subcommand("search-anime", "Tìm bài hát theo tên anime")
+async def song_search_anime(
+    ctx: arc.GatewayContext,
+    query: arc.Option[str, arc.StrParams("Tên anime cần tìm")],
+    session: aiohttp.ClientSession = arc.inject(),
+) -> None:
+    await _handle_search(ctx, session, query, True, ctx.author.id, "anime")
+
+
+@song_group.include
+@arc.slash_subcommand("search-artist", "Tìm bài hát theo tên nghệ sĩ")
+async def song_search_artist(
+    ctx: arc.GatewayContext,
+    query: arc.Option[str, arc.StrParams("Tên nghệ sĩ cần tìm")],
+    session: aiohttp.ClientSession = arc.inject(),
+) -> None:
+    await _handle_search(ctx, session, query, True, ctx.author.id, "artist")
+
+
 @arc.loader
 def arc_loader(client: arc.GatewayClient) -> None:
     client.add_plugin(arc_plugin)
@@ -74,3 +94,25 @@ async def song_all_prefix(ctx: lightbulb.PrefixContext) -> None:
     state = get_app_state(ctx.app)
     session = state.container.http
     await _handle_search(ctx, session, query, False, ctx.author.id)
+
+
+@lb_loader.command
+@lightbulb.option("query", "Tên anime cần tìm", modifier=lightbulb.GreedyArgument)
+@lightbulb.command("song-anime", "Tìm bài hát theo tên anime", aliases=["sanime"])
+@lightbulb.implements(lightbulb.PrefixCommand)
+async def song_anime_prefix(ctx: lightbulb.PrefixContext) -> None:
+    query = " ".join(ctx.options.query) if isinstance(ctx.options.query, list) else ctx.options.query
+    state = get_app_state(ctx.app)
+    session = state.container.http
+    await _handle_search(ctx, session, query, True, ctx.author.id, "anime")
+
+
+@lb_loader.command
+@lightbulb.option("query", "Tên nghệ sĩ cần tìm", modifier=lightbulb.GreedyArgument)
+@lightbulb.command("song-artist", "Tìm bài hát theo tên nghệ sĩ", aliases=["sartist"])
+@lightbulb.implements(lightbulb.PrefixCommand)
+async def song_artist_prefix(ctx: lightbulb.PrefixContext) -> None:
+    query = " ".join(ctx.options.query) if isinstance(ctx.options.query, list) else ctx.options.query
+    state = get_app_state(ctx.app)
+    session = state.container.http
+    await _handle_search(ctx, session, query, True, ctx.author.id, "artist")
