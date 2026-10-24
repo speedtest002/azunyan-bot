@@ -121,10 +121,15 @@ async def process_ai_request(
                 sources: set[tuple[str, str]] = set()
                 last_yield = 0.0
                 thinking_notified = False
+                finish_reason: str | None = None
 
                 async for chunk in stream:
                     if chunk.candidates:
                         candidate = chunk.candidates[0]
+                        if candidate.finish_reason is not None:
+                            # Ghi lại lý do kết thúc (STOP/SAFETY/MAX_TOKENS/...)
+                            # để log rõ khi model trả về nội dung rỗng.
+                            finish_reason = str(candidate.finish_reason)
                         if getattr(candidate.content, "parts", None):
                             for part in candidate.content.parts:
                                 if getattr(part, "thought", False):
@@ -146,9 +151,23 @@ async def process_ai_request(
                         total_tokens = chunk.usage_metadata.total_token_count or total_tokens
 
                     now = time.time()
-                    if now - last_yield > 1.5 and full_text:
+                    if now - last_yield > 1.5 and full_text.strip():
                         await edit_fn(build_ai_embed(full_text, model_name, total_tokens, False))
                         last_yield = now
+
+                # Model có thể kết thúc mà không trả về text nào (chỉ có thought,
+                # bị chặn safety, MALFORMED_FUNCTION_CALL, MAX_TOKENS...).
+                # Không được gửi embed rỗng (sẽ hiện "…") — thử model kế tiếp.
+                if not full_text.strip():
+                    log.warning(
+                        "Empty response from %s (finish_reason=%s) — trying next model...",
+                        model_name,
+                        finish_reason,
+                    )
+                    last_error = RuntimeError(
+                        f"{model_name} không trả về nội dung (finish_reason={finish_reason})"
+                    )
+                    continue
 
                 if len(full_text) > 4000:
                     pages = split_text(full_text)
@@ -179,7 +198,12 @@ async def process_ai_request(
                 log.warning("Error on %s: %s — trying next model...", model_name, e)
                 continue
 
-        raise Exception(f"All models failed: {last_error}")
+        if last_error is None:
+            raise RuntimeError("Không model nào trả về nội dung — vui lòng thử lại.")
+        # Không show raw lỗi API (JSON dài) cho user; chi tiết đã có trong log.
+        raise RuntimeError(
+            "Không model nào trả lời được — vui lòng thử lại sau ít phút."
+        ) from last_error
 
     except Exception as e:
         log.exception("AI processing error")
