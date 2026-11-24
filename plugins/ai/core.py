@@ -91,6 +91,12 @@ _DEFAULT_AI_CONFIG = AIConfig(
             thinking_level="minimal",
         ),
         ModelConfig(
+            name="gemini-4-hydrogen",
+            model="models/gemini-4-hydrogen",
+            tools=(),
+            thinking_level="medium",
+        ),
+        ModelConfig(
             name="gemma-4-26b-a4b-it",
             model="models/gemma-4-26b-a4b-it",
             tools=("search",),
