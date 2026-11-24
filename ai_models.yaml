@@ -1,0 +1,55 @@
+# Cấu hình danh sách model fallback cho lệnh /ai và prefix ai.
+# Bot tự reload khi file này thay đổi (không cần build lại Docker image).
+#
+# Tham số cấu hình chung (settings):
+#   request_timeout_seconds:      Timeout mở kết nối tới model (giây)
+#   stream_chunk_timeout_seconds: Timeout chờ chunk tiếp theo khi đang stream (giây)
+#   cooldown_seconds:             Thời gian tạm bỏ qua model khi gặp 503/429/timeout (giây)
+#   max_cooldown_seconds:         Giới hạn thời gian cooldown tối đa khi lỗi liên tiếp (giây)
+#
+# Các trường cho mỗi model:
+#   name:             Tên hiển thị ở footer & log
+#   model:            Model ID của Gemini API (vd: models/gemma-4-31b-it)
+#   tools:            Danh sách tool: [search] hoặc []
+#   thinking_level:   (tuỳ chọn) Cho Gemma 4 / Gemini 3.x: minimal | low | medium | high
+#   thinking_budget:  (tuỳ chọn) Cho Gemini 2.5: -1 (tự động), 0 (tắt), hoặc số token (vd: 1024)
+#   include_thoughts: (tuỳ chọn, mặc định true) Hiện trạng thái "Đang suy nghĩ..." khi model trả thought
+#   enabled:          (tuỳ chọn, mặc định true) Đặt false để tạm tắt model mà không cần xóa
+
+settings:
+  request_timeout_seconds: 30
+  stream_chunk_timeout_seconds: 45
+  cooldown_seconds: 60
+  max_cooldown_seconds: 300
+
+models:
+  - name: gemma-4-31b-it
+    model: models/gemma-4-31b-it
+    tools: [search]
+    thinking_level: minimal
+
+  - name: gemma-4-26b-a4b-it
+    model: models/gemma-4-26b-a4b-it
+    tools: [search]
+    thinking_level: minimal
+
+  - name: gemini-2.5-flash
+    model: models/gemini-2.5-flash
+    tools: [search]
+    thinking_budget: -1
+
+  - name: gemini-2.5-flash-lite
+    model: models/gemini-2.5-flash-lite
+    tools: [search]
+    thinking_budget: 0
+    include_thoughts: false
+
+  - name: gemini-3.8-flash
+    model: models/gemini-3.8-flash
+    tools: []
+    thinking_level: medium
+
+  - name: gemini-3.5-flash-lite
+    model: models/gemini-3.5-flash-lite
+    tools: []
+    thinking_level: medium

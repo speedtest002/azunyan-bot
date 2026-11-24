@@ -34,6 +34,7 @@ class Settings:
     media_url: str
     amq_guild_id: int
     prompts_path: str
+    ai_models_path: str
     log_dir: str
     cloudflare_worker_url: str
 
@@ -41,8 +42,10 @@ class Settings:
 def load_settings() -> Settings:
     owner_id = _get_int("BOT_OWNER_ID", 0) or None
     
-    # Mặc định tìm file prompts.yaml ở thư mục gốc nếu không có cấu hình PROMPTS_PATH
-    default_prompts = str(Path(__file__).resolve().parents[1] / "prompts.yaml")
+    # Mặc định tìm file prompts.yaml và ai_models.yaml ở thư mục gốc nếu không có cấu hình env
+    project_root = Path(__file__).resolve().parents[1]
+    default_prompts = str(project_root / "prompts.yaml")
+    default_ai_models = str(project_root / "ai_models.yaml")
 
     return Settings(
         discord_token=os.getenv("DISCORD_TOKEN", ""),
@@ -57,6 +60,7 @@ def load_settings() -> Settings:
         media_url=os.getenv("MEDIA_URL", ""),
         amq_guild_id=_get_int("AMQ_GUILD_ID", 1361617403112460389),
         prompts_path=os.getenv("PROMPTS_PATH", default_prompts),
+        ai_models_path=os.getenv("AI_MODELS_PATH", default_ai_models),
         log_dir=os.getenv("LOG_DIR", "logs"),
         cloudflare_worker_url=os.getenv("CLOUDFLARE_WORKER_URL", ""),
     )
@@ -66,6 +70,7 @@ settings = load_settings()
 
 AMQ_GUILD_ID: int = settings.amq_guild_id
 PROMPTS_PATH: str = settings.prompts_path
+AI_MODELS_PATH: str = settings.ai_models_path
 LOG_DIR: str = settings.log_dir
 BOT_OWNER_ID: int = settings.bot_owner_id or 0
 PREFIX: str = settings.prefix
