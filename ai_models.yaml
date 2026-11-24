@@ -33,24 +33,13 @@ models:
     tools: []
     thinking_level: medium
 
-  - name: gemma-4-26b-a4b-it
-    model: models/gemma-4-26b-a4b-it
-    tools: [search]
-    thinking_level: minimal
-
-  - name: gemini-2.5-flash
-    model: models/gemini-2.5-flash
-    tools: [search]
-    thinking_budget: -1
-
-  - name: gemini-2.5-flash-lite
-    model: models/gemini-2.5-flash-lite
-    tools: [search]
-    thinking_budget: 0
-    include_thoughts: false
-
   - name: gemini-3.8-flash
     model: models/gemini-3.8-flash
+    tools: []
+    thinking_level: medium
+
+  - name: gemini-3.6-flash
+    model: models/gemini-3.6-flash
     tools: []
     thinking_level: medium
 
@@ -58,3 +47,13 @@ models:
     model: models/gemini-3.5-flash-lite
     tools: []
     thinking_level: medium
+
+  - name: gemini-2.5-flash
+    model: models/gemini-2.5-flash
+    tools: [search]
+    thinking_budget: -1
+
+  - name: gemma-4-26b-a4b-it
+    model: models/gemma-4-26b-a4b-it
+    tools: [search]
+    thinking_level: minimal
